@@ -18,37 +18,37 @@
 <!-- multistep form -->
 <div style="padding: 20px;" class="row">
 
-   <select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_nutrient" >
-      <option [value]="0" selected disabled>Nutrient</option>
-      <option [value]="category" *ngFor="let category of nutrientList">{{category[1]}}</option>
-    </select>
+   <ion-select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_nutrient" >
+      <ion-option [value]="0" selected disabled>Nutrient</ion-option>
+      <ion-option [value]="category[0]" *ngFor="let category of nutrientList">{{category[1]}}</ion-option>
+    </ion-select>
 
 
- <select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;  margin: 10px;" [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
-      <!--<option [value]="0" selected>English</option>-->
-       <option value="EN"  selected>English</option>
-      <option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</option>
-    </select>
-  <!--<select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
-    <option selected>Sort By</option>    
-    <!--<option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</option> -->
-  <!--</select>-->
+ <ion-select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;  margin: 10px;" [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
+      <!--<ion-option [value]="0" selected>English</ion-option>-->
+       <ion-option value="EN"  selected>English</ion-option>
+      <ion-option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</ion-option>
+    </ion-select>
+  <!--<ion-select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
+    <ion-option selected>Sort By</ion-option>    
+    <!--<ion-option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</ion-option> -->
+  <!--</ion-select>-->
    
- <select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="ascrdesc" >
-      <option value="false" selected >Descending</option>
-      <option value="true" >Ascending</option> 
-    </select>
+ <ion-select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="ascrdesc" >
+      <ion-option value="false" selected >Descending</ion-option>
+      <ion-option value="true" >Ascending</ion-option> 
+    </ion-select>
 
    
-    <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="plantRanimal" style="padding: 10px;     margin: 10px;">
+    <ion-select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="plantRanimal" style="padding: 10px;     margin: 10px;">
         
-        <option value="plant" selected> Plant Source</option>
-        <option value="animal"> Animal Source</option>       
-    </select>
-     <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="perticulars" style="padding: 10px;     margin: 10px;">
-        <option value="" disabled selected>Particulars</option>
-        <option [value]="item.name" *ngFor="let item of plantanimalDetails[plantRanimal]">{{item.title}}</option>       
-    </select>    
+        <ion-option value="plant" selected> Plant Source</ion-option>
+        <ion-option value="animal"> Animal Source</ion-option>       
+    </ion-select>
+     <ion-select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="perticulars" style="padding: 10px;     margin: 10px;">
+        <ion-option value="" disabled selected>Particulars</ion-option>
+        <ion-option [value]="item.name" *ngFor="let item of plantanimalDetails[plantRanimal]">{{item.title}}</ion-option>       
+    </ion-select>    
     <input type="button" name="next" class="submit_button" value="Know & Submit" (click)="submitAction()" style="margin:auto;"/>                
      <!--<input type="button" name="next" class="submit_button" value="Submit" (click)="submitRda()"/> -->
 

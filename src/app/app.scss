@@ -413,7 +413,7 @@ margin: 13px;
 }
 
 .submit_button {
-     padding: 5px !important;
+     padding:  10px 5px !important;
 width: 140px !important;
 background-color: #fabd75;
 -webkit-appearance: button !important;
@@ -435,8 +435,14 @@ font-size: 14px;
 }
 
 ion-select{
-  max-width: 80% !important;
+  max-width: 100% !important;
 }
+
+.ion-page.show-page {
+  opacity: 1;
+  background-color: white;
+}
+
 // .item-input::after { border-bottom-color: transparent !important; } 
 // .list-ios .item-block .item-inner{
 //   border-bottom: 0 !important;

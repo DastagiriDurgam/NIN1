@@ -16,7 +16,7 @@ export class HttpRequest {
     constructor(private http: Http, private spinnerDialog: SpinnerDialog) { }    
 
     get(url: any) {       
-        //this.spinnerDialog.show('Loading..');
+        
         // let options = new RequestOptions({ headers:this.headers, responseType: ResponseContentType.Blob });
         return this.http.get(this.baseUrl + url, {headers: this.headers})
             .map((res: Response) => {return res.json()})

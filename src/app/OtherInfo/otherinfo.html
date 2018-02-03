@@ -7,30 +7,35 @@
         -webkit-appearance: input;
         color: white !important;
     }
-    
+
     #msform {
         margin: 450px 10px !important;
         width: 95%;
     }
-     .infoinput{
+
+    .infoinput {
         background-color: #F8B864;
         margin: 10px;
         height: 35px;
         font-size: 12px;
         font-weight: bold;
-     }
-     .poweredby{
-         position: absolute;
-         bottom: 20px;
-         color: #0a007d;
-         margin: auto;
-         text-align: center;
-         right: 40px;
-      
-     }
-     .cname{
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    .poweredby {
+        position: absolute;
+        bottom: 20px;
+        color: #0a007d;
+        margin: auto;
+        text-align: center;
+        right: 40px;
+
+    }
+
+    .cname {
         font-weight: bold;
-     }
+    }
 </style>
 <!-- multistep form -->
 <!--<form>
@@ -48,23 +53,41 @@
     
 
 </form>-->
-<div  class="container" style="height:100%; background-color:white;">
-<div class="row" style="margin:auto; padding:20px;">
-    <div class="col-md-12" style="margin:auto;">
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('details')" value="Registration Details of User">
-          <input type="button" class="col-md-8 infoinput" (click)="otherInfo('subuser')" value="Register Sub User">
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('userguide')" value="User guide">
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('contactus')" value="Contact Us">
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('source')" value="Source">      
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('about')" value="About App">
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('version')" value="Version">
-        <input type="button" class="col-md-8 infoinput" (click)="otherInfo('terms')" value="Terms & Conditions">
+<div class="container" style="height:100%; background-color:white;">
+    <div class="row" style="margin:auto; padding:20px;">
+        <div class="col-md-12" style="margin:auto;">
+            <div class="col-md-12">
+                <input type="button" class=" infoinput" (click)="otherInfo('details')" value="Registration Details of User">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('subuser')" value="Register Sub User">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('userguide')" value="User guide">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('contactus')" value="Contact Us">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('source')" value="Source">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('about')" value="About App">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('version')" value="Version">
+            </div>
+            <div class="col-md-12">
+                <input type="button" class="infoinput" (click)="otherInfo('terms')" value="Terms & Conditions">
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="poweredby ">
-  Powered by 
-  <a href="http://www.macronel.com" > <img src="assets/images/mac-logo.png" alt="Macronel" width="100" height="30"></a>
-</div>
+    <div class="poweredby ">
+        Powered by
+        <a href="http://www.macronel.com">
+            <img src="assets/images/mac-logo.png" alt="Macronel" width="100" height="30">
+        </a>
+    </div>
 
 </div>

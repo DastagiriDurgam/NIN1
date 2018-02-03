@@ -30,14 +30,14 @@
   <!--<input type="text" name="cpass" placeholder="Select Your Country" [(ngModel)]="location"/> 
     <input type="text" name="cpass" placeholder="Select Your State" [(ngModel)]="location"/>  -->
 
-  <select disabled class="list" [(ngModel)]="userData.Location">
-  <option disabled>Select Country</option>
-  <option selected>India</option>
-</select>
-  <select disabled class="list" [(ngModel)]="userData.State">
-  <option value="0">Select State</option>
-  <option [value]="state[1]" *ngFor="let state of statesList">{{state[1]}}</option>
-</select>
+  <ion-select disabled class="list" [(ngModel)]="userData.Location">
+  <ion-option disabled>Select Country</ion-option>
+  <ion-option selected>India</ion-option>
+</ion-select>
+  <ion-select disabled class="list" [(ngModel)]="userData.State">
+  <ion-option value="0">Select State</ion-option>
+  <ion-option [value]="state[1]" *ngFor="let state of statesList">{{state[1]}}</ion-option>
+</ion-select>
 
   <!--<input type="checkbox" class="terms" style="width: 20px; height: 20px;"/><span style="margin-left: 10px; color:#F8B864">I Agree Terms and Conditions</span><br>
      <input type="button"  class="register_button" value="Register" (click)="register();" [disabled]="!isDataLoaded"/> -->

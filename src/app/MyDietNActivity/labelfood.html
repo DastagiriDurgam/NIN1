@@ -26,18 +26,18 @@
 
   <ion-content>
     <div class="row labelfoodform">
-      <select class="col-xs-12" [(ngModel)]="Userid">
-       <option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</option>
-    </select>
+      <ion-select class="col-xs-12" [(ngModel)]="Userid">
+       <ion-option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</ion-option>
+    </ion-select>
       <input class="col-xs-12" type="text" placeholder="Select Date" [min]="sel_minDate" [(ngModel)]="date" onfocus="(this.type='date')"
         onblur="(this.type='text')" />
-      <select class="col-xs-12" [(ngModel)]="timetype">
-        <option  selected>Breakfast</option>
-        <option  >Morning Snack</option>
-        <option  >Lunch</option> 
-        <option  >Evening Snacks</option>
-        <option  >Dinner</option> 
-  </select>
+      <ion-select class="col-xs-12" [(ngModel)]="timetype">
+        <ion-option  selected>Breakfast</ion-option>
+        <ion-option  >Morning Snack</ion-option>
+        <ion-option  >Lunch</ion-option> 
+        <ion-option  >Evening Snacks</ion-option>
+        <ion-option  >Dinner</ion-option> 
+  </ion-select>
       <input class="col-xs-12" type="text" placeholder="Enter Food name" [(ngModel)]="labelfooddetails['Itemname']" />
       <ion-input class="col-xs-12" type="tel" placeholder="Enter Quantity" [(ngModel)]="labelfooddetails['quantity']"></ion-input>
     </div>

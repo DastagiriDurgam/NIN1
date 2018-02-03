@@ -36,9 +36,9 @@
   <div class="bmicalc msform row" id="">
 
     <!--<input type="text" name="email" placeholder="Your name" />-->
-    <!--<select  type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px">
-  <option *ngFor="let user of Users">{{user.Name}}</option>
-</select>-->
+    <!--<ion-select  type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px">
+  <ion-option *ngFor="let user of Users">{{user.Name}}</ion-option>
+</ion-select>-->
 
     <ion-item class="col-sm-12 col-xs-12 ">
       <ion-label>Age</ion-label> 
@@ -47,10 +47,10 @@
       </ion-select>
     </ion-item>
 
-    <!-- <select type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px" [(ngModel)]="age">
-      <option value="0" selected disabled>Age</option>
-      <option *ngFor="let age of 100 | printnumbers:{start:18}">{{age}}</option>
-    </select> -->
+    <!-- <ion-select type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px" [(ngModel)]="age">
+      <ion-option value="0" selected disabled>Age</ion-option>
+      <ion-option *ngFor="let age of 100 | printnumbers:{start:18}">{{age}}</ion-option>
+    </ion-select> -->
     <div style="text-align:left;">
       <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="gender" />Male
       <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="gender" />Female
@@ -58,22 +58,22 @@
     </div>
     <!--<input type="text" name="cpass" placeholder="Occupation" />-->
 
-    <!--<select type="text" class="col-sm-12 col-xs-12" style="padding: 10px">
-      <option selected disabled>Physio logical status</option>
-      <option *ngFor="let status of physioLogicalStatus[gender]">{{status}}</option>
-    </select>-->
+    <!--<ion-select type="text" class="col-sm-12 col-xs-12" style="padding: 10px">
+      <ion-option selected disabled>Physio logical status</ion-option>
+      <ion-option *ngFor="let status of physioLogicalStatus[gender]">{{status}}</ion-option>
+    </ion-select>-->
     <!-- <div class="  bmimeasurecontainer col-sm-12 col-xs-12">
       <input type="number" style="width:35%;" placeholder="Height (cms)" [(ngModel)]="heightincm" [ngModelOptions]="{standalone: true}"
         (keyup)="convertUnits('cmeter',heightincm)" (change)="heightinft=(heightincm/30.48)" />
       <p style="display: inline;"> or</p>
-      <select type="text" style="width:24%; margin-left:0px !important" name="pass" [(ngModel)]="heightFeet" (change)="convertUnits('feet',heightFeet)">
-        <option value="" selected disabled>Feet</option>
-        <option [value]="num" *ngFor="let num of 11 | printnumbers:{start:0}">{{num}}</option>
-      </select>
-      <select type="text" name="pass" style="width:27%;margin-left:0px !important" [(ngModel)]="heightInch" (change)="convertUnits('inch',heightInch)">
-        <option value="" selected disabled>Inches</option>
-        <option [value]="num" *ngFor="let num of 12 | printnumbers:{start:0}">{{num}}</option>
-      </select>
+      <ion-select type="text" style="width:24%; margin-left:0px !important" name="pass" [(ngModel)]="heightFeet" (change)="convertUnits('feet',heightFeet)">
+        <ion-option value="" selected disabled>Feet</ion-option>
+        <ion-option [value]="num" *ngFor="let num of 11 | printnumbers:{start:0}">{{num}}</ion-option>
+      </ion-select>
+      <ion-select type="text" name="pass" style="width:27%;margin-left:0px !important" [(ngModel)]="heightInch" (change)="convertUnits('inch',heightInch)">
+        <ion-option value="" selected disabled>Inches</ion-option>
+        <ion-option [value]="num" *ngFor="let num of 12 | printnumbers:{start:0}">{{num}}</ion-option>
+      </ion-select>
       
     </div> -->
 
@@ -116,11 +116,11 @@
     </ion-select> -->
 
 
-
+<ion-item style="margin-bottom:15px;">
     <!--<input type="text" class="hicm measure2" name="cpass" placeholder="Height Feets & Inches" />-->
-    <input type="number" class="hicm measures1" name="cpass" placeholder="Weight (Kg)" [(ngModel)]="weightinkg" />
-
-    <input type="button" style="margin:auto;" name="next" class="submit_button" value="Submit" (click)="submitCalc()" />
+    <ion-input type="number" class="hicm " name="cpass" placeholder="Weight (Kg)" [(ngModel)]="weightinkg" ></ion-input>
+  </ion-item>
+    <button type="button" style="margin:auto;" name="next" class="submit_button" (click)="submitCalc()" >Submit</button>
 
   </div>
   <div class="col-md-12">

@@ -19,15 +19,15 @@
 <!-- multistep form -->
 <div style="padding: 20px;" class="row container">
 
-  <!--<select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_food" >
-      <option [value]="0" selected disabled>Food</option>
-      <option [value]="food[1]" *ngFor="let food of foodList">{{food[1]}}</option>
-    </select>-->
- <select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;  margin: 10px;" [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
-      <!--<option [value]="0" selected>English</option>-->
-       <option value="EN"  selected>English</option>
-      <option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</option>
-    </select>
+  <!--<ion-select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_food" >
+      <ion-option [value]="0" selected disabled>Food</ion-option>
+      <ion-option [value]="food[1]" *ngFor="let food of foodList">{{food[1]}}</ion-option>
+    </ion-select>-->
+ <ion-select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;  margin: 10px;" [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
+      <!--<ion-option [value]="0" selected>English</ion-option>-->
+       <ion-option value="EN"  selected>English</ion-option>
+      <ion-option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</ion-option>
+    </ion-select>
 
   <input #searchInput type="text" class="col-sm-12 col-xs-12 searchInput" style="padding:10px; margin:10px" [ngModel]="searchStr" (ngModelChange)="getFilteredRawfoods($event)"  placeholder="Search  here"/>
     <ul *ngIf="selected_language!='EN'" [hidden]="!isDisplayRawfoodList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 95px;     margin: 0;">
@@ -40,10 +40,10 @@
 
   
 
-  <!--<select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
-    <option selected>Sort By</option>    
-    <!--<option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</option> -->
-  <!--</select>-->
+  <!--<ion-select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
+    <ion-option selected>Sort By</ion-option>    
+    <!--<ion-option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</ion-option> -->
+  <!--</ion-select>-->
    
  
 

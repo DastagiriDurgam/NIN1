@@ -20,29 +20,32 @@
 
         <!--<input type="text" name="email" placeholder="Your name" />-->
         <!--<input type="text" name="pass" placeholder="Select List" />     -->
-        <select class="col-sm-12 col-xs-12 rdaSelect" [(ngModel)]="gender">
-        <option value="" disabled selected> Select Category</option>
-        <option value="Man"> Man</option>
-        <option value="Woman"> Woman</option>
-        <option value="Infants"> Infants(Below 1 year)</option>        
-         <option value="Boys"> Boys(Below 18 years)</option>
-        <option value="Girls"> Girls(Below 18 years)</option>
-    </select>
-        <select class="col-sm-12 col-xs-12 rdaSelect" [(ngModel)]="perticulars">
-        <option value="" disabled selected>Work & Physiological Status / Age</option>
-        <option [value]="item" *ngFor="let item of perticularsArray[gender]">{{item}}</option>       
-    </select>
-
+        <div class="col-sm-12 col-xs-12">
+            <ion-select class="col-sm-12 col-xs-12 rdaSelect" [(ngModel)]="gender" placeholder="Select Category">
+                <!-- <ion-option value="" disabled selected> Select Category</ion-option> -->
+                <ion-option value="Man"> Man</ion-option>
+                <ion-option value="Woman"> Woman</ion-option>
+                <ion-option value="Infants"> Infants(Below 1 year)</ion-option>
+                <ion-option value="Boys"> Boys(Below 18 years)</ion-option>
+                <ion-option value="Girls"> Girls(Below 18 years)</ion-option>
+            </ion-select>
+        </div>
+        <div class="col-sm-12 col-xs-12">
+            <ion-select class="col-sm-12 col-xs-12 rdaSelect" [(ngModel)]="perticulars" placeholder="Work & Physiological Status / Age">
+                <!-- <ion-option value="" disabled selected>Work & Physiological Status / Age</ion-option> -->
+                <ion-option [value]="item" *ngFor="let item of perticularsArray[gender]">{{item}}</ion-option>
+            </ion-select>
+        </div>
         <!--<input type="text" name="cpass" placeholder="Occupation" />-->
 
         <input type="button" name="next" class="submit_button" value="Submit" (click)="submitRda()" />
 
-<div class="col-md-12 text-left" style="margin-top:30px;">
-        <p >
-            Reference man is between 18-29 years of age and weighs 60 kg with a height of 1.73 m Reference woman is between 18-29 years
-            of age, non-pregnant non- lactating (NPNL) and weighs 55 kg with a height of 1.61m
-        </p>
-</div>
+        <div class="col-md-12 text-left" style="margin-top:30px;">
+            <p>
+                Reference man is between 18-29 years of age and weighs 60 kg with a height of 1.73 m Reference woman is between 18-29 years
+                of age, non-pregnant non- lactating (NPNL) and weighs 55 kg with a height of 1.61m
+            </p>
+        </div>
     </div>
 
 </div>

@@ -6,26 +6,26 @@
 
 
   <div class="bmicalc">
-    <select name="pass" class="col-sm-12 col-xs-12" style="padding: 10px; background-color:white; margin:5px;" [(ngModel)]="uid" (change)="clearValues()">
-      <option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</option> 
-    </select>
+    <ion-select name="pass" class="col-sm-12 col-xs-12" style="padding: 10px; background-color:white; margin:5px;" [(ngModel)]="uid" (change)="clearValues()">
+      <ion-option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</ion-option> 
+    </ion-select>
 
  <!--<input class="form-control" placeholder="Select Date" type="text" [min]="sel_minDate" [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')">-->
     <input placeholder="Select Date"  type="text" [min]="sel_minDate" [max]="sel_maxDate"  [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')" class="col-sm-12 col-xs-12"  style="padding: 10px; background-color:white; margin:5px;" > 
     <!--<ion-datetime style="    border: 1px solid gray;    margin-bottom: 10px;    padding: 10px;" displayFormat="YYYY-MMM-DD" [(ngModel)]="sel_date"  [min]="sel_minDate"></ion-datetime>-->
-    <select name="pass" class="col-sm-12 col-xs-12" style="padding: 10px; background-color:white; margin:5px;" [(ngModel)]="timeType">
-      <!--<option [value]="" selected disabled>Language</option>-->
-      <option  >Breakfast</option>
-      <option  >Morning Snack</option>
-      <option  >Lunch</option> 
-      <option  >Evening Snacks</option>
-      <option  >Dinner</option> 
-    </select>
+    <ion-select name="pass" class="col-sm-12 col-xs-12" style="padding: 10px; background-color:white; margin:5px;" [(ngModel)]="timeType">
+      <!--<ion-option [value]="" selected disabled>Language</ion-option>-->
+      <ion-option  >Breakfast</ion-option>
+      <ion-option  >Morning Snack</ion-option>
+      <ion-option  >Lunch</ion-option> 
+      <ion-option  >Evening Snacks</ion-option>
+      <ion-option  >Dinner</ion-option> 
+    </ion-select>
 
-    <!--<select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px" [(ngModel)]="selected_recipe">
-      <option [value]="0" selected disabled>Select Here</option>
-      <option [ngValue]="category" *ngFor="let category of totalRecipies">{{category[1]}}</option>
-    </select>-->
+    <!--<ion-select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px" [(ngModel)]="selected_recipe">
+      <ion-option [value]="0" selected disabled>Select Here</ion-option>
+      <ion-option [ngValue]="category" *ngFor="let category of totalRecipies">{{category[1]}}</ion-option>
+    </ion-select>-->
 
     <!--<input type="text" placeholder="Search Here" >-->
     <input #searchInput type="text" class="col-sm-12 col-xs-12 searchInput" [ngModel]="searchStr" (ngModelChange)="getFilteredRecipies($event)"

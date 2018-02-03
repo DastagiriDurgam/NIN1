@@ -14,15 +14,15 @@
   
     <!--<input type="text" name="email" placeholder="Your name" />-->
     <!--<input type="text" name="pass" placeholder="Select List" />     -->
-    <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="gender">
-        <option value="" disabled selected> Select List</option>
-        <option value="Man"> Man</option>
-        <option value="Woman"> Woman</option>
-    </select>
-     <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="perticulars" >
-        <option value="" disabled selected>Occupation</option>
-        <option [value]="item" *ngFor="let item of perticularsArray[gender]">{{item}}</option>       
-    </select>   
+    <ion-select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="gender">
+        <ion-option value="" disabled selected> Select List</ion-option>
+        <ion-option value="Man"> Man</ion-option>
+        <ion-option value="Woman"> Woman</ion-option>
+    </ion-select>
+     <ion-select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="perticulars" >
+        <ion-option value="" disabled selected>Occupation</ion-option>
+        <ion-option [value]="item" *ngFor="let item of perticularsArray[gender]">{{item}}</ion-option>       
+    </ion-select>   
 
     <!--<input type="text" name="cpass" placeholder="Occupation" />-->
     

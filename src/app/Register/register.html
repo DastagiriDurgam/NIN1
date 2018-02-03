@@ -78,23 +78,23 @@
     <input *ngIf="isPrimary" type="number" placeholder="Enter 4 Digit Password" (keydown)="restricttonumbers($event, 'pin')" [(ngModel)]="pin" class="col-md-12"/>
     
     
-    <select *ngIf="isPrimary" class="list" [(ngModel)]="currentcountry">
-  <option disabled>Select Country</option>
-  <option selected>India</option> 
-</select>
-    <select *ngIf="isPrimary" class="list" [(ngModel)]="currentstate">
-  <option value="0">Select State</option>
-  <option [value]="state[0]" *ngFor="let state of statesList">{{state[0]}}</option>
-</select>
-    <select *ngIf="!isPrimary" class="list" [(ngModel)]="relation">
-  <option value="relation" selected disabled>Choose Relation</option>
-  <option value="Wife">Wife</option>
-  <option value="Son">Son</option>
-  <option value="Daughter">Daughter</option>
-  <option value="Other">Other</option>
-</select> -->
+    <ion-select *ngIf="isPrimary" class="list" [(ngModel)]="currentcountry">
+  <ion-option disabled>Select Country</ion-option>
+  <ion-option selected>India</ion-option> 
+</ion-select>
+    <ion-select *ngIf="isPrimary" class="list" [(ngModel)]="currentstate">
+  <ion-option value="0">Select State</ion-option>
+  <ion-option [value]="state[0]" *ngFor="let state of statesList">{{state[0]}}</ion-option>
+</ion-select>
+    <ion-select *ngIf="!isPrimary" class="list" [(ngModel)]="relation">
+  <ion-option value="relation" selected disabled>Choose Relation</ion-option>
+  <ion-option value="Wife">Wife</ion-option>
+  <ion-option value="Son">Son</ion-option>
+  <ion-option value="Daughter">Daughter</ion-option>
+  <ion-option value="Other">Other</ion-option>
+</ion-select> -->
 <div item-width="100%" class="text-center">
-  <button  ion-button color="secondary" (click)="register();">Register</button> 
+  <button class="register_button"  color="secondary" (click)="register();">Register</button> 
   <div>
   <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
   <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;"    (click)="gotoLogin();">Login</a>

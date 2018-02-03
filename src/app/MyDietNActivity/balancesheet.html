@@ -24,9 +24,9 @@
 <!-- multistep form -->
 <div class="form" style="height:100%; background-color:white;">
     <div class="col-xs-12">
-        <select type="text" name="pass" class="form-control" style="margin-top:5px;" [(ngModel)]="uid" (change)="onchangeofuser()">
-      <option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</option> 
-    </select>
+        <ion-select type="text" name="pass" class="form-control" style="margin-top:5px;" [(ngModel)]="uid" (change)="onchangeofuser()">
+      <ion-option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</ion-option> 
+    </ion-select>
     </div>
     <div class="col-xs-12 col-sm-12" style="padding:10px; height:auto;">
         <div *ngFor="let date of datesArray; let i = index">
