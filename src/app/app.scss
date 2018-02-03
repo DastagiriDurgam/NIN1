@@ -26,7 +26,9 @@
   padding: 0;
 }
 
-
+.mtop0{
+  margin-top: 0 !important;
+}
 
 html {
   height: 100%;
@@ -426,3 +428,19 @@ text-align: justify;
 text-align-last: center;
 font-size: 14px;
 }
+
+.label-ios{
+  color: black !important;
+  text-align: left !important;
+}
+
+ion-select{
+  max-width: 80% !important;
+}
+// .item-input::after { border-bottom-color: transparent !important; } 
+// .list-ios .item-block .item-inner{
+//   border-bottom: 0 !important;
+// }
+// .list-ios > .item-wrapper:last-child .item-block {
+//   border: none !important;
+// }

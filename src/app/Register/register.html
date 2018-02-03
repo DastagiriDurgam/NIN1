@@ -14,7 +14,7 @@
   }
 </style>
 
-<!-- multistep form -->
+
 <div class="icon-bar" *ngIf="isPrimary">
   <a><i  ></i></a>
   <a class="pageTitle"> Registration </a>
@@ -24,22 +24,60 @@
 <navbar [pageTitle]="pageTitle" [isDisplayFooter]="false" *ngIf="!isPrimary">
 </navbar>
 
-<div >
-  <div id="msform" *ngIf="!isRestricted">
+<div > 
+  <div id="" *ngIf="!isRestricted">
 
-    <input type="text" placeholder="Your name" [(ngModel)]="usename" />
-    <!-- <div style="text-align:left;">
-      <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="gender" />Male
-      <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="gender" />Female<br>
-    </div> -->
+    <ion-list>
+  
+  
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="usename"  placeholder="Your Name"></ion-input>
+      </ion-item>
+
+
+      <ion-item *ngIf="isPrimary">
+        <ion-input type="text" placeholder="Email Address" [(ngModel)]="email_address" ></ion-input>
+      </ion-item>
+
+
+      <ion-item> *ngIf="isPrimary"
+        <ion-input type="number" max="10" placeholder="Mobile Number" [(ngModel)]="mobile_number"></ion-input>
+      </ion-item>
+
+
+      <ion-item *ngIf="isPrimary">
+        <ion-input type="number" max ="4" placeholder="Enter 4 Digit Password" [(ngModel)]="pin"></ion-input>
+      </ion-item>
+
+
+      <ion-item *ngIf="isPrimary">
+        <ion-label>Select Country</ion-label>
+        <ion-select [(ngModel)]="currentcountry">
+          <ion-option selectedText>India</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="isPrimary">
+        <ion-label>Select State</ion-label>
+        <ion-select [(ngModel)]="currentstate"> 
+          <ion-option [value]="state[0]" *ngFor="let state of statesList" >{{state[0]}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+
+     
+    </ion-list>
+
+
+    <!-- <input type="text" placeholder="Your name" [(ngModel)]="usename" />
+   
     <input *ngIf="isPrimary" type="text" placeholder="Email Address" [(ngModel)]="email_address" />
     <input *ngIf="isPrimary" type="number" placeholder="Mobile Number" [(ngModel)]="mobile_number" class="col-md-12"/>
 
     <input *ngIf="isPrimary" type="number" placeholder="Enter 4 Digit Password" (keydown)="restricttonumbers($event, 'pin')" [(ngModel)]="pin" class="col-md-12"/>
     
-    <!--<input type="text" name="cpass" placeholder="Select Your Country" [(ngModel)]="location"/> 
-    <input type="text" name="cpass" placeholder="Select Your State" [(ngModel)]="location"/>  -->
-
+    
     <select *ngIf="isPrimary" class="list" [(ngModel)]="currentcountry">
   <option disabled>Select Country</option>
   <option selected>India</option> 
@@ -54,16 +92,23 @@
   <option value="Son">Son</option>
   <option value="Daughter">Daughter</option>
   <option value="Other">Other</option>
-</select>
+</select> -->
+<div item-width="100%" class="text-center">
+  <button  ion-button color="secondary" (click)="register();">Register</button> 
+  <div>
+  <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
+  <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;"    (click)="gotoLogin();">Login</a>
+</div>
+</div>
 
-    <!-- <input type="checkbox" class="terms" style="width: 20px; height: 20px;" [(ngModel)]="terms" /><span style="margin-left: 10px; color:#F8B864">I Agree Terms and Conditions</span><br> -->
-    <input type="button" class="register_button" value="Register" (click)="register();"
-    />
-    <!--  [disabled]="!isDataLoaded || !terms" -->
-    <!-- <a *ngIf="isPrimary" >Already Registered?</a>     -->
-    <!-- <input *ngIf="isPrimary"  type="button" class="register_button" value="Login" (click)="gotoLogin();"   /> -->
-    <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
-    <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;"    (click)="gotoLogin();">Login</a>
 
+    <!-- <input type="button" class="register_button" value="Register" (click)="register();"
+    /> -->
+  
+   
   </div>
+
+
+  
+
 </div>

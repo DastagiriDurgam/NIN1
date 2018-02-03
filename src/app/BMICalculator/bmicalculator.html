@@ -1,12 +1,13 @@
-
 <style>
-  .bmicalc{
+  .bmicalc {
     padding: 25px;
   }
-  .bmicalc *{
+
+  .bmicalc * {
     margin-top: 10px;
   }
-.bmicalc .measures1{
+
+  .bmicalc .measures1 {
     margin-top: 15px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -17,69 +18,120 @@
     font-family: montserrat;
     color: #2C3E50;
     font-size: 13px;
-}
-.bmimeasurecontainer input[type="text"]{
-  margin-left: 10px;
-}
-.bmimeasurecontainer select{
-  margin-left: 10px;
-}
+  }
+
+  .bmimeasurecontainer input[type="text"] {
+    margin-left: 10px;
+  }
+
+  .bmimeasurecontainer select {
+    margin-left: 10px;
+  }
 </style>
 
 <navbar [pageTitle]="pageTitle">
-</navbar> 
-<div class="container"  style="height:100%; background-color:white;">   
+</navbar>
+<div class="container" style="height:100%; background-color:white;">
  
-<div class="bmicalc msform row" id="">
+  <div class="bmicalc msform row" id="">
 
-  <!--<input type="text" name="email" placeholder="Your name" />-->
-<!--<select  type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px">
+    <!--<input type="text" name="email" placeholder="Your name" />-->
+    <!--<select  type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px">
   <option *ngFor="let user of Users">{{user.Name}}</option>
 </select>-->
 
-  <select type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px" [(ngModel)]="age">
+    <ion-item class="col-sm-12 col-xs-12 ">
+      <ion-label>Age</ion-label> 
+      <ion-select [(ngModel)]="age" placeholder="Age">
+        <ion-option *ngFor="let age of 100 | printnumbers:{start:18}">{{age}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- <select type="text"  class="col-sm-12 col-xs-12 measures1" style="padding: 10px" [(ngModel)]="age">
       <option value="0" selected disabled>Age</option>
       <option *ngFor="let age of 100 | printnumbers:{start:18}">{{age}}</option>
-    </select>
- <div style="text-align:left;">
-  <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="gender"/>Male
-  <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="gender"/>Female<br>
- </div>
-  <!--<input type="text" name="cpass" placeholder="Occupation" />-->
+    </select> -->
+    <div style="text-align:left;">
+      <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="gender" />Male
+      <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="gender" />Female
+      <br>
+    </div>
+    <!--<input type="text" name="cpass" placeholder="Occupation" />-->
 
- <!--<select type="text" class="col-sm-12 col-xs-12" style="padding: 10px">
+    <!--<select type="text" class="col-sm-12 col-xs-12" style="padding: 10px">
       <option selected disabled>Physio logical status</option>
       <option *ngFor="let status of physioLogicalStatus[gender]">{{status}}</option>
     </select>-->
-<div class="  bmimeasurecontainer col-sm-12 col-xs-12" >
-  <input type="number" style="width:35%;"  placeholder="Height (cms)" [(ngModel)]="heightincm" [ngModelOptions]="{standalone: true}" (keyup)="convertUnits('cmeter',heightincm)" (change)="heightinft=(heightincm/30.48)"/><p style="display: inline;" > or</p>
-   <select type="text" style="width:24%; margin-left:0px !important"  name="pass"   [(ngModel)]="heightFeet" (change)="convertUnits('feet',heightFeet)">
-      <option value="" selected disabled>Feet</option>
-      <option [value]="num" *ngFor="let num of 11 | printnumbers:{start:0}">{{num}}</option>
-    </select>
-    <select type="text" name="pass" style="width:27%;margin-left:0px !important"  [(ngModel)]="heightInch" (change)="convertUnits('inch',heightInch)">
-      <option  value="" selected disabled>Inches</option>
-      <option [value]="num" *ngFor="let num of 12 | printnumbers:{start:0}">{{num}}</option>
-    </select>
-  <!--<input type="number" class="col-sm-3 col-xs-3"  placeholder="Feet" [(ngModel)]="heightinft" [ngModelOptions]="{standalone: true}" (keyup)="heightincm=(heightinft*30.48)"/>-->
-  <!--<input type="text" class="col-sm-3 col-xs-3" name="cpass" placeholder="Inches" />-->
-</div>
-  <!--<input type="text" class="hicm measure2" name="cpass" placeholder="Height Feets & Inches" />-->
-  <input type="number" class="hicm measures1" name="cpass" placeholder="Weight (Kg)" [(ngModel)]="weightinkg"/>
+    <!-- <div class="  bmimeasurecontainer col-sm-12 col-xs-12">
+      <input type="number" style="width:35%;" placeholder="Height (cms)" [(ngModel)]="heightincm" [ngModelOptions]="{standalone: true}"
+        (keyup)="convertUnits('cmeter',heightincm)" (change)="heightinft=(heightincm/30.48)" />
+      <p style="display: inline;"> or</p>
+      <select type="text" style="width:24%; margin-left:0px !important" name="pass" [(ngModel)]="heightFeet" (change)="convertUnits('feet',heightFeet)">
+        <option value="" selected disabled>Feet</option>
+        <option [value]="num" *ngFor="let num of 11 | printnumbers:{start:0}">{{num}}</option>
+      </select>
+      <select type="text" name="pass" style="width:27%;margin-left:0px !important" [(ngModel)]="heightInch" (change)="convertUnits('inch',heightInch)">
+        <option value="" selected disabled>Inches</option>
+        <option [value]="num" *ngFor="let num of 12 | printnumbers:{start:0}">{{num}}</option>
+      </select>
+      
+    </div> -->
 
-  <input type="button" style="margin:auto;" name="next" class="submit_button" value="Submit" (click)="submitCalc()" />
+    <div class="col-md-4 col-xs-12 col-sm-4">
+        <ion-item>
+            <ion-input  type="text" [(ngModel)]="heightincm" placeholder="Height (cms)" [ngModelOptions]="{standalone: true}"
+            (keyup)="convertUnits('cmeter',heightincm)" (change)="heightinft=(heightincm/30.48)"></ion-input>
+          </ion-item>
+    </div>
+    <div class="col-md-2 col-xs-12 col-sm-2 text-center">
+        <p >or</p>
+    </div>
+    <div class="col-md-3 col-xs-6 col-sm-4 mtop0">
+        <ion-item>
+            <ion-select placeholder="Feet" [(ngModel)]="heightFeet" (ngModelChange)="convertUnits('feet',heightFeet)">
+                <!-- <ion-option value="" selected disabled>Feet</ion-option> -->
+                <ion-option [value]="num" *ngFor="let num of 100 | printnumbers:{start:0}">{{num}}</ion-option>
+              </ion-select>
+          </ion-item>
+    </div>
+    <div class="col-md-3 col-xs-6 col-sm-4 mtop0">
+        <ion-item>
+            <ion-select  placeholder="Inches" [(ngModel)]="heightInch" (ngModelChange)="convertUnits('inch',heightInch)">
+                <!-- <ion-option value="" selected disabled>Inches</ion-option> -->
+                <ion-option [value]="num" *ngFor="let num of 100 | printnumbers:{start:0}">{{num}}</ion-option>
+              </ion-select>
+          </ion-item>
+      </div>
 
-</div>
-<div class="col-md-12">
-  <p class="col-md-12">
-<strong> BMI:</strong> Body Mass Index (BMI) = Weight in kilogram divided by the square of the height in meters.
+    <!-- <ion-input class="col-md-4 col-xs-12" type="text" [(ngModel)]="heightincm" placeholder="Height (cms)" [ngModelOptions]="{standalone: true}"
+      (keyup)="convertUnits('cmeter',heightincm)" (change)="heightinft=(heightincm/30.48)"></ion-input>
+    <ion-label class="col-md-2 col-xs-12 col-xs-12">or</ion-label>
+    <ion-select class="col-md-3 col-xs-6 col-sm-3" [(ngModel)]="heightFeet">
+      <ion-option value="" selected disabled>Feet</ion-option>
+      <ion-option [value]="num" *ngFor="let num of 100 | printnumbers:{start:0}">{{num}}</ion-option>
+    </ion-select>
+    <ion-select class="col-md-3 col-xs-6 col-sm-3" [(ngModel)]="heightInch">
+      <ion-option value="" selected disabled>Inches</ion-option>
+      <ion-option [value]="num" *ngFor="let num of 100 | printnumbers:{start:0}">{{num}}</ion-option>
+    </ion-select> -->
 
-It is used to assess the nutritional status of an Individual.
-</p>
-<p class="col-md-12">
-<strong>BMR:</strong> Basal Metabolic Rate (BMR) is the number of calories required to keep your body functioning at rest.
-</p>
-</div>
+
+
+    <!--<input type="text" class="hicm measure2" name="cpass" placeholder="Height Feets & Inches" />-->
+    <input type="number" class="hicm measures1" name="cpass" placeholder="Weight (Kg)" [(ngModel)]="weightinkg" />
+
+    <input type="button" style="margin:auto;" name="next" class="submit_button" value="Submit" (click)="submitCalc()" />
+
+  </div>
+  <div class="col-md-12">
+    <p class="col-md-12">
+      <strong> BMI:</strong> Body Mass Index (BMI) = Weight in kilogram divided by the square of the height in meters. It is used
+      to assess the nutritional status of an Individual.
+    </p>
+    <p class="col-md-12">
+      <strong>BMR:</strong> Basal Metabolic Rate (BMR) is the number of calories required to keep your body functioning at rest.
+    </p>
+  </div>
 
 
 </div>

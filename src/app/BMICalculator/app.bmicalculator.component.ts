@@ -139,6 +139,7 @@ export class BMICalcComponent {
   }
 
   convertUnits(str, value) {
+    debugger;
     if (str == 'cmeter') {
       let tempInch = this.heightincm * 0.393701;
       this.heightFeet = Math.round(tempInch / 12);
