@@ -1,0 +1,83 @@
+<navbar [pageTitle]="pageTitle"></navbar>
+
+<div clss="container expenditure"  style="height:100%; background-color:white;">
+  <div class="form row">
+    <div class="col-xs-12">
+      <div class="col-xs-12">
+        <select type="text" name="pass" class="form-control" [(ngModel)]="uid">
+            <option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</option>
+         </select>
+      </div>
+       <div class="col-xs-12 col-sm-12">
+        <input class="form-control" placeholder="Select Date" type="text" [min]="sel_minDate" [max]="sel_maxDate" [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')">
+      </div>
+      <div class="col-xs-6">
+        <select [(ngModel)]="hours" class="form-control">
+            <option value="HRS" selected disabled>HRS</option>
+            <option  *ngFor="let hh of 25 | printnumbers:{start:0}">{{hh}}</option>
+            </select>
+      </div>
+      <div class="col-xs-6">
+        <select [(ngModel)]="minuts" class="form-control">
+            <option value="MM" selected disabled>MM</option>
+            <option *ngFor="let mm of 60 | printnumbers:{start:0}">{{mm}}</option>
+            </select>
+      </div>
+      <!--<input type="text" name="email" placeholder="HH" class="createRecipeInput" />
+            <input type="text" name="selectlist" placeholder="MM" class="createRecipeInput" />    -->
+     
+      <div class="col-xs-12 text-center">
+
+        <select class="form-control" [(ngModel)]="selActivity">
+            <option value="0" selected>Physical Activity</option>
+            <option *ngFor="let activity of totalActivities.values" [ngValue]="activity[0]">{{activity[1]}}</option>
+            </select>
+        <input class="submit_button" name="next" style="margin:auto;" type="button" value="Add" (click)="addActivity(uid,totalActivities.values[selActivity-1], hours, minuts, sel_date)">
+
+      </div>
+      <!--<input type="text" class="col-sm-11 col-xs-11 searchInput" [ngModel]="searchStr" (ngModelChange)="getPhysicalActList($event)"  placeholder="Physical Activity"/>
+            <ul [hidden]="!isDisplayActivityList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 95px;     margin: 0;">
+              <li *ngFor="let item of filteredActivities" (click)="addRawfood(item)">{{item}}</li>  
+               
+              </ul>  -->
+
+    </div>
+  </div>
+  <!--<div class="col-sm-12 col-xs-12" style="margin-top: 10px; height: 40px; background-color: #f9a938; text-align: right;
+      font-size: 15px; text-align: center; font-weight: bold;">Calories Spent per Activity</div>-->
+  <table class="col-sm-12 col-xs-12" style="background-color: darkslategray;  color: white; margin:15px;">
+  <tr style="margin-top: 10px; height: 40px; background-color: #f9a938; text-align: right;
+      font-size: 15px; text-align: center; font-weight: bold; color:black;">
+    <td></td>
+    <td>Activity</td>
+       <td>Time(min)</td>
+      <td>Energy(Kcal)</td>
+  </tr>
+    <tr style="color:#f9a938; padding:10px 5px;" *ngFor="let activity of selectedActivities">
+       <td><span style="margin-left:10px;" (click)="selectedActivities.splice(i, 1)"><i class="fa fa-times-circle-o"></i></span></td>
+      <td>{{activity.activityname}}</td>
+       <td>{{activity.hours}}</td>
+      <td>{{activity.energy.toFixed(2) }}</td>
+    </tr>
+  </table>
+  <div class="col-xs-6">
+    <input type="button" name="next" class="submitbutton form-control" value="Submit" (click)="submit()" />
+  </div>
+  <div class="col-xs-6">
+    <input type="button" name="next" class="submitbutton form-control" value="Clear" (click)="clearValues()" />
+  </div>
+</div>
+
+<style type="text/css">
+  .form-control {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .submitbutton {
+    background-color: #fabd75;
+    -webkit-appearance: button !important;
+    color: black !important;
+    border-radius: 0px !important;
+  }
+</style>

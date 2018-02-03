@@ -1,0 +1,55 @@
+<navbar [pageTitle]="pageTitle"></navbar>
+
+<style>
+
+ .register_button {
+      padding: 5px !important;
+      width: 100px !important;
+      background-color: orangered;
+      -webkit-appearance: button;
+      color: white !important;
+    }
+     #msform {
+         margin: 280px 10px !important;
+    }
+
+</style>
+<div  style="height:100%; background-color:white;">
+<!-- multistep form -->
+<div style="padding: 20px;" class="row">
+
+   <select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_nutrient" >
+      <option [value]="0" selected disabled>Nutrient</option>
+      <option [value]="category" *ngFor="let category of nutrientList">{{category[1]}}</option>
+    </select>
+
+
+ <select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;  margin: 10px;" [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
+      <!--<option [value]="0" selected>English</option>-->
+       <option value="EN"  selected>English</option>
+      <option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</option>
+    </select>
+  <!--<select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
+    <option selected>Sort By</option>    
+    <!--<option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</option> -->
+  <!--</select>-->
+   
+ <select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="ascrdesc" >
+      <option value="false" selected >Descending</option>
+      <option value="true" >Ascending</option> 
+    </select>
+
+   
+    <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="plantRanimal" style="padding: 10px;     margin: 10px;">
+        
+        <option value="plant" selected> Plant Source</option>
+        <option value="animal"> Animal Source</option>       
+    </select>
+     <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="perticulars" style="padding: 10px;     margin: 10px;">
+        <option value="" disabled selected>Particulars</option>
+        <option [value]="item.name" *ngFor="let item of plantanimalDetails[plantRanimal]">{{item.title}}</option>       
+    </select>    
+    <input type="button" name="next" class="submit_button" value="Know & Submit" (click)="submitAction()" style="margin:auto;"/>                
+     <!--<input type="button" name="next" class="submit_button" value="Submit" (click)="submitRda()"/> -->
+
+</div> </div>

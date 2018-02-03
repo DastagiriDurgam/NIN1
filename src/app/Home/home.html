@@ -1,0 +1,89 @@
+
+
+<navbar  [pageTitle]="pageTitle" [color]="" [isDisplayFooter]="false" >
+
+</navbar>
+
+<div   style="height:100%; background-color:white;">
+  <style>
+    .w3-padding-16 {
+      text-align: center;
+      height: 90px;
+    }
+  </style>
+  <div>
+    <ul style="list-style: none; padding: 0; margin-top: 0; height: 100%;  background-color: #ff7403; color:black;">
+      <li class="w3-padding-16" style="background-color: 	#fbc579" (click)="onNavigate('req')">
+        <div style="
+            font-size: 35px;
+            "><img src="assets/icon/menu-1.png" width="48"></div>
+        <div style="
+            font-size: 20px;
+            ">
+          My Nutrient Requirements
+        </div>
+      </li>
+      <li class="w3-padding-16" style="background-color: #fdb44c" (click)="onNavigate('nutrientinfood')">
+        <div style="
+            font-size: 35px;
+            ">
+          <img src="assets/icon/searchfoodsbynutrients-2.png" width="50">
+        </div>
+        <div style="
+            font-size: 20px;
+            ">
+          Nutrients in My food
+        </div>
+      </li>
+      <li class="w3-padding-16" style="background-color: #fba52a" (click)="onNavigate('mydietnactivity')">
+        <div style="
+            font-size: 35px;
+            ">
+          <img src="assets/icon/mydietactivity.png" width="50">
+        </div>
+        <div style="
+            font-size: 20px;
+            ">
+          My Diet and Activity
+        </div>
+      </li>
+      <li class="w3-padding-16" style="background-color: #f79929" (click)="onNavigate('searchfoodbynutrient')">
+        <div style="
+            font-size: 35px;
+            ">
+          <img src="assets/icon/88-1.png" width="50">
+        </div>
+        <div style="
+            font-size: 20px;
+            ">
+          Search Foods by Nutrients
+        </div>
+      </li>
+      <li class="w3-padding-16" style="background-color: #f99116" (click)="onNavigate('searchfoodbylanguage')">
+        <div style="
+            font-size: 35px;
+            ">
+          <img src="assets/icon/foodlanguage.png" width="50">
+        </div>
+        <div style="
+            font-size: 20px;
+            ">
+          Search Foods by Language
+        </div>
+      </li>
+      <li class="w3-padding-16" style="background-color: #ff7403" (click)="onNavigate('otherinfo')">
+        <div style="
+            font-size: 35px;
+            ">
+        </div>
+        <img src="assets/icon/otherinfo.png" width="50">
+        <div style="
+            font-size: 20px;
+            ">
+          Info
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+

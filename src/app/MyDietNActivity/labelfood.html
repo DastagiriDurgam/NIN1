@@ -1,0 +1,79 @@
+<navbar [pageTitle]="pageTitle">
+</navbar>
+<style>
+  .labelfoodform>* {
+    margin: 10px;
+  }
+
+  .labelfoodform>input {
+    padding: 10px;
+  }
+
+  .labelfoodform>select {
+    padding: 10px;
+  }
+
+
+
+  .nutrients input {
+    margin: 10px;
+    padding: 10px;
+  }
+</style>
+<div class="container" style="height:100%; background-color:white;">
+
+
+
+  <ion-content>
+    <div class="row labelfoodform">
+      <select class="col-xs-12" [(ngModel)]="Userid">
+       <option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</option>
+    </select>
+      <input class="col-xs-12" type="text" placeholder="Select Date" [min]="sel_minDate" [(ngModel)]="date" onfocus="(this.type='date')"
+        onblur="(this.type='text')" />
+      <select class="col-xs-12" [(ngModel)]="timetype">
+        <option  selected>Breakfast</option>
+        <option  >Morning Snack</option>
+        <option  >Lunch</option> 
+        <option  >Evening Snacks</option>
+        <option  >Dinner</option> 
+  </select>
+      <input class="col-xs-12" type="text" placeholder="Enter Food name" [(ngModel)]="labelfooddetails['Itemname']" />
+      <ion-input class="col-xs-12" type="tel" placeholder="Enter Quantity" [(ngModel)]="labelfooddetails['quantity']"></ion-input>
+    </div>
+
+
+    <div class="row nutrients">
+     
+        <input type="text" class="col-xs-5" value="Energy (cal)" disabled/>
+        <ion-input type="tel" class="col-xs-5" aria-placeholder="0.00" [(ngModel)]="labelfooddetails['energy_joules']"></ion-input>
+        <!--<input type="tel" class="col-xs-5" [(ngModel)]="labelfooddetails['energy_joules']" />-->
+      
+     
+        <input type="text" class="col-xs-5" value="Carbohydrates (g)" disabled/>
+        <ion-input type="tel" class="col-xs-5" aria-placeholder="0.00"  [(ngModel)]="labelfooddetails['carbohydrate']"></ion-input>
+     
+     
+        <input type="text" class="col-xs-5" value="Total Fat (g)" disabled/>
+        <ion-input type="tel" class="col-xs-5" aria-placeholder="0.00" [(ngModel)]="labelfooddetails['total_fat']"></ion-input>
+      
+     
+        <input type="text" class="col-xs-5" value="Saturated Fat (mg)" disabled/>
+        <ion-input type="tel" class="col-xs-5" aria-placeholder="0.00"  [(ngModel)]="labelfooddetails['saturated_fat']"></ion-input>
+     
+     
+        <input type="text" class="col-xs-5" value="Protein (g)" disabled/>
+        <ion-input type="tel" class="col-xs-5" aria-placeholder="0.00"  [(ngModel)]="labelfooddetails['protein']"></ion-input>
+      
+     
+        <input type="text" class="col-xs-5" value="Sodium (mg)" disabled/>
+        <ion-input type="tel" class="col-xs-5" aria-placeholder="0.00" [(ngModel)]="labelfooddetails['sodium_na']"></ion-input>
+      
+
+      <div style="margin:auto">
+        <input type="button" value="Submit" class="submit_button" (click)="submitLabelFoodDetails()" />
+        <input type="button" value="Clear" class="submit_button" (click)="clearValues()" />
+      </div>
+    </div>
+  </ion-content>
+</div>

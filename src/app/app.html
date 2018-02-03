@@ -1,1 +1,29 @@
-<ion-nav [root]="rootPage"></ion-nav>
+
+<!--<ion-menu [content]="content">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Pages</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>-->
+<div id="mySidenav" class="sidenav"> 
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+    <a href="#" (click)="onNavigate('req')" >Nutrient Requirements</a>
+    <a href="#"  (click)="onNavigate('nutrientinfood')">Nutrients In My Food</a>  
+    <a href="#"  (click)="onNavigate('mydietnactivity')">My Diet And Activity</a>
+    <a href="#"  (click)="onNavigate('searchfoodbynutrient')">Search Food By Nutrient</a>
+    <a href="#"  (click)="onNavigate('searchfoodbylanguage')">Search Food By Language</a>
+    <a href="#"  (click)="onNavigate('otherinfo')">Info</a>
+   
+  </div>
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

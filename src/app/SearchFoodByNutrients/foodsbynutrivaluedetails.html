@@ -1,0 +1,21 @@
+<navbar [pageTitle]="pageTitle">
+</navbar>
+<div class="container" style="height:100%; background-color:white;">
+    <div class="row">
+        <div class="col-sm-12 col-xs-12" style=" line-height: 40px; height: 40px; background-color: #f9a938; text-align: right;
+    font-size: 15px; text-align: center; font-weight: bold;">{{details.nutrient[1]}} <span>/100gm</span> </div>
+        <table *ngIf="!isNoDataAvailable" class="col-sm-12 col-xs-12" style="background-color: darkslategray;  color: white; padding:0px 10px;">
+
+            <tr style="color:#f9a938;  line-height: 50px;" *ngFor="let food of totalRawfoods">
+                <td style="text-indent:10px;" >{{food[1]}}</td>
+                <!-- <td style="text-indent:10px;" *ngIf="details.language=='EN'">{{food[1]}}</td> -->
+                <td *ngIf="food[1]!=null && details.nutrient[2].replace('\t', '')!='energy_joules'">{{food[2]}}</td>
+                <td *ngIf="food[1]!=null && details.nutrient[2].replace('\t', '')=='energy_joules'">{{adjustFractions(food[2]/4.184)}}</td>
+                 <td *ngIf="food[1]==null">0</td>                  
+            </tr>
+
+        </table>
+        <label *ngIf="isNoDataAvailable">No Data Available</label>
+
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<style>
+    .mydietbgimg{
+           top: 20%;
+    position: relative;
+        margin: auto;
+    }
+</style>
+<div style="background: url(assets/images/consumption-bg-1.png) no-repeat;     background-size: 100% 100%; height: inherit;">
+<navbar [pageTitle]="pageTitle"></navbar>
+<div  style="height:100%; background-color:white;">
+ <div class="row mydietbgimg" >
+      <ul class="req_item_container">
+         <li class="col-xs-6">
+            <div class="circle1 text-center" (click)="navigate('Consuption')">
+               <p>Food</p>
+                <p>Consumption</p>
+            </div>
+         </li>
+         <li class="col-xs-6">
+            <div class="circle1 text-center" (click)="navigate('expenditure')">
+               <p>Energy</p>
+               <p>Expenditure</p>
+            </div>
+         </li>
+         <li class="col-xs-11" style="margin-top: 34px;">
+            <div style="margin:auto;" class="circle"  (click)="navigate('balancesheet')">               
+               <p>Balance Sheet</p>
+            </div>
+         </li>
+      </ul>
+   </div>
+
+<!--<div class="row bgimg">
+    <ul class="req_item_container">
+        <li class="req_item"><div class="circle" (click)="navigate('Consuption')"><p>Consumption</p></div></li>
+        <li class="req_item"><div class="circle" (click)="navigate('expenditure')"><p>Expenditure</p></div></li>
+        <li class="req_item"><div class="circle"  (click)="navigate('balancesheet')"><p>Balance Sheet</p></div></li> 
+    </ul>
+</div> -->
+</div>
+</div>

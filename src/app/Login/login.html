@@ -1,0 +1,36 @@
+<style>
+    select.list {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: montserrat;
+      color: #2C3E50;
+      font-size: 13px;
+      background-color: white;
+    }
+  </style>
+  
+  <!-- multistep form -->
+  <div class="icon-bar" *ngIf="isPrimary">
+    <a><i  ></i></a>
+    <a class="pageTitle"> Login </a>
+    <a style="float: right"><img src="assets/icon/nin-logo-main.png" width="40"></a>
+  </div>
+  
+  <navbar [pageTitle]="pageTitle" [isDisplayFooter]="true" >
+  </navbar>
+   
+  <div  style="height:100%; background-color:white;">
+    <div id="msform">
+  
+      <input type="number" class="col-xs-12" placeholder="Enter Your Phone Number" [(ngModel)]="mobileNumber"  (keydown)="restricttonumbers($event, '')"/>
+     
+      <input type="number" class="col-xs-12" placeholder="Enter 4 Digit Pin" [(ngModel)]="pinnumber" (keydown)="restricttonumbers($event, '')"/>
+      <input type="button" class="register_button" value="Login" (click)="login();"/>
+  
+    </div>
+  </div>

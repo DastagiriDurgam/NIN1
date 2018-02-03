@@ -1,0 +1,57 @@
+<navbar [pageTitle]="pageTitle"></navbar>
+<style>
+    body {
+        margin: 0;
+    }
+    
+    .icon-bar.knowvalues {
+        width: 100%;
+        background-color: #555;
+           overflow-x: auto;
+    overflow-y: hidden;
+        height: 60px;
+    }
+    
+    .icon-bar.knowvalues a {
+        float: left;
+        width: 20%;
+        text-align: center;
+        padding: 12px 0;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 16px;
+    }
+    
+    .icon-bar a div {
+        font-size: 10px;
+    }
+    
+    .icon-bar.knowvalues a:hover {
+        background-color: #000;
+    }
+</style>
+<div  style="height:100%; background-color:white;">
+<div class="icon-bar knowvalues">
+    <a *ngFor="let rawfood of selectedRawfoods" (click)="getNutrientValues(rawfood)"><i class="fa fa-calendar-o" ></i><div>{{rawfood.item[2]}}</div></a>
+    <!--<a  (click)="getTotal()" *ngIf="selectedRawfoods.length>1"><i class="fa fa-plus-circle" ></i><div>Total</div></a>-->
+   
+</div>
+
+<table class="col-sm-12 col-xs-12" style=" margin: 0px 10px 10px 10px; ">
+<tr style="color: #f9a938">
+    <th>Nutrient</th>
+      <th>Value</th>
+    </tr>
+ 
+<tr *ngFor="let column of columnstodisplay; let i = index" [ngStyle]="{'color':(itemNames[column]=='Energy (Kcal)'?'red':'black')}">
+      <td *ngIf="itemNames[column]!='Vitamin B12'">{{itemNames[column]}}</td>
+      <td *ngIf="itemNames[column]!='Energy (Kcal)' && itemNames[column]!='Vitamin B12' && column!='total_saturated_fatty_acids_TFSA'">{{adjustFractions(valuestodisplay[i] *(currentRawfood.value/100))}}</td>
+     <td *ngIf="itemNames[column]=='Energy (Kcal)'">{{adjustFractions((valuestodisplay[i]/(4.184)) *(currentRawfood.value/100))}}</td>
+    <td *ngIf="column=='total_saturated_fatty_acids_TFSA'">{{adjustFractions((valuestodisplay[i]/1000) *(currentRawfood.value/100))}}</td>
+    
+     
+    </tr>
+   
+</table>
+
+</div>

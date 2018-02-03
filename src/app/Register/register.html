@@ -1,0 +1,69 @@
+<style>
+  select.list {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+    background-color: white;
+  }
+</style>
+
+<!-- multistep form -->
+<div class="icon-bar" *ngIf="isPrimary">
+  <a><i  ></i></a>
+  <a class="pageTitle"> Registration </a>
+  <a style="float: right"><img src="assets/icon/NIN_100_LOGO_FINAL.png" width="40"></a>
+</div>
+
+<navbar [pageTitle]="pageTitle" [isDisplayFooter]="false" *ngIf="!isPrimary">
+</navbar>
+
+<div >
+  <div id="msform" *ngIf="!isRestricted">
+
+    <input type="text" placeholder="Your name" [(ngModel)]="usename" />
+    <!-- <div style="text-align:left;">
+      <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="gender" />Male
+      <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="gender" />Female<br>
+    </div> -->
+    <input *ngIf="isPrimary" type="text" placeholder="Email Address" [(ngModel)]="email_address" />
+    <input *ngIf="isPrimary" type="number" placeholder="Mobile Number" [(ngModel)]="mobile_number" class="col-md-12"/>
+
+    <input *ngIf="isPrimary" type="number" placeholder="Enter 4 Digit Password" (keydown)="restricttonumbers($event, 'pin')" [(ngModel)]="pin" class="col-md-12"/>
+    
+    <!--<input type="text" name="cpass" placeholder="Select Your Country" [(ngModel)]="location"/> 
+    <input type="text" name="cpass" placeholder="Select Your State" [(ngModel)]="location"/>  -->
+
+    <select *ngIf="isPrimary" class="list" [(ngModel)]="currentcountry">
+  <option disabled>Select Country</option>
+  <option selected>India</option> 
+</select>
+    <select *ngIf="isPrimary" class="list" [(ngModel)]="currentstate">
+  <option value="0">Select State</option>
+  <option [value]="state[0]" *ngFor="let state of statesList">{{state[0]}}</option>
+</select>
+    <select *ngIf="!isPrimary" class="list" [(ngModel)]="relation">
+  <option value="relation" selected disabled>Choose Relation</option>
+  <option value="Wife">Wife</option>
+  <option value="Son">Son</option>
+  <option value="Daughter">Daughter</option>
+  <option value="Other">Other</option>
+</select>
+
+    <!-- <input type="checkbox" class="terms" style="width: 20px; height: 20px;" [(ngModel)]="terms" /><span style="margin-left: 10px; color:#F8B864">I Agree Terms and Conditions</span><br> -->
+    <input type="button" class="register_button" value="Register" (click)="register();"
+    />
+    <!--  [disabled]="!isDataLoaded || !terms" -->
+    <!-- <a *ngIf="isPrimary" >Already Registered?</a>     -->
+    <!-- <input *ngIf="isPrimary"  type="button" class="register_button" value="Login" (click)="gotoLogin();"   /> -->
+    <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
+    <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;"    (click)="gotoLogin();">Login</a>
+
+  </div>
+</div>

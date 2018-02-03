@@ -1,0 +1,13 @@
+
+<div style="z-index: 10000; height:75px"> 
+
+<div class="icon-bar">
+  <a  (click)="openNav();"><i class="fa fa-bars" ></i></a> 
+ <a class="pageTitle">{{pageTitle}}</a>
+  <a  style="float: right"><img src="assets/icon/NIN_100_LOGO_FINAL.png" width="40"></a> 
+</div>
+  <a *ngIf="isDisplayFooter" style="position:fixed; left:5px; bottom:0; font-size: 35px; z-index:1000;" (click)="gotoHome()"><i class="fa fa-home" [ngStyle]="{'color':color}"></i></a> 
+  <a *ngIf="isDisplayFooter" style="position:fixed; right:5px; bottom:0; font-size: 35px;z-index:1000;" (click)="popView()"><i class="fa fa-reply" [style.color]="color"></i></a> 
+</div>
+
+ 

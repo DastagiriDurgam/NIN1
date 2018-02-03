@@ -1,0 +1,46 @@
+
+<style>
+    #msform {
+        bottom: 150px;
+    }
+   .rdaSelect {
+            padding: 5px;
+    margin-bottom: 20px;
+    }
+</style>
+<navbar [pageTitle]="pageTitle"></navbar>
+<div  style="height:100%; background-color:white;">
+<div clss="bmicalc msform" id="msform">
+  
+    <!--<input type="text" name="email" placeholder="Your name" />-->
+    <!--<input type="text" name="pass" placeholder="Select List" />     -->
+    <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="gender">
+        <option value="" disabled selected> Select List</option>
+        <option value="Man"> Man</option>
+        <option value="Woman"> Woman</option>
+    </select>
+     <select class="col-sm-12 col-xs-12 rdaSelect"  [(ngModel)]="perticulars" >
+        <option value="" disabled selected>Occupation</option>
+        <option [value]="item" *ngFor="let item of perticularsArray[gender]">{{item}}</option>       
+    </select>   
+
+    <!--<input type="text" name="cpass" placeholder="Occupation" />-->
+    
+      <input type="button" name="next" class="submit_button" value="Get Recipe Values" (click)="getRecipeValues()"/>
+
+</div>
+<!--<form clss="bmicalc msform" id="msform" class="msform"> 
+  
+   
+    <input type="text" name="selectlist" placeholder="Select List" />
+     
+    
+    <input type="text" name="occupation" placeholder="Occupation" />
+    <input type="text" name="weight" placeholder="Weight(kg)" />
+    
+     <input type="button" name="next" class="submit_button" value="Get Recipe Values" (click)="getRecipeValues()"/>
+ 
+</form>-->
+
+
+</div>

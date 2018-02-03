@@ -1,0 +1,46 @@
+<style>
+  select.list {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+    background-color: white;
+  }
+</style>
+
+<navbar [pageTitle]="pageTitle"></navbar>
+<div  >
+<div id="msform">
+
+  <input type="text" placeholder="Your name" [(ngModel)]="userData.Name" disabled/>
+  <p [hidden]="true">{{errorMessage.username}}</p>
+  <div style="text-align:left;">
+    <input disabled type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="userData.Gender" />Male
+    <input disabled type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="userData.Gender" />Female<br>
+  </div>
+  <input disabled type="text" placeholder="Email Address" [(ngModel)]="userData.Email" />
+  <input disabled type="text" placeholder="Mobile Number" [(ngModel)]="userData.Phone" />
+
+  <!--<input type="text" name="cpass" placeholder="Select Your Country" [(ngModel)]="location"/> 
+    <input type="text" name="cpass" placeholder="Select Your State" [(ngModel)]="location"/>  -->
+
+  <select disabled class="list" [(ngModel)]="userData.Location">
+  <option disabled>Select Country</option>
+  <option selected>India</option>
+</select>
+  <select disabled class="list" [(ngModel)]="userData.State">
+  <option value="0">Select State</option>
+  <option [value]="state[1]" *ngFor="let state of statesList">{{state[1]}}</option>
+</select>
+
+  <!--<input type="checkbox" class="terms" style="width: 20px; height: 20px;"/><span style="margin-left: 10px; color:#F8B864">I Agree Terms and Conditions</span><br>
+     <input type="button"  class="register_button" value="Register" (click)="register();" [disabled]="!isDataLoaded"/> -->
+
+</div>
+</div>
