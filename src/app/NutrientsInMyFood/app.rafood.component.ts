@@ -53,7 +53,8 @@ export class RawFoodComponent {
    this.eventservice.getMessage().subscribe((data) => {
      if (data.name == 'language_codes') {
        this.languagesList = Array.from(data.value.values);
-     
+    //  alert(JSON.stringify(this.languagesList
+    // ));
      }
 
 
@@ -205,7 +206,7 @@ export class RawFoodComponent {
      
     var filterStr = ele;
     if (filterStr.length > 0) {
-      this.filteredRawfood = this.totalRawfoods.filter((item) => {if(item[2]==null){ return false;} return ((item[2].toLowerCase().includes(filterStr.toLowerCase()))&&(this.selected_language==item[3]|| this.selected_language==""))});
+      this.filteredRawfood = this.totalRawfoods.filter((item) => {if(item[0]==null){ return false;} return ((item[0].toLowerCase().includes(filterStr.toLowerCase()))&&(this.selected_language==item[3]|| this.selected_language==""))});
       this.isDisplayRawfoodList = true;
     } else {
       this.isDisplayRawfoodList = false;
@@ -217,7 +218,7 @@ export class RawFoodComponent {
   setInput(input, item) {
     // alert(JSON.stringify(item));
     this.isDisplayRawfoodList = false;
-    input.value = item[2];
+    input.value = item[0];
     this.currentitem = Array.from(item);
   }
 

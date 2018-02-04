@@ -59,8 +59,11 @@ export class RecipeComponent {
     var filterStr = ele;
 
     if (filterStr.length > 0) {
-      this.filteredRecipies = this.totalRecipies.filter((item) => { return (item[1].toLowerCase().includes(filterStr.toLowerCase())) });
+      this.filteredRecipies = this.totalRecipies.filter((item) => {
+        return (item[0].toLowerCase().includes(filterStr.toLowerCase())) 
+      });
       this.isDisplayRecipeList = true;
+      // alert(JSON.stringify(this.filteredRecipies));
     } else {
       this.isDisplayRecipeList = false;
     }
@@ -92,7 +95,7 @@ export class RecipeComponent {
 
   setInput(input, item) {
     this.isDisplayRecipeList = false;
-    input.value = item[1];
+    input.value = item[0];
     this.currentitem = Array.from(item);
   }
 

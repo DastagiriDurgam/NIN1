@@ -163,8 +163,9 @@ onChangeOfLanguge(){
 
 
   submitAction() {
+    
     this.errorMessage = this.validateForms([{ modelName: this.selected_nutrient, defaultvalue: '0', modelTitle: 'Nutrient', errorTitle: 'Nutrient' }, { modelName: this.perticulars, defaultvalue: '', modelTitle: 'Particulars', errorTitle: 'Particulars' }]);
-
+    // alert(JSON.stringify(this.errorMessage ));
     if (this.errorMessage.isValid) {
       this.navController.push(SearchFoodByNutrientDetails, { fbyndetails: { nutrient: this.selected_nutrient.split(','), category: this.perticulars, isascending: this.ascrdesc, language: this.selected_language } });
     } else {

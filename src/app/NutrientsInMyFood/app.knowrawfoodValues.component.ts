@@ -95,7 +95,7 @@ export class KnowRawFoodValuesComponent {
     let displayValues;
     let displaycolumns;
 
-    let getNutrientsQuery = "select * from raw_foods_ifct_nvif where food_code='" + rafood.item[0] + "'";
+    let getNutrientsQuery = "select * from raw_foods_ifct_nvif where food_code='" + rafood.item[2] + "'";
       // alert(JSON.stringify(getNutrientsQuery));
     this.dbservice.getDataFromTable('rawfoodifct1', 'recipes.sql', getNutrientsQuery);
 
