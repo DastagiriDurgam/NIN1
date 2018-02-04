@@ -45,7 +45,7 @@ export class FoodsByLanguageDetails {
  this.getlanguagesData();   
     this.foodsList = this.navParams.get('foods');
     this.selectedFood = this.foodsList[0];
-   
+  //  alert(JSON.stringify(this.selectedFood));
     this.getfoodbylang();
 
 

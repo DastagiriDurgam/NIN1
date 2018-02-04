@@ -94,8 +94,8 @@ export class SearchFoodByLanguage {
 
   setInput(input, item) {
     this.isDisplayRawfoodList = false;
-    if (this.selected_language == 'EN') {
-      input.value = item[3];
+    if (this.selected_language == 'EN') { 
+      input.value = item[1];
     } else {
       input.value = item[1];
     }
@@ -105,11 +105,11 @@ export class SearchFoodByLanguage {
 
   getFilteredRawfoods(ele) {
     this.filteredRawfood = [];
-
+    //  alert(JSON.stringify(this.totalRawfoods[0]))
     var filterStr = ele;
     if (filterStr.length > 0) {
       if (this.selected_language == 'EN') {
-        this.filteredRawfood = this.totalRawfoods.filter((item) => (item[3].toLowerCase().includes(filterStr.toLowerCase()))
+        this.filteredRawfood = this.totalRawfoods.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase()))
         );
       } else {
         this.filteredRawfood = this.totalRawfoods.filter((item) =>(item[1].toLowerCase().includes(filterStr.toLowerCase())));
@@ -177,7 +177,7 @@ export class SearchFoodByLanguage {
     var filterStr = ele;
     this.filteredFood = [];
     if (filterStr.length > 0) {
-      this.filteredFood = this.foodList.filter((item) => (item[3].toLowerCase().includes(filterStr.toLowerCase())));
+      this.filteredFood = this.foodList.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase())));
       this.isDisplayRawfoodList = true;
     } else {
       this.isDisplayRawfoodList = false;
@@ -188,9 +188,9 @@ export class SearchFoodByLanguage {
   submitDetails() {
     this.selectedFoodsArray = [];
     if (this.selected_language == 'EN') {
-      this.selectedFoodsArray.push({ foodcode: this.currentitem[2], foodname: this.currentitem[3] });
+      this.selectedFoodsArray.push({ foodcode: this.currentitem[17], foodname: this.currentitem[1] });
     } else {
-      this.selectedFoodsArray.push({ foodcode: this.currentitem[2], foodname: this.currentitem[1] });
+      this.selectedFoodsArray.push({ foodcode: this.currentitem[17], foodname: this.currentitem[1] });
     }
 
     this.navController.push(FoodsByLanguageDetails, { foods: this.selectedFoodsArray });

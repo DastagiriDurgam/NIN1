@@ -20,7 +20,7 @@
 
    <ion-select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_nutrient" >
       <ion-option [value]="0" selected disabled>Nutrient</ion-option>
-      <ion-option [value]="category[0]" *ngFor="let category of nutrientList">{{category[1]}}</ion-option>
+      <ion-option [value]="category" *ngFor="let category of nutrientList">{{category[1]}}</ion-option>
     </ion-select>
 
 
