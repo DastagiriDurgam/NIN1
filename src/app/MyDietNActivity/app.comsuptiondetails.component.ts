@@ -72,10 +72,12 @@ export class ConsuptionDetailsComponent {
     this.commons = this.navParams.get('commons');
     this.selectedRecipies.forEach(element => {
       this.currentRecipe = element;
-      this.getSelectedRecipies(this.currentRecipe.item[0], element.timetype);
+      // alert(JSON.stringify(this.currentRecipe.item));
+      this.getSelectedRecipies(this.currentRecipe.item[2], element.timetype);
     });
     this.currentRecipe = this.selectedRecipies[0];
-     this.getSelectedRecipies(this.currentRecipe.item[0], this.currentRecipe.timetype);
+    // alert(JSON.stringify(this.currentRecipe.item));
+     this.getSelectedRecipies(this.currentRecipe.item[2], this.currentRecipe.timetype);
     this.onOrientationChange();
   }
 
@@ -131,7 +133,7 @@ export class ConsuptionDetailsComponent {
   getNutrientValues(recipe) {
     this.isTotalTab = false;
     this.currentRecipe = recipe;
-    this.getSelectedRecipies(this.currentRecipe.item[0], recipe.timetype);
+    this.getSelectedRecipies(this.currentRecipe.item[2], recipe.timetype);
   }
 
   submit() {

@@ -11,7 +11,11 @@
     </ion-select>
 
  <!--<input class="form-control" placeholder="Select Date" type="text" [min]="sel_minDate" [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')">-->
-    <input placeholder="Select Date"  type="text" [min]="sel_minDate" [max]="sel_maxDate"  [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')" class="col-sm-12 col-xs-12"  style="padding: 10px; background-color:white; margin:5px;" > 
+    <!-- <input placeholder="Select Date"  type="text" [min]="sel_minDate" [max]="sel_maxDate"  [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')" class="col-sm-12 col-xs-12"  style="padding: 10px; background-color:white; margin:5px;" >  -->
+    <div class="col-sm-12 col-xs-12">
+    <ion-datetime [min]="sel_minDate" [max]="sel_maxDate" [(ngModel)]="sel_date" placeholder="Select Date" class=""
+    displayFormat="MM/DD/YYYY"></ion-datetime>
+  </div>
     <!--<ion-datetime style="    border: 1px solid gray;    margin-bottom: 10px;    padding: 10px;" displayFormat="YYYY-MMM-DD" [(ngModel)]="sel_date"  [min]="sel_minDate"></ion-datetime>-->
     <ion-select name="pass" class="col-sm-12 col-xs-12" style="padding: 10px; background-color:white; margin:5px;" [(ngModel)]="timeType">
       <!--<ion-option [value]="" selected disabled>Language</ion-option>-->
@@ -28,17 +32,17 @@
     </ion-select>-->
 
     <!--<input type="text" placeholder="Search Here" >-->
-    <input #searchInput type="text" class="col-sm-12 col-xs-12 searchInput" [ngModel]="searchStr" (ngModelChange)="getFilteredRecipies($event)"
-      placeholder="Enter Food name" style="margin:5px; padding:10px" />
+    <ion-input #searchInput type="text" class="col-sm-12 col-xs-12 searchInput" [ngModel]="searchStr" (ngModelChange)="getFilteredRecipies($event)"
+      placeholder="Enter Food name" style="margin:5px; padding:10px" ></ion-input>
     <ul [hidden]="!isDisplayRecipeList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; height:60%; max-height: 200%; background-color: white; width: 91%; overflow-y: auto;  z-index: 10;     top: 0px;     margin: 5%;">
-      <li *ngFor="let item of filteredRecipies" (click)="setInput(searchInput, item)">{{item[1]}}</li>
+      <li *ngFor="let item of filteredRecipies" (click)="setInput(searchInput, item)">{{item[0]}}</li>
     </ul> 
 
 
-    <input type="submit" name="next" class="submit_button" value="Add" (click)="addRecipe(item, searchInput, quantity, timeType, sel_date)" style="margin:5px; z-index:20;"
-    />
-    <input type="submit" name="next" class="submit_button" value="Add Packaged Foods" (click)="addLabelfood()" style="margin:5px; z-index:20;"
-    />
+    <button type="submit"  class="submit_button"  (click)="addRecipe(item, searchInput, quantity, timeType, sel_date)" style="margin:5px; z-index:20;"
+    > Add</button>
+    <!-- <button type="button"  class="submit_button" (click)="addLabelfood()" style="margin:5px; z-index:20;"
+    >Add Packaged Foods</button> -->
 
     <table class="col-sm-12 col-xs-12 recipiesTables" style="background-color: darkslategray;  color: white; margin-bottom:40px;">
       <tr style="background-color:#f9a938; color:black">
@@ -48,11 +52,11 @@
       </tr>
       <tr style="color:#f9a938; padding:10px 5px;"  *ngFor="let recipe of selectedRecipies; let i = index">
          <td><span style="margin-left:10px;" (click)="selectedRecipies.splice(i, 1)"><i class="fa fa-times-circle-o"></i></span></td>
-        <td >{{recipe.item[1]}}</td>
+        <td >{{recipe.item[0]}}</td>
         <td>
           <input type="number" (keydown)="restricttonumbers($event)" [(ngModel)]="selectedRecipies[i].value" style="background-color: transparent; color:white;   margin: 5px;    width: 100px;    padding: 2px;" (focus)="onFocus($event)"/>
         </td>
-      </tr>
+      </tr> 
     </table>
 
 
@@ -68,8 +72,8 @@
     </div>-->
 
     <div style="margin-top:40px;">
-      <input type="button" name="next" class="submit_button" value="Know & Submit" (click)="getConsuptionDetails()" />
-      <input type="button" name="next" class="submit_button" value="Clear" (click)="clearValues()" />
+      <input type="button"  class="submit_button" value="Know & Submit" (click)="getConsuptionDetails()" />
+      <input type="button"  class="submit_button" value="Clear" (click)="clearValues()" />
     </div>
     <!--<input type="text" name="occupation" placeholder="Quantity" />-->
   </div>

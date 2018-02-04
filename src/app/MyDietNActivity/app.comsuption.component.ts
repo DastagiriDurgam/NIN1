@@ -148,9 +148,10 @@ ionViewDidEnter(){
 
 
   getFilteredRecipies(ele) {
+    // alert(JSON.stringify(this.totalRecipies));
     var filterStr = ele;
     if (filterStr.length > 0) {
-      this.filteredRecipies = this.totalRecipies.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase())));
+      this.filteredRecipies = this.totalRecipies.filter((item) => (item[0].toLowerCase().includes(filterStr.toLowerCase())));
       this.isDisplayRecipeList = true;
     } else {
       this.isDisplayRecipeList = false;
@@ -180,7 +181,7 @@ ionViewDidEnter(){
     // this.navController.push(KnowRecipeValuesComponent, { selectedRecipies: this.selectedRecipies });
   }
 
-  restricttonumbers(event) {
+  restricttonumbers(event) { 
 
     if ((event.which >= 48) && (event.which < 57) || (event.which == 8)) {
       console.log(JSON.stringify(event.which));
@@ -192,7 +193,7 @@ ionViewDidEnter(){
   }
   setInput(input, item) {
     this.isDisplayRecipeList = false;
-    input.value = item[1];
+    input.value = item[0];
     this.currentitem = Array.from(item);
   }
 
