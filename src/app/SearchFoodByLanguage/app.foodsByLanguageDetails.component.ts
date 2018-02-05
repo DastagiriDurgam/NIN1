@@ -21,7 +21,7 @@ export class FoodsByLanguageDetails {
   pageTitle = "Search Food By Language";
   selectedFood: any = {};
   foodListByLang: any = [];
-  languagesList:any = [];
+  languagesList: any = [];
 
   constructor(private dbservice: DBService, private eventservice: EventService, private navParams: NavParams) {
 
@@ -34,18 +34,18 @@ export class FoodsByLanguageDetails {
 
 
   ngOnInit() {
-   
+
     //  this.storage.get('languagesList').then((data1) => {
-      
+
     //   this.languagesList  = data1;
     //   // console.log(JSON.stringify(data1));
-       
+
     // });
-    
- this.getlanguagesData();   
+
+    this.getlanguagesData();
     this.foodsList = this.navParams.get('foods');
     this.selectedFood = this.foodsList[0];
-  //  alert(JSON.stringify(this.selectedFood));
+    //  alert(JSON.stringify(this.selectedFood));
     this.getfoodbylang();
 
 
@@ -69,16 +69,16 @@ export class FoodsByLanguageDetails {
 
 
 
- 
-getlanguagesData() {
-     let getRecipiesQuery = "select languages, abbreviation from language_codes";
+
+  getlanguagesData() {
+    let getRecipiesQuery = "select languages, abbreviation from language_codes";
 
     this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery);
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'language_codes') {
         this.languagesList = Array.from(data.value.values);
-      
+        // alert(JSON.stringify(this.languagesList));
       }
 
 
@@ -87,54 +87,54 @@ getlanguagesData() {
 
   }
 
-  
+
 
   getfoodbylang() {
 
-    
-   let getRecipiesQuery = "select * from foods_by_language where food_codes='" + this.selectedFood.foodcode + "'";
+
+    let getRecipiesQuery = "select * from foods_by_language where food_codes='" + this.selectedFood.foodcode + "'";
 
     this.dbservice.getDataFromTable('foods_in_language', 'recipes.sql', getRecipiesQuery);
 
     this.eventservice.getMessage().subscribe((data) => {
-      
+
       if (data.name == 'foods_in_language') {
-        this.foodListByLang =Array.from(data.value.values);
-    //  alert(JSON.stringify(data.value.values));
-        this.foodsList =[];
+        this.foodListByLang = Array.from(data.value.values);
+        // alert(JSON.stringify(data.value.values));
+        this.foodsList = [];
 
-for (var key in this.foodListByLang) {
-  if (this.foodListByLang.hasOwnProperty(key)) {
-//     let el0 = this.foodListByLang[key][0];
-// if(el0.include('.')){
-  
-//   }else{
-//     el0.append('.');
-//   }
- 
-    let langarr = this.languagesList.filter((lan)=>{
-    return  ((this.foodListByLang[key][0]==lan[1])||((this.foodListByLang[key][0]+'.')==lan[1]));
-  })
-   this.foodsList.push({food:this.foodListByLang[key][1], language:langarr[0][0]}) ;
-   
-    
-  }
-}
+        for (var key in this.foodListByLang) {
+          if (this.foodListByLang.hasOwnProperty(key)) {
+            //     let el0 = this.foodListByLang[key][0];
+            // if(el0.include('.')){
 
-      // this.generateFoodList(this.foodListByLang);
-// this.foodListByLang.forEach(element => { 
-  
+            //   }else{
+            //     el0.append('.');
+            //   }
+            // alert(JSON.stringify(this.languagesList));
+            let langarr = this.languagesList.filter((lan) => {
+              return ((this.foodListByLang[key][3] == lan[0]) || ((this.foodListByLang[key][3] + '.') == lan[0]));
+            })
+            this.foodsList.push({ food: this.foodListByLang[key][0], language: langarr[0][1] });
 
-  //  let langarr = this.languagesList.filter((lan)=>{
-  //   return element[0]==lan[1];
-  // });
 
-//   console.log(JSON.stringify(langarr));
-// this.foodsList.push({food:element[1], language:langarr[0][0]}) ;
-// });
-      
-       
-      } 
+          }
+        }
+
+        // this.generateFoodList(this.foodListByLang);
+        // this.foodListByLang.forEach(element => { 
+
+
+        //  let langarr = this.languagesList.filter((lan)=>{
+        //   return element[0]==lan[1];
+        // });
+
+        //   console.log(JSON.stringify(langarr));
+        // this.foodsList.push({food:element[1], language:langarr[0][0]}) ;
+        // });
+
+
+      }
 
 
     });
@@ -143,24 +143,24 @@ for (var key in this.foodListByLang) {
 
   }
 
-generateFoodList(array){
-// let tempArray = [];
-array.forEach(element => {
-  if(!element[0].include('.')){
-    element[0]+='.';
+  generateFoodList(array) {
+    // let tempArray = [];
+    array.forEach(element => {
+      if (!element[0].include('.')) {
+        element[0] += '.';
+      }
+      let langarr = this.languagesList.filter((lan) => {
+        return element[0] == lan[1];
+      });
+
+      console.log(JSON.stringify(langarr));
+      //  tempArray.push({food:element[1], language:})
+    });
+
+
   }
-  let langarr = this.languagesList.filter((lan)=>{
-    return element[0]==lan[1];
-  });
 
-  console.log(JSON.stringify(langarr));
-//  tempArray.push({food:element[1], language:})
-});
-
-
-}
-
-restricttonumbers(event) {
+  restricttonumbers(event) {
 
     if ((event.which >= 48) && (event.which < 57) || (event.which == 8)) {
 

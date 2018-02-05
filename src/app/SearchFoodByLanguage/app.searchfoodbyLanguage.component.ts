@@ -178,6 +178,7 @@ export class SearchFoodByLanguage {
     this.filteredFood = [];
     if (filterStr.length > 0) {
       this.filteredFood = this.foodList.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase())));
+      alert(JSON.stringify(this.filteredFood)); 
       this.isDisplayRawfoodList = true;
     } else {
       this.isDisplayRawfoodList = false;
@@ -188,11 +189,11 @@ export class SearchFoodByLanguage {
   submitDetails() {
     this.selectedFoodsArray = [];
     if (this.selected_language == 'EN') {
-      this.selectedFoodsArray.push({ foodcode: this.currentitem[17], foodname: this.currentitem[1] });
+      this.selectedFoodsArray.push({ foodcode: this.currentitem[16], foodname: this.currentitem[1] });
     } else {
-      this.selectedFoodsArray.push({ foodcode: this.currentitem[17], foodname: this.currentitem[1] });
+      this.selectedFoodsArray.push({ foodcode: this.currentitem[16], foodname: this.currentitem[1] });
     }
-
+    // alert(JSON.stringify(this.currentitem)); 
     this.navController.push(FoodsByLanguageDetails, { foods: this.selectedFoodsArray });
   }
 
