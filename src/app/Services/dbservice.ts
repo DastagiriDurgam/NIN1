@@ -20,21 +20,27 @@ export class DBService {
 
     createTable(databaseName: string, query: string) {
         
-        this.sqlite.create({
+        return this.sqlite.create({
             name: databaseName,
             location: 'default' 
-        }).then((db: SQLiteObject) => {
-            console.log(JSON.stringify(db))
+        })
+        .then((db: SQLiteObject) => {
+            //  console.log(JSON.stringify(db))
             this.sqliteObject = db;
-            db.executeSql(query, {}).then((output) => {                  
-                return output;
-            }).catch((e) => { });
+              db.executeSql(query, {})
+            .then((output) => {  
+                console.log(JSON.stringify(query))  
+                //  console.log(JSON.stringify(output))          
+               
+            }).catch((e) => { console.log(JSON.stringify(e))});
 
         }).catch((e) => {console.log('SQL Exception');console.log(JSON.stringify(e))});;
+       
     }
 
 
-    insertValuesToTable(databaseName: string, query: string, tableName:string) {
+    insertValuesToTable(databaseName: string, query: string, tableName:string, db?:any) {
+        this.sqliteObject = db;
         if (this.sqliteObject != null) {
             console.log('sqliteObject not null')
              var clearQuery = 'DELETE FROM ' + tableName;              
@@ -46,7 +52,7 @@ export class DBService {
                 console.log(JSON.stringify(output));
                 return output;
 
-            }).catch((e) => {console.log('SQL Exception');console.log(JSON.stringify(e)) });
+            }).catch((e) => {console.log('SQL Exception'); console.log(JSON.stringify(e)) });
         } else {
              console.log('sqliteObject  null')
             this.createDb(databaseName).then((db: SQLiteObject) => {
@@ -92,7 +98,7 @@ export class DBService {
                     // console.log(JSON.stringify(responseArray) );
                 })
                 .catch((e) => { 
-                      console.log(JSON.stringify(e))
+                       console.log(JSON.stringify(e))
                 }); 
 
         }).catch((e) => { 

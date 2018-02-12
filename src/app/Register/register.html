@@ -60,7 +60,7 @@
       <ion-item *ngIf="isPrimary">
         <ion-label>Select State</ion-label>
         <ion-select [(ngModel)]="currentstate"> 
-          <ion-option [value]="state[0]" *ngFor="let state of statesList" >{{state[0]}}</ion-option>
+          <ion-option [value]="state[1]" *ngFor="let state of statesList" >{{state[1]}}</ion-option>
         </ion-select>
       </ion-item>
 

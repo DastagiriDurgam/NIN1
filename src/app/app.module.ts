@@ -7,6 +7,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { EventService } from './Services/eventservice'
+import { DBService } from './Services/dbservice'
 import { RegisterComponent } from '../app/Register/app.register.component';
 import { LoginComponent } from '../app/Login/app.login.component';
 import { HomeComponent } from '../app/Home/app.home.component'
@@ -50,8 +52,6 @@ import { HttpRequest } from './Services/httpservice'
 import { NINService } from './Services/ninhttpservice'
 import { NinDBService } from './Services/nindbservice'
 import { JsonpModule, HttpModule } from '@angular/http'
-import { DBService } from './Services/dbservice'
-import { EventService } from './Services/eventservice'
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { RegisterOthersComponent } from '../app/Register/app.registerothers.component';
 import { DatePicker } from '@ionic-native/date-picker';
