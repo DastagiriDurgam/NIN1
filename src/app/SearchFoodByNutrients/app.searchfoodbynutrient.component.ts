@@ -93,7 +93,7 @@ onChangeOfLanguge(){
 
     let getRecipiesQuery = "select * from raw_categories";
 
-    this.dbservice.createTable('recipes.sql', createQuery);
+    this.dbservice.createTable('recipes.sql', createQuery, insertQuery, `raw_categories`);
 
     this.dbservice.insertValuesToTable('recipes.sql', insertQuery, `raw_categories`);
 
@@ -121,7 +121,7 @@ onChangeOfLanguge(){
 
     let getRecipiesQuery = "select * from nutrients";
 
-    this.dbservice.createTable('recipes.sql', createQuery);
+    this.dbservice.createTable('recipes.sql', createQuery, insertQuery, `nutrients`);
 
 
     this.dbservice.insertValuesToTable('recipes.sql', insertQuery, `nutrients`);

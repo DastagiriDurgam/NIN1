@@ -87,14 +87,14 @@ export class RDAIndiansComponent {
   getRda() {    
     let getRecipiesQuery = "SELECT * FROM rda_2010 where gender='" + this.gender + "' AND particulars='" + this.selectedParticular + "'";  
 
-    this.dbservice.getDataFromTable('rda', 'rda_2010.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('rda', 'recipes.sql', getRecipiesQuery);
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'rda') {
 
         // let columns = data.value.columns.length ? data.value.columns : [];
         let values = data.value.values.length ? data.value.values : [];
-       
+      //  alert(JSON.stringify(values));
         this.perticularsToDisplay = values[0].filter((item, index) => {
           if (index > 3) {
             return true;

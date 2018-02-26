@@ -18,23 +18,30 @@ export class DBService {
         });
     }
 
-    createTable(databaseName: string, query: string) {
-        
+    createTable(databaseName: string, query: string, insertQuery: string, tableName:string) {
+        // alert(JSON.stringify(query));
         return this.sqlite.create({
             name: databaseName,
             location: 'default' 
         })
         .then((db: SQLiteObject) => {
-            //  console.log(JSON.stringify(db))
+            
+            //  alert(JSON.stringify(db))
             this.sqliteObject = db;
               db.executeSql(query, {})
             .then((output) => {  
-                console.log(JSON.stringify(query))  
-                //  console.log(JSON.stringify(output))          
+                // alert(JSON.stringify("create")) 
+                // alert(JSON.stringify(output))  
+                //  console.log(JSON.stringify(output))  
+                this.insertValuesToTable(databaseName, insertQuery, tableName, db);        
                
-            }).catch((e) => { console.log(JSON.stringify(e))});
+            }).catch((e) => { 
+                // alert(JSON.stringify(e))
+            });
 
-        }).catch((e) => {console.log('SQL Exception');console.log(JSON.stringify(e))});;
+        }).catch((e) => {
+            // alert('create db SQL Exception');alert(JSON.stringify(e))
+        });;
        
     }
 
@@ -42,20 +49,27 @@ export class DBService {
     insertValuesToTable(databaseName: string, query: string, tableName:string, db?:any) {
         this.sqliteObject = db;
         if (this.sqliteObject != null) {
+            console.log(JSON.stringify(query));
             console.log('sqliteObject not null')
              var clearQuery = 'DELETE FROM ' + tableName;              
                
                 this.sqliteObject.executeSql(clearQuery,{}).then((output) => {
                    
                 });
+               
             this.sqliteObject.executeSql(query, {}).then((output) => {
-                console.log(JSON.stringify(output));
-                return output;
+                // alert(JSON.stringify("insert"));
+                // alert(JSON.stringify(output));
+                
 
-            }).catch((e) => {console.log('SQL Exception'); console.log(JSON.stringify(e)) });
+            }).catch((e) => {
+                // alert('insert sql Exception'); 
+                // alert(JSON.stringify(e)) 
+            });
         } else {
-             console.log('sqliteObject  null')
+            
             this.createDb(databaseName).then((db: SQLiteObject) => {
+               
                 this.sqliteObject = db;
                 var clearQuery = 'DELETE FROM ' + tableName;              
                
@@ -63,7 +77,7 @@ export class DBService {
                    
                 });
                 db.executeSql(query, {}).then((output) => {
-                      
+                    // console.log(JSON.stringify(query))
                     return output;
 
                 }).catch((e) => { console.log('SQL Exception');console.log(JSON.stringify(e)) });
@@ -74,7 +88,7 @@ export class DBService {
 
 
     getDataFromTable(name:any, databaseName: string, query: string): any {
-    
+        
         this.createDb(databaseName).then((db: SQLiteObject) => {
             this.sqliteObject = db;
             db.executeSql(query, {})
@@ -95,14 +109,14 @@ export class DBService {
                         
                     this.eventservice.sendMessage(name,new Object(responseArray) );
                    
-                    // console.log(JSON.stringify(responseArray) );
+                    // alert(JSON.stringify(responseArray) );
                 })
                 .catch((e) => { 
-                       console.log(JSON.stringify(e))
+                        // alert(JSON.stringify(e))
                 }); 
 
         }).catch((e) => { 
-               console.log(JSON.stringify(e))
+            //   alert(JSON.stringify(e))
             });
 
     }

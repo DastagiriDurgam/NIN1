@@ -12,7 +12,7 @@ export class LoginComponent {
   mobileNumber = "";
   pinnumber = "";
   // storage = new Storage();
-  constructor(private ninService: NINService, private storage:Storage, private navController: NavController) {
+  constructor(private ninService: NINService, private storage: Storage, private navController: NavController) {
 
   }
 
@@ -32,7 +32,7 @@ export class LoginComponent {
   login() {
     let loginUrl = "/Food/ValidateUser?Pno=" + this.mobileNumber + "&pin=" + this.pinnumber;
     this.ninService.login(loginUrl).subscribe((response) => {
-
+      // alert(JSON.stringify(response));
       if (response != null && response.length > 0 && response != "user not present") {
 
 

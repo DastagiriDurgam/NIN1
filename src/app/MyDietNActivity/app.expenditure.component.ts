@@ -81,14 +81,15 @@ export class ExpenditureComponent {
 
   getData() {
     let createQuery = "CREATE TABLE IF NOT EXISTS IF NOT EXISTS `physical_activities_individual` (   `sno` int(2) NOT NULL,   `Activity` varchar(19) DEFAULT NULL,   `kcal_per_hour` int(3) DEFAULT NULL )";
-    this.dbservice.createTable('expenditure.sql', createQuery);
+    
 
     let insertQuery = "INSERT INTO `physical_activities_individual` (`sno`, `Activity`, `kcal_per_hour`) VALUES (1, 'Cleaning/Mopping', 210), (2, 'Gardening', 300), (3, 'Watching TV', 86), (4, 'Cycling- 15 (Km/hr)', 360), (5, 'Running- 12 (Km/hr)', 750), (6, 'Running- 10 (Km/hr)', 655), (7, 'Running- 8 (Km/hr)', 522), (8, 'Running- 6 (Km/hr)', 353), (9, 'Walking - 4 (Km/hr)', 160), (10, 'Shuttle', 348), (11, 'Table Tennis', 245), (12, 'Tennis', 392), (13, 'Volley Ball', 180), (14, 'Dancing', 372), (15, 'Fishing', 222), (16, 'Shopping', 204), (17, 'Typing', 108), (18, 'Sleeping', 57), (19, 'Standing', 132), (20, 'Sitting', 86)";
-    this.dbservice.insertValuesToTable('expenditure.sql', insertQuery, 'physical_activities_individual');
+    this.dbservice.createTable('recipes.sql', createQuery, insertQuery, 'physical_activities_individual');
+    this.dbservice.insertValuesToTable('recipes.sql', insertQuery, 'physical_activities_individual');
 
     let getRecipiesQuery = "select * from physical_activities_individual";
 
-    this.dbservice.getDataFromTable('physical_activities_individual', 'expenditure.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('physical_activities_individual', 'recipes.sql', getRecipiesQuery);
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'physical_activities_individual') {

@@ -170,7 +170,7 @@ scrollTo() {
 
     let getRecipiesQuery = "select * from nutrients";
 
-    this.dbservice.createTable('recipes.sql', createQuery);
+    this.dbservice.createTable('recipes.sql', createQuery, insertQuery, `nutrients`);
 
     this.dbservice.insertValuesToTable('recipes.sql', insertQuery, `nutrients`);
 

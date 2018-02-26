@@ -178,7 +178,7 @@ export class SearchFoodByLanguage {
     this.filteredFood = [];
     if (filterStr.length > 0) {
       this.filteredFood = this.foodList.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase())));
-      alert(JSON.stringify(this.filteredFood)); 
+      // alert(JSON.stringify(this.filteredFood)); 
       this.isDisplayRawfoodList = true;
     } else {
       this.isDisplayRawfoodList = false;

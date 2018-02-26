@@ -21,7 +21,7 @@
   <a style="float: right"><img src="assets/icon/NIN_100_LOGO_FINAL.png" width="40"></a>
 </div>
 
-<navbar [pageTitle]="pageTitle" [isDisplayFooter]="false" *ngIf="!isPrimary">
+<navbar [pageTitle]="pageTitle" [isDisplayFooter]="!isPrimary" *ngIf="!isPrimary">
 </navbar>
 
 <div > 
@@ -40,7 +40,7 @@
       </ion-item>
 
 
-      <ion-item> *ngIf="isPrimary"
+      <ion-item *ngIf="isPrimary">  
         <ion-input type="number" max="10" placeholder="Mobile Number" [(ngModel)]="mobile_number"></ion-input>
       </ion-item>
 
@@ -60,13 +60,19 @@
       <ion-item *ngIf="isPrimary">
         <ion-label>Select State</ion-label>
         <ion-select [(ngModel)]="currentstate"> 
-          <ion-option [value]="state[1]" *ngFor="let state of statesList" >{{state[1]}}</ion-option>
+          <ion-option [value]="state[0]" *ngFor="let state of statesList" >{{state[0]}}</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="!isPrimary" class="">
+      <ion-select style="margin-top:15px;" class="list col-md-12" [(ngModel)]="relation">
+        <ion-option value="relation" selected disabled>Choose Relation</ion-option>
+        <ion-option value="Wife">Wife</ion-option>
+        <ion-option value="Son">Son</ion-option>
+        <ion-option value="Daughter">Daughter</ion-option>
+        <ion-option value="Other">Other</ion-option>
+      </ion-select> 
 
-
-
-     
+    </ion-item>
     </ion-list>
 
 

@@ -25,18 +25,23 @@ export class HttpRequest {
     //Post data to server
     post(data: any) { 
         // alert(JSON.stringify(data))
+        // alert(JSON.stringify(this.baseUrl ))
         if(data.request==='dummy'){
              console.log('dummy')
               return this.http.post(this.baseUrl + data.url,  this.headers)
             .map((res: Response) =>{ this.spinnerDialog.hide() ;return res.json()} )
-            .catch((error: any) =>{alert(JSON.stringify(error));   return Observable.throw(error.json().error )});
+            .catch((error: any) =>{
+                // alert(JSON.stringify(error)); 
+                  return Observable.throw(error.json().error )});
         }  
            
        this.spinnerDialog.show('Loading..');
     //    let options = new RequestOptions({ headers: this.headers, responseType: ResponseContentType.Blob });
         return this.http.post(this.baseUrl + data.url, data.request, {headers: this.headers})
             .map((res: Response) =>{ this.spinnerDialog.hide() ;return res.json()} )
-            .catch((error: any) => {alert(JSON.stringify(error)); return Observable.throw(error.json().error || 'Server error')});
+            .catch((error: any) => {
+                // alert(JSON.stringify(error)); 
+                return Observable.throw(error.json().error || 'Server error')});
     }
     post_promise(data: any) {
         let headers = new Headers({ 'Content-type': 'application/json', responseType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
@@ -46,7 +51,7 @@ export class HttpRequest {
    
 
     private wrapResponse(res: Response) {
-        alert(JSON.stringify(res))
+        // alert(JSON.stringify(res))
         return {
             statusCode: res.status,
             data: res,

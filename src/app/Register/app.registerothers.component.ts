@@ -73,7 +73,7 @@ export class RegisterOthersComponent {
        
         let getRecipiesQuery = "select *from states";      
 
-        this.dbservice.getDataFromTable('states', 'states.sql', getRecipiesQuery);
+        this.dbservice.getDataFromTable('states', 'recipes.sql', getRecipiesQuery);
 
         this.eventservice.getMessage().subscribe((data) => {
             if (data.name == 'states') {
@@ -97,7 +97,7 @@ export class RegisterOthersComponent {
 
         let getRecipiesQuery = "select * from language_codes";
 
-        this.dbservice.createTable('recipes.sql', createQuery);
+        this.dbservice.createTable('recipes.sql', createQuery, insertQuery, `language_codes`);
 
 
         this.dbservice.insertValuesToTable('recipes.sql', insertQuery, `language_codes`);
@@ -135,7 +135,7 @@ export class RegisterOthersComponent {
                 });
 
             } else if (response.Status == "Fail") {
-                alert(response.Error);
+                // alert(response.Error);
             }
         });
 
