@@ -36,10 +36,11 @@ export class SearchFoodByNutrient {
   perticularsArray: any = {};
 
   constructor(private dbservice: DBService, private eventservice: EventService, private navController: NavController) {
-    this.getNutrientFromDB();
+   
   }
 
   ngOnInit() {
+    this.getNutrientFromDB();
     // this.storage.get('languagesList').then((data1) => {
     //   this.languagesList = data1;
     //   // console.log(JSON.stringify(data1));
@@ -69,7 +70,7 @@ onChangeOfLanguge(){
 
     });
 
-  }
+  } 
 
   onOrientationChange() {
     this.devHeight = (window.innerHeight - 75).toString() + "px";
@@ -128,13 +129,15 @@ onChangeOfLanguge(){
 
 
 
-    this.dbservice.getDataFromTable('nutrients', 'recipes.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('nutrients', 'recipes.sql', getRecipiesQuery, function (a, b) {
+      console.log(JSON.stringify(b));
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
-      // alert(JSON.stringify(data.value));
+      
       if (data.name == 'nutrients') {
         this.nutrientList = data.value.values;
-
+        // alert(JSON.stringify(data.value.values));
       }
 
     });
@@ -151,7 +154,7 @@ onChangeOfLanguge(){
       // alert(JSON.stringify(data.value));
       if (data.name == 'rawfoodifctreviced1') {
         this.nutrientList = data.value.values;
-
+        // alert(JSON.stringify(data.value.values));
       }
 
     });

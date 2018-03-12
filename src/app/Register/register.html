@@ -25,7 +25,7 @@
 </navbar>
 
 <div > 
-  <div id="" *ngIf="!isRestricted">
+  <div id="register" *ngIf="!isRestricted">
 
     <ion-list>
   
@@ -59,7 +59,7 @@
 
       <ion-item *ngIf="isPrimary">
         <ion-label>Select State</ion-label>
-        <ion-select [(ngModel)]="currentstate"> 
+        <ion-select [(ngModel)]="currentstate" placeholder="Select State"> 
           <ion-option [value]="state[0]" *ngFor="let state of statesList" >{{state[0]}}</ion-option>
         </ion-select>
       </ion-item>
@@ -100,7 +100,7 @@
   <ion-option value="Other">Other</ion-option>
 </ion-select> -->
 <div item-width="100%" class="text-center">
-  <button class="register_button"  color="secondary" (click)="register();">Register</button> 
+  <input type="button" class="register_button"  color="secondary" (click)="register();" value="Register" /> 
   <div>
   <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
   <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;"    (click)="gotoLogin();">Login</a>

@@ -21,6 +21,8 @@ declare var window;
 })
 export class RDAIndiansComponent {
   devHeight;
+  perticularKeys :any;
+  perticularsObj:any = {isLoaded:true};
   pageTitle: any = 'Recommended Dietary Allowance(RDA)';
   database: SQLite;
   gender: string = '';
@@ -62,6 +64,7 @@ export class RDAIndiansComponent {
     var perticulars = params['perticulars'];
     this.selectedParticular = perticulars;
    
+    this.perticularKeys = ['netenergy', 'protein', 'visiblefat', 'calcium', 'iron', 'retinol', 'betacarotene', 'thiamin', 'riboflavin', 'pyridoxin', 'ascorbicacid', 'vitaminb12', 'zinc', 'niacinequialent', 'ditearyfolate'];
      this.perticularColumns = ["Energy(kcals)", "Protein(g)", "Visible Fat(g)", "Calcium(mg)", "Iron(mg)", "Retinol(Vit A*)(µg)", "Beta carotene(Vit A**)(µg)", "Thiamin(mg)", "Riboflavin(Vit B2)(mg)", "Pyridoxin(µg)", "Ascorbic acid(mg)", "Vitamin B12(µg)", "Zinc(mg)", "Niacin Equialent(mg)", "Dietary Folate(µg)"];
     this.measureUnits = [" kcals", " g", " g", " mg", " mg", " µg", " µg", " mg", " mg", " mg", " mg", " µg", " mg", " mg", " µg"];
 
@@ -83,11 +86,35 @@ export class RDAIndiansComponent {
   }
 
 
-
+onGetRda(dObj, response){
+  this.perticularsObj =response ;
+  this.perticularsObj.isLoaded = false;
+   alert(this.perticularKeys);
+  this.perticularsToDisplay = [];
+  this.perticularKeys.forEach((element, index) => {
+    // alert(element);
+      this.perticularsToDisplay.push(response[element]);
+    
+  });
+// alert(JSON.stringify(response)); 
+}
   getRda() {    
+    var that = this;
     let getRecipiesQuery = "SELECT * FROM rda_2010 where gender='" + this.gender + "' AND particulars='" + this.selectedParticular + "'";  
 
-    this.dbservice.getDataFromTable('rda', 'recipes.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('rda', 'recipes.sql', getRecipiesQuery, function(dObj, response){
+      // that.perticularsObj =response ;
+      // this.perticularsObj.isLoaded = false;
+      //  alert(JSON.stringify(that.perticularsObj));
+      that.perticularsToDisplay = [];
+      that.perticularKeys.forEach((element, index) => {
+        // alert(element);
+          that.perticularsToDisplay.push(response[element]);
+        
+      });
+    // alert(JSON.stringify(response)); 
+    }
+  );
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'rda') {
@@ -95,13 +122,13 @@ export class RDAIndiansComponent {
         // let columns = data.value.columns.length ? data.value.columns : [];
         let values = data.value.values.length ? data.value.values : [];
       //  alert(JSON.stringify(values));
-        this.perticularsToDisplay = values[0].filter((item, index) => {
-          if (index > 3) {
-            return true;
-          }
-        });
+        // this.perticularsToDisplay = values[0].filter((item, index) => {
+        //   if (index > 3) {
+        //     return true;
+        //   }
+        // });
 
-      }
+      } 
 
 
     });

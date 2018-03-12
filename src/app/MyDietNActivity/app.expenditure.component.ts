@@ -41,9 +41,9 @@ export class ExpenditureComponent {
   tempdetails: any = [];
   // storage = new Storage();
   sel_minDate: any = "";
-   sel_maxDate = "";
-  constructor( private storage:Storage, private dbservice: DBService, private eventservice: EventService, private ninservice: NINService) {
-    // this.getData();
+  sel_maxDate = "";
+  constructor(private storage: Storage, private dbservice: DBService, private eventservice: EventService, private ninservice: NINService) {
+    
   }
 
   getPhysicalActList(ele) {
@@ -56,7 +56,7 @@ export class ExpenditureComponent {
   }
   setMaxDate() {
     var beforeDate = new Date();
-    beforeDate.setDate(beforeDate.getDate() );
+    beforeDate.setDate(beforeDate.getDate());
     var dateStr = (beforeDate.getDate() / 10) < 1 ? "0" + beforeDate.getDate().toString() : beforeDate.getDate().toString();
     var monthStr = ((beforeDate.getMonth() + 1) / 10) < 1 ? "0" + (beforeDate.getMonth() + 1).toString() : (beforeDate.getMonth() + 1).toString();
     this.sel_maxDate = beforeDate.getFullYear().toString() + "-" + monthStr + "-" + dateStr;
@@ -81,15 +81,19 @@ export class ExpenditureComponent {
 
   getData() {
     let createQuery = "CREATE TABLE IF NOT EXISTS IF NOT EXISTS `physical_activities_individual` (   `sno` int(2) NOT NULL,   `Activity` varchar(19) DEFAULT NULL,   `kcal_per_hour` int(3) DEFAULT NULL )";
-    
+
 
     let insertQuery = "INSERT INTO `physical_activities_individual` (`sno`, `Activity`, `kcal_per_hour`) VALUES (1, 'Cleaning/Mopping', 210), (2, 'Gardening', 300), (3, 'Watching TV', 86), (4, 'Cycling- 15 (Km/hr)', 360), (5, 'Running- 12 (Km/hr)', 750), (6, 'Running- 10 (Km/hr)', 655), (7, 'Running- 8 (Km/hr)', 522), (8, 'Running- 6 (Km/hr)', 353), (9, 'Walking - 4 (Km/hr)', 160), (10, 'Shuttle', 348), (11, 'Table Tennis', 245), (12, 'Tennis', 392), (13, 'Volley Ball', 180), (14, 'Dancing', 372), (15, 'Fishing', 222), (16, 'Shopping', 204), (17, 'Typing', 108), (18, 'Sleeping', 57), (19, 'Standing', 132), (20, 'Sitting', 86)";
     this.dbservice.createTable('recipes.sql', createQuery, insertQuery, 'physical_activities_individual');
     this.dbservice.insertValuesToTable('recipes.sql', insertQuery, 'physical_activities_individual');
 
     let getRecipiesQuery = "select * from physical_activities_individual";
-
-    this.dbservice.getDataFromTable('physical_activities_individual', 'recipes.sql', getRecipiesQuery);
+    var self = this;
+    this.dbservice.getDataFromTable('physical_activities_individual', 'recipes.sql', getRecipiesQuery, function (a, b) {
+      // self.totalActivities = b;
+      // alert(JSON.stringify(a));
+      // alert(JSON.stringify(b));
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'physical_activities_individual') {
@@ -118,7 +122,7 @@ export class ExpenditureComponent {
     // let currentDate = new Date();
 
     // this.sel_date = currentDate.getFullYear().toString()+ "-" + ( currentDate.getMonth() + 1).toString() + "-" + currentDate.getDate().toString() ;
-
+    this.getData();
     this.setMinDate();
     this.setMaxDate();
     this.tempdetails = [];

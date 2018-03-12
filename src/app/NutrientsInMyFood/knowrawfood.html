@@ -45,10 +45,9 @@
  
 <tr *ngFor="let column of columnstodisplay; let i = index" [ngStyle]="{'color':(itemNames[column]=='Energy (Kcal)'?'red':'black')}">
       <td *ngIf="itemNames[column]!='Vitamin B12'">{{itemNames[column]}}</td>
-      <td *ngIf="itemNames[column]!='Energy (Kcal)' && itemNames[column]!='Vitamin B12' && column!='total_saturated_fatty_acids_TFSA'">{{adjustFractions(valuestodisplay[i] *(currentRawfood.value/100))}}</td>
-     <td *ngIf="itemNames[column]=='Energy (Kcal)'">{{adjustFractions((valuestodisplay[i]/(4.184)) *(currentRawfood.value/100))}}</td>
-    <td *ngIf="column=='total_saturated_fatty_acids_TFSA'">{{adjustFractions((valuestodisplay[i]/1000) *(currentRawfood.value/100))}}</td>
-    
+      <td *ngIf="itemNames[column]!='Energy (Kcal)' && itemNames[column]!='Vitamin B12' && column!='total_saturated_fatty_acids_TFSA'">{{adjustFractions(valuestodisplay[column] *(currentRawfood.value/100))}}</td>
+     <td *ngIf="itemNames[column]=='Energy (Kcal)'">{{adjustFractions((valuestodisplay[column]/(4.184)) *(currentRawfood.value/100))}}</td>
+    <td *ngIf="column=='total_saturated_fatty_acids_TFSA'">{{adjustFractions((valuestodisplay[column]/1000) *(currentRawfood.value/100))}}</td>
      
     </tr>
    

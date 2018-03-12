@@ -23,11 +23,11 @@
 
 <!-- multistep form -->
 <div class="form" style="height:100%; background-color:white;">
-    <div class="col-xs-12">
-        <ion-select type="text" name="pass" class="form-control" style="margin-top:5px;" [(ngModel)]="uid" (change)="onchangeofuser()">
+    <ion-item class="col-xs-12">
+        <ion-select placeholder="Select User" type="text" name="pass"  style="margin-top:5px;" [(ngModel)]="uid" (change)="onchangeofuser()">
       <ion-option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</ion-option> 
     </ion-select>
-    </div>
+    </ion-item>
     <div class="col-xs-12 col-sm-12" style="padding:10px; height:auto;">
         <div *ngFor="let date of datesArray; let i = index">
             <div (click)="getBalanceSheetDetails(date, dcontainer, i)" class="col-xs-12 col-sm-12" href="#detailscontainer" data-toggle="collapse"

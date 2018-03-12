@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { NINService } from '../Services/ninhttpservice';
 import { HomeComponent } from '../Home/app.home.component';
 import { Storage } from '@ionic/storage';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 @Component({
   selector: 'nin-login',
   templateUrl: './login.html'
@@ -12,7 +13,7 @@ export class LoginComponent {
   mobileNumber = "";
   pinnumber = "";
   // storage = new Storage();
-  constructor(private ninService: NINService, private storage: Storage, private navController: NavController) {
+  constructor(private ninService: NINService, private storage: Storage, private navController: NavController, public spinner: SpinnerDialog) {
 
   }
 
@@ -31,7 +32,9 @@ export class LoginComponent {
 
   login() {
     let loginUrl = "/Food/ValidateUser?Pno=" + this.mobileNumber + "&pin=" + this.pinnumber;
+    this.spinner.show();
     this.ninService.login(loginUrl).subscribe((response) => {
+      this.spinner.hide();
       // alert(JSON.stringify(response));
       if (response != null && response.length > 0 && response != "user not present") {
 

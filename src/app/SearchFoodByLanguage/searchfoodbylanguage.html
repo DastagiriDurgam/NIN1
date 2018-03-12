@@ -1,59 +1,62 @@
 <navbar [pageTitle]="pageTitle"></navbar>
 
 <style>
+  .register_button {
+    padding: 5px !important;
+    width: 100px !important;
+    background-color: orangered;
+    -webkit-appearance: button;
+    color: white !important;
+  }
 
- .register_button {
-      padding: 5px !important;
-      width: 100px !important;
-      background-color: orangered;
-      -webkit-appearance: button;
-      color: white !important;
-    }
-     #msform {
-         margin: 280px 10px !important;
-    }
-
+  #msform {
+    margin: 280px 10px !important;
+  }
 </style>
 
-<div  style="height:100%; background-color:white;">
-<!-- multistep form -->
-<div style="padding: 20px;" class="row container">
+<div style="height:100%; background-color:white;">
+  <!-- multistep form -->
+  <div style="padding: 20px;" class="row container">
 
-  <!--<ion-select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_food" >
+    <!--<ion-select type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;     margin: 10px;" [(ngModel)]="selected_food" >
       <ion-option [value]="0" selected disabled>Food</ion-option>
       <ion-option [value]="food[1]" *ngFor="let food of foodList">{{food[1]}}</ion-option>
     </ion-select>-->
- <ion-select #lang type="text" name="pass" class="col-sm-12 col-xs-12" style="padding: 10px;  margin: 10px;" [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
-      <!--<ion-option [value]="0" selected>English</ion-option>-->
-       <ion-option value="EN"  selected>English</ion-option>
-      <ion-option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</ion-option>
-    </ion-select>
-
-  <input #searchInput type="text" class="col-sm-12 col-xs-12 searchInput" style="padding:10px; margin:10px" [ngModel]="searchStr" (ngModelChange)="getFilteredRawfoods($event)"  placeholder="Search  here"/>
+    <ion-item class="col-sm-12 col-xs-12">
+      <ion-select #lang type="text" name="pass" style="padding: 10px;  " [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
+        <!--<ion-option [value]="0" selected>English</ion-option>-->
+        <ion-option value="EN" selected>English</ion-option>
+        <ion-option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="col-sm-12 col-xs-12 ">
+      <ion-input #searchInput type="text" style="padding:0px; margin:0px" [ngModel]="searchStr" (ngModelChange)="getFilteredRawfoods($event)"
+        placeholder="Search  here" ></ion-input>
+    </ion-item>
     <ul *ngIf="selected_language!='EN'" [hidden]="!isDisplayRawfoodList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 95px;     margin: 0;">
-      <li *ngFor="let item of filteredRawfood" (click)="setInput(searchInput, item)">{{item[1]}}</li>            
-      </ul> 
+      <li *ngFor="let item of filteredRawfood" (click)="setInput(searchInput, item)">{{item[1]}}</li>
+    </ul>
 
-      <ul *ngIf="selected_language=='EN'" [hidden]="!isDisplayRawfoodList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 95px;     margin: 0;">
-      <li *ngFor="let item of filteredRawfood" (click)="setInput(searchInput, item)">{{item[1]}}</li>            
-      </ul> 
+    <ul *ngIf="selected_language=='EN'" [hidden]="!isDisplayRawfoodList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 95px;     margin: 0;">
+      <li *ngFor="let item of filteredRawfood" (click)="setInput(searchInput, item)">{{item[1]}}</li>
+    </ul>
 
-  
 
-  <!--<ion-select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
+
+    <!--<ion-select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
     <ion-option selected>Sort By</ion-option>    
     <!--<ion-option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</ion-option> -->
-  <!--</ion-select>-->
-   
- 
+    <!--</ion-select>-->
 
-   <button  class="submit_button" name="next" type="button" value="Submit" style="
+
+
+    <button class="submit_button" name="next" type="button" value="Submit" style="
     margin: auto;
     height: 35px;
     width: 115px !important;
     border-radius: 3px !important;
-" (click)="submitDetails()">Submit</button>                   
-    
-</div>
+" (click)="submitDetails()">Submit</button>
+
+  </div>
 
 </div>

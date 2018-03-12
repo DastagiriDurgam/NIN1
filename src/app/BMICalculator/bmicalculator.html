@@ -31,7 +31,7 @@
 
 <navbar [pageTitle]="pageTitle">
 </navbar>
-<div class="container" style="height:100%; background-color:white;">
+<div class="container" style="height: calc(100% - 75px); background-color:white; overflow-y:auto;">
  
   <div class="bmicalc msform row" id="">
 
@@ -51,7 +51,7 @@
       <ion-option value="0" selected disabled>Age</ion-option>
       <ion-option *ngFor="let age of 100 | printnumbers:{start:18}">{{age}}</ion-option>
     </ion-select> -->
-    <div style="text-align:left;">
+    <div style="text-align:left;" class="col-md-4 col-xs-12 col-sm-4">
       <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="male" [(ngModel)]="gender" />Male
       <input type="radio" class="terms" style="margin-left: 10px;" name="gender" value="female" [(ngModel)]="gender" />Female
       <br>
@@ -77,16 +77,16 @@
       
     </div> -->
 
-    <div class="col-md-4 col-xs-12 col-sm-4">
-        <ion-item>
-            <ion-input  type="text" [(ngModel)]="heightincm" placeholder="Height (cms)" [ngModelOptions]="{standalone: true}"
+    
+        <ion-item class="col-md-4 col-xs-12 col-sm-4">
+            <ion-input style="margin:0;"  type="text" [(ngModel)]="heightincm" placeholder="Height (cms)" [ngModelOptions]="{standalone: true}"
             (keyup)="convertUnits('cmeter',heightincm)" (change)="heightinft=(heightincm/30.48)"></ion-input>
           </ion-item>
+   
+    <div style="margin:0;" class="col-md-2 col-xs-12 col-sm-2 text-center">
+        <p style="margin:0;">or</p>
     </div>
-    <div class="col-md-2 col-xs-12 col-sm-2 text-center">
-        <p >or</p>
-    </div>
-    <div class="col-md-3 col-xs-6 col-sm-4 mtop0">
+    <div class="col-md-3 col-xs-6 col-sm-4 mtop0" style="padding:0;">
         <ion-item>
             <ion-select placeholder="Feet" [(ngModel)]="heightFeet" (ngModelChange)="convertUnits('feet',heightFeet)">
                 <!-- <ion-option value="" selected disabled>Feet</ion-option> -->
@@ -94,7 +94,7 @@
               </ion-select>
           </ion-item>
     </div>
-    <div class="col-md-3 col-xs-6 col-sm-4 mtop0">
+    <div class="col-md-3 col-xs-6 col-sm-4 mtop0" style="padding:0;">
         <ion-item>
             <ion-select  placeholder="Inches" [(ngModel)]="heightInch" (ngModelChange)="convertUnits('inch',heightInch)">
                 <!-- <ion-option value="" selected disabled>Inches</ion-option> -->
@@ -118,7 +118,7 @@
 
 <ion-item style="margin-bottom:15px;">
     <!--<input type="text" class="hicm measure2" name="cpass" placeholder="Height Feets & Inches" />-->
-    <ion-input type="number" class="hicm " name="cpass" placeholder="Weight (Kg)" [(ngModel)]="weightinkg" ></ion-input>
+    <ion-input style="margin:0;" type="number" class="hicm " name="cpass" placeholder="Weight (Kg)" [(ngModel)]="weightinkg" ></ion-input>
   </ion-item>
     <button type="button" style="margin:auto;" name="next" class="submit_button" (click)="submitCalc()" >Submit</button>
 

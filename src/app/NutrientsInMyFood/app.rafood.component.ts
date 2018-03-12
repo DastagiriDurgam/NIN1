@@ -48,7 +48,9 @@ export class RawFoodComponent {
   getLanguagesList() {
     let getRecipiesQuery = "select languages, abbreviation from language_codes";
 
-   this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery);
+   this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery, function (a, b) {
+    // alert(JSON.stringify(b));
+  });
 
    this.eventservice.getMessage().subscribe((data) => {
      if (data.name == 'language_codes') {
@@ -161,7 +163,9 @@ export class RawFoodComponent {
       getRecipiesQuery = "select  `foodcode`,`foodnames`,`names`, `languages` from rawfoodifctreviced";
     }
 
-    this.dbservice.getDataFromTable('rawfoodifctreviced1', 'recipes.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('rawfoodifctreviced1', 'recipes.sql', getRecipiesQuery, function (a, b) {
+      // alert(JSON.stringify(b));
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
 
@@ -186,16 +190,15 @@ export class RawFoodComponent {
       getRecipiesQuery = "select * from raw_foods_ifct_nvif";
     }
 
-    this.dbservice.getDataFromTable('raw_foods_ifct_nvif', 'recipes.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('raw_foods_ifct_nvif', 'recipes.sql', getRecipiesQuery, function (a, b) {
+       console.log(JSON.stringify(b));
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
-
       if (data.name == 'raw_foods_ifct_nvif') {
         this.totalRawfoods = data.value.values;
         this.columnNames = data.value.columns;
-
       }
-
     });
 
   }

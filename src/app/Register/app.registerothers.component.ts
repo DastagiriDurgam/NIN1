@@ -48,6 +48,7 @@ export class RegisterOthersComponent {
                 this.userData = prevRegDetails.filter((item) => {
                     return item.Primary;
                 })[0];
+                // alert(JSON.stringify(data))
             }
         });
         this.getStatesData();

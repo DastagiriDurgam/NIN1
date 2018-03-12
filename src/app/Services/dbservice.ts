@@ -87,26 +87,28 @@ export class DBService {
     }
 
 
-    getDataFromTable(name:any, databaseName: string, query: string): any {
+    getDataFromTable(name:any, databaseName: string, query: string, callback?:any): any {
         
         this.createDb(databaseName).then((db: SQLiteObject) => {
             this.sqliteObject = db;
             db.executeSql(query, {})
                 .then((output) => {
+                   
                     let responseArray: any = {columns:[], values:[]};
                     for (var i = 0; i < output.rows.length; i++) {
                         if (i == 0) {
                             responseArray.columns = Object.keys(output.rows.item(i));
                         }
+                        // alert(JSON.stringify(output.rows.item(i)));
                         let vals = Object.keys(output.rows.item(i)).map(function (key) {
-                            
+                           
                             return output.rows.item(i)[key];
                         });
                         
                         responseArray.values.push(Array.from(vals));                      
                   
                     }   
-                        
+                        callback(new Object(responseArray), output.rows.item(0));
                     this.eventservice.sendMessage(name,new Object(responseArray) );
                    
                     // alert(JSON.stringify(responseArray) );

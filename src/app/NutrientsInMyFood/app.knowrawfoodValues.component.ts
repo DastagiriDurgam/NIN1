@@ -94,10 +94,13 @@ export class KnowRawFoodValuesComponent {
     this.currentRawfood = rafood;
     let displayValues;
     let displaycolumns;
-
+    var self = this;
     let getNutrientsQuery = "select * from raw_foods_ifct_nvif where food_code='" + rafood.item[2] + "'";
-      // alert(JSON.stringify(getNutrientsQuery));
-    this.dbservice.getDataFromTable('rawfoodifct1', 'recipes.sql', getNutrientsQuery);
+    // alert(JSON.stringify(getNutrientsQuery));
+    this.dbservice.getDataFromTable('rawfoodifct1', 'recipes.sql', getNutrientsQuery, function (a, b) {
+      // alert(JSON.stringify(b));
+      self.valuestodisplay = b;
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
 
@@ -111,11 +114,11 @@ export class KnowRawFoodValuesComponent {
             return (index > 4) && (this.itemNames[item] != null) && ((displaycolumns.length - 1) != index);
           }
         );
-        this.valuestodisplay = displayValues.filter(
-          (item, index) => {
-            return index > 4;
-          }
-        );
+        // this.valuestodisplay = displayValues.filter(
+        //   (item, index) => {
+        //     return index > 4;
+        //   }
+        // );
 
       }
 

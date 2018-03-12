@@ -48,8 +48,8 @@
 </style>
 <div  style="height:100%; background-color:white;">
 <div class="icon-bar knowvalues">  
-    <a *ngFor="let recipe of selectedRecipies" (click)="getNutrientValues(recipe)"><i class="fa fa-calendar-o" ></i><div>{{recipe.item[1]}}</div></a>   
-     <a  (click)="getTotal()" *ngIf="selectedRecipies.length>1"><i class="fa fa-plus-circle" ></i><div>Total</div></a>
+    <a *ngFor="let recipe of selectedRecipies" (click)="getNutrientValues(recipe)"><i class="fa fa-calendar-o" ></i><div>{{recipe.item[0]}}</div></a>   
+     <!-- <a  (click)="getTotal()" *ngIf="selectedRecipies.length>1"><i class="fa fa-plus-circle" ></i><div>Total</div></a> -->
    
 </div>
 <div class="container">
@@ -62,9 +62,9 @@
 <tr *ngFor="let item of displayValues.columns; let i = index;" [ngStyle]="{'color':(itemNames[item]=='Energy (Kcal)'?'red':'black')}">
       <td *ngIf="itemNames[item]!='Vitamin B12'">{{itemNames[item]}}</td>
       <!-- <td *ngIf="itemNames[item]!='Vitamin B12'">{{item}}</td>       -->
-      <td *ngIf="itemNames[item]!='Energy (Kcal)' && itemNames[item]  && item!='total_saturated_fatty_acids_TFSA' && !isTotalTab">{{adjustFractions(displayValues.values[0][i] * (currentRecipe.value/100))}}</td> 
-       <td *ngIf="itemNames[item]=='Energy (Kcal)'  && !isTotalTab">{{adjustFractions(((displayValues.values[0][i])/4.184) * (currentRecipe.value/100))}}</td> 
-      <td *ngIf="item=='total_saturated_fatty_acids_TFSA'  && !isTotalTab">{{adjustFractions(((displayValues.values[0][i])/1000) * (currentRecipe.value/100))}}</td>
+      <td *ngIf="itemNames[item]!='Energy (Kcal)' && itemNames[item]  && item!='total_saturated_fatty_acids_TFSA' && !isTotalTab">{{adjustFractions(displayValues.values[item] * (currentRecipe.value/100))}}</td> 
+       <td *ngIf="itemNames[item]=='Energy (Kcal)'  && !isTotalTab">{{adjustFractions(((displayValues.values[item])/4.184) * (currentRecipe.value/100))}}</td> 
+      <td *ngIf="item=='total_saturated_fatty_acids_TFSA'  && !isTotalTab">{{adjustFractions(((displayValues.values[item])/1000) * (currentRecipe.value/100))}}</td>
     <td *ngIf=" itemNames[item] && isTotalTab">{{adjustFractions(totalValues[item])}}</td>
     </tr> 
     

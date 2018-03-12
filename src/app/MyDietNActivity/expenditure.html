@@ -3,41 +3,41 @@
 <div clss="container expenditure" style="height:100%; background-color:white;">
   <div class="form row">
     <div class="col-xs-12">
-      <div class="col-xs-12">
-        <ion-select type="text" name="pass" class="form-control" [(ngModel)]="uid">
+      <ion-item class="col-xs-12">
+        <ion-select type="text" name="pass" placeholder="Select User" [(ngModel)]="uid">
           <ion-option [value]="user.uid" *ngFor="let user of Users">{{user.Name}}</ion-option>
         </ion-select>
-      </div>
-      <div class="col-xs-12 col-sm-12">
-        <!-- <input class="form-control" placeholder="Select Date" type="text" [min]="sel_minDate" [max]="sel_maxDate" [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')"> -->
+      </ion-item>
+      <ion-item class="col-xs-12 col-sm-12">
+        <!-- <input  placeholder="Select Date" type="text" [min]="sel_minDate" [max]="sel_maxDate" [(ngModel)]="sel_date" onfocus="(this.type='date')" onblur="(this.type='text')"> -->
 
-        <ion-datetime [min]="sel_minDate" [max]="sel_maxDate" [(ngModel)]="sel_date" placeholder="Select Date" class="form-control"
+        <ion-datetime [min]="sel_minDate" [max]="sel_maxDate" [(ngModel)]="sel_date" placeholder="Select Date" 
           displayFormat="MM/DD/YYYY"></ion-datetime>
 
-      </div>
-      <div class="col-xs-6">
-        <ion-select [(ngModel)]="hours" class="form-control">
+      </ion-item>
+      <ion-item class="col-xs-6">
+        <ion-select [(ngModel)]="hours" >
           <ion-option value="HRS" selected disabled>HRS</ion-option>
           <ion-option *ngFor="let hh of 25 | printnumbers:{start:0}">{{hh}}</ion-option>
         </ion-select>
-      </div>
-      <div class="col-xs-6">
-        <ion-select [(ngModel)]="minuts" class="form-control">
+      </ion-item>
+      <ion-item class="col-xs-6">
+        <ion-select [(ngModel)]="minuts" >
           <ion-option value="MM" selected disabled>MM</ion-option>
           <ion-option *ngFor="let mm of 60 | printnumbers:{start:0}">{{mm}}</ion-option>
         </ion-select>
-      </div>
+      </ion-item>
       <!--<input type="text" name="email" placeholder="HH" class="createRecipeInput" />
             <input type="text" name="selectlist" placeholder="MM" class="createRecipeInput" />    -->
 
-      <div class="col-xs-12 text-center">
+      <ion-item class="col-xs-12 text-center">
 
-        <ion-select class="form-control" [(ngModel)]="selActivity">
+        <ion-select *ngIf="totalActivities" [(ngModel)]="selActivity">
           <ion-option value="0" selected>Physical Activity</ion-option>
           <ion-option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</ion-option>
         </ion-select>
 
-      </div>
+      </ion-item>
       <div class="col-xs-12 text-center">
         <input class="submit_button" name="next" style="margin:auto;" type="button" value="Add" (click)="addActivity(uid,totalActivities.values[selActivity-1], hours, minuts, sel_date)">
       </div> 

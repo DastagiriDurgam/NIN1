@@ -34,6 +34,7 @@ export class RecipeComponent {
   ngOnInit() {
 
     this.storage.get('totalRecipies').then((data1) => {
+      // alert(data1);
       this.totalRecipies = data1;
 
     });

@@ -37,15 +37,18 @@ export class ConsuptionDetailsComponent {
 
   getSelectedRecipies(item, timetype) {
 
-
+var self = this;
     let getRecipiesQuery = "SELECT  protein,  total_fat,  total_dietary_fibre,  carbohydrate ,  energy_joules ,  riboflavin_b2 ,  total_b6,  total_folate_b9 ,  total_ascorbic_acid  ,  retinol ,  total_carotenoids ,  ergocalciferol_d2  ,  cholecalciferol_d3  ,  vitamin_25_hydroxy_D3  ,  Iron_fe  ,  Zinc_zn  ,  Potassium_k ,  sodium_na  ,  calcium_ca ,  total_saturated_fatty_acids_TFSA ,  b12   FROM recipes_nut_value_for_100_grams where uid_recipes=" + item;
-
-    this.dbservice.getDataFromTable('recipes_nut_value_for_100_grams_'+item, 'recipes.sql', getRecipiesQuery);
+    self.displayValues.values ={};
+    this.dbservice.getDataFromTable('recipes_nut_value_for_100_grams_'+item, 'recipes.sql', getRecipiesQuery, function (a, b) {
+      self.displayValues.values  = b;
+      console.log(JSON.stringify(b))
+    });
 
     var gotValues;
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'recipes_nut_value_for_100_grams_'+item) {
-        this.displayValues.values = data.value.values;
+        // this.displayValues.values = data.value.values;
         this.displayValues.columns = data.value.columns;
         gotValues = data.value;
         this.selectedValues[item+timetype] = data.value;
@@ -70,9 +73,9 @@ export class ConsuptionDetailsComponent {
   ngOnInit() {
     this.selectedRecipies = this.navParams.get('selectedRecipies');
     this.commons = this.navParams.get('commons');
+    // alert(JSON.stringify(this.selectedRecipies));
     this.selectedRecipies.forEach(element => {
       this.currentRecipe = element;
-      // alert(JSON.stringify(this.currentRecipe.item));
       this.getSelectedRecipies(this.currentRecipe.item[2], element.timetype);
     });
     this.currentRecipe = this.selectedRecipies[0];

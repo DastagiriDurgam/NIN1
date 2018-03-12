@@ -73,7 +73,9 @@ export class FoodsByLanguageDetails {
   getlanguagesData() {
     let getRecipiesQuery = "select languages, abbreviation from language_codes";
 
-    this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery, function (a, b) {
+      console.log(JSON.stringify(b));
+      });
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'language_codes') {
@@ -94,7 +96,9 @@ export class FoodsByLanguageDetails {
 
     let getRecipiesQuery = "select * from foods_by_language where food_codes='" + this.selectedFood.foodcode + "'";
 
-    this.dbservice.getDataFromTable('foods_in_language', 'recipes.sql', getRecipiesQuery);
+    this.dbservice.getDataFromTable('foods_in_language', 'recipes.sql', getRecipiesQuery, function (a, b) {
+      console.log(JSON.stringify(b));
+      });
 
     this.eventservice.getMessage().subscribe((data) => {
 
