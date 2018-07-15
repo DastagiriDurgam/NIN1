@@ -53,9 +53,9 @@ overflow-y: auto;
 }
 
 /*---------------------------*/
-ul:not(".sourceContainer"){
-list-style: none;
-}
+// ul:not(".sourceContainer"){
+// list-style: none;
+// }
 input+ul>li{
 background-color: darkslategray;
 color: white;
