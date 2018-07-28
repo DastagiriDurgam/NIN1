@@ -1,34 +1,24 @@
-## Setup machine
-machine:
-  java:
-    version: 'oraclejdk8'
-  node:
-    version: v6.10.3
-  ruby:
-    version: 2.1.2
-  environment:
-    ANDROID_HOME: /usr/local/android-sdk-linux
-
-
-## Setup dependencies
-dependencies:
-  pre:
-    - npm install -g ionic cordova
-    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository,android-25
-    - echo y | android update sdk --no-ui --all --filter build-tools-25.0.0
-
-  cache_directories:
-    - /usr/local/android-sdk-linux/tools
-    - /usr/local/android-sdk-linux/build-tools/24.0.1
-
-  post:
-    - mkdir www
-    - ionic cordova platform add android -Y --noresources
-
-test:
-  pre:
-    - npm install
-
-  override:
-    - ionic cordova build android -Y
-    - cp -r platforms/android/build/outputs/apk $CIRCLE_ARTIFACTS
+steps:
+          - checkout
+          - run:
+              name: update-npm
+              command: 'sudo npm install -g npm@latest'
+          - restore_cache:
+              key: dependency-cache-{{ checksum "package.json" }}
+          - run:
+              name: install-npm-wee
+              command: npm install
+          - run:
+             name: install-cordova
+             command: sudo npm install -g cordova
+          - run:
+             name: add-cordova
+             command: cordova platform add android
+          - run:
+             name: build-android
+             command: cordova build android       
+          - run:
+             name: mkdir-android
+             command: mkdir mybuild
+          - store_artifacts:
+              path: '/home/circleci/mern-starter/mybuild/myapk.apk'    
