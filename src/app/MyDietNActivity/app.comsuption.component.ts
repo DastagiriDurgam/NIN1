@@ -12,7 +12,7 @@ declare var window;
 
 @Component({
   selector: 'Consuption',
-  templateUrl: './Comsuption.html',
+  templateUrl: './comsuption.html',
   styles: [` 
 
   `]

@@ -31,7 +31,7 @@ export class HttpRequest {
               return this.http.post(this.baseUrl + data.url,  this.headers)
             .map((res: Response) =>{ this.spinnerDialog.hide() ;return res.json()} )
             .catch((error: any) =>{
-                // alert(JSON.stringify(error)); 
+                 alert(JSON.stringify(error)); 
                   return Observable.throw(error.json().error )});
         }  
            
