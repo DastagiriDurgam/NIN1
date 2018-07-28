@@ -1,144 +1,27 @@
 version: 2
-
-# ALIASES & DEFAULTS
-
-aliases:
-  - &restore-cache
-      keys:
-        - dependency-cache-{{ checksum "package.json" }}
-        - dependency-cache-{{ checksum "packages/@ionic/cli-framework/package.json" }}
-        - dependency-cache-{{ checksum "packages/@ionic/cli-utils/package.json" }}
-        - dependency-cache-{{ checksum "packages/@ionic/discover/package.json" }}
-        - dependency-cache-{{ checksum "packages/@ionic/lab/package.json" }}
-        - dependency-cache-{{ checksum "packages/@ionic/schematics-angular/package.json" }}
-        - dependency-cache-{{ checksum "packages/@ionic/v1-toolkit/package.json" }}
-        - dependency-cache-{{ checksum "packages/cli-scripts/package.json" }}
-        - dependency-cache-{{ checksum "packages/ionic/package.json" }}
-
-  - &save-cache
-      key: dependency-cache-{{ checksum "package.json" }}
-      paths:
-        - node_modules
-
-  - &save-cache-cli-framework
-      key: dependency-cache-{{ checksum "packages/@ionic/cli-framework/package.json" }}
-      paths:
-        - packages/@ionic/cli-framework/node_modules
-
-  - &save-cache-cli-utils
-      key: dependency-cache-{{ checksum "packages/@ionic/cli-utils/package.json" }}
-      paths:
-        - packages/@ionic/cli-utils/node_modules
-
-  - &save-cache-discover
-      key: dependency-cache-{{ checksum "packages/@ionic/discover/package.json" }}
-      paths:
-        - packages/@ionic/discover/node_modules
-
-  - &save-cache-lab
-      key: dependency-cache-{{ checksum "packages/@ionic/lab/package.json" }}
-      paths:
-        - packages/@ionic/lab/node_modules
-
-  - &save-cache-schematics-angular
-      key: dependency-cache-{{ checksum "packages/@ionic/schematics-angular/package.json" }}
-      paths:
-        - packages/@ionic/schematics-angular/node_modules
-
-  - &save-cache-v1-toolkit
-      key: dependency-cache-{{ checksum "packages/@ionic/v1-toolkit/package.json" }}
-      paths:
-        - packages/@ionic/v1-toolkit/node_modules
-
-  - &save-cache-cli-scripts
-      key: dependency-cache-{{ checksum "packages/cli-scripts/package.json" }}
-      paths:
-        - packages/cli-scripts/node_modules
-
-  - &save-cache-ionic
-      key: dependency-cache-{{ checksum "packages/ionic/package.json" }}
-      paths:
-        - packages/ionic/node_modules
-
-defaults: &defaults
-  docker:
-    - image: circleci/node:latest
-  working_directory: /tmp/workspace
-
-
-unit-test-base: &unit-test-base
-  <<: *defaults
-  steps:
-    - attach_workspace:
-        at: /tmp/workspace
-    - run: npm rebuild # We need to rebuild/recompile for specific Node versions.
-    - run: npm run lint
-    - run: npm run test
-
-# JOBS
-
 jobs:
   build:
-    <<: *defaults
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-25-alpha
+    environment:
+      JVM_OPTS: -Xmx3200m
     steps:
       - checkout
-      - restore_cache: *restore-cache
-      - run: npm install
-      - save_cache: *save-cache
-      - run: npm run bootstrap
-      - save_cache: *save-cache-cli-framework
-      - save_cache: *save-cache-cli-utils
-      - save_cache: *save-cache-discover
-      - save_cache: *save-cache-lab
-      - save_cache: *save-cache-schematics-angular
-      - save_cache: *save-cache-v1-toolkit
-      - save_cache: *save-cache-cli-scripts
-      - save_cache: *save-cache-ionic
-      - persist_to_workspace:
-          root: /tmp/workspace
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
           paths:
-            - "*"
-
-  unit-test-node-6:
-    <<: *unit-test-base
-    docker:
-      - image: circleci/node:6
-
-  unit-test-node-8:
-    <<: *unit-test-base
-    docker:
-      - image: circleci/node:8
-
-  unit-test-node-latest:
-    <<: *unit-test-base
-
-  deploy:
-    <<: *defaults
-    environment:
-      GIT_AUTHOR_NAME: Ionitron
-      GIT_AUTHOR_EMAIL: hi@ionicframework.com
-      GIT_COMMITTER_NAME: Ionitron
-      GIT_COMMITTER_EMAIL: hi@ionicframework.com
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: npm run publish:ci -- --yes
-
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
-      - unit-test-node-6:
-          requires: [build]
-      - unit-test-node-8:
-          requires: [build]
-      - unit-test-node-latest:
-          requires: [build]
-      - deploy:
-          requires: [unit-test-node-6, unit-test-node-8, unit-test-node-latest]
-          filters:
-            branches:
-              only: master
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
