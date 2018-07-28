@@ -7,6 +7,7 @@ import { NINService } from '../Services/ninhttpservice';
 import { Storage } from '@ionic/storage';
 import { DBService } from '../Services/dbservice';
 import { EventService } from '../Services/eventservice';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 declare var Object;
 declare var window;
 @Component({
@@ -36,7 +37,10 @@ export class RegisterComponent {
   relation: any = "relation";
   isRestricted = false;
   devHeight: any;
-  constructor(private navController: NavController, private ninService: NINService, private dbservice: DBService, private storage: Storage, private eventservice: EventService) {
+  constructor(private navController: NavController,
+     private ninService: NINService, 
+     private spinnerDialog:SpinnerDialog,
+     private dbservice: DBService, private storage: Storage, private eventservice: EventService) {
   }
 
 
@@ -532,6 +536,13 @@ export class RegisterComponent {
 
   ngOnInit() {
     this.changeDivHeight();
+    console.log('spiner start');
+    this.spinnerDialog.show('HI','Testing');
+    setTimeout(() => {
+      console.log('spiner end');
+      this.spinnerDialog.hide()
+    }, 10000);
+
     this.storage.get('regDetails').then((data) => {
       if (data != null && data != undefined) {
         if (data.length > 0) {

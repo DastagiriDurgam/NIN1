@@ -15,7 +15,7 @@ import { NutrientsInMyFoodComponent } from './NutrientsInMyFood/app.nutrientsinm
 import { MyDietNActivity } from './MyDietNActivity/app.mydietnactivity.component'
 import { OtherInfoComponent } from './OtherInfo/app.otherinfo.component'
 import { SearchFoodByNutrient } from './SearchFoodByNutrients/app.searchfoodbynutrient.component'
-import { SearchFoodByLanguage } from './SearchFoodByLanguage/app.searchfoodbylanguage.component';
+import { SearchFoodByLanguage } from './SearchFoodByLanguage/app.searchfoodbyLanguage.component';
 declare var window;
 declare var document;
 

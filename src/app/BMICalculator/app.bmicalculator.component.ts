@@ -28,7 +28,7 @@ export class BMICalcComponent {
   Users: any = [];
   // private storage = new Storage();
   physioLogicalStatus: any = { male: ['Sedentary Work', 'Moderate Work', 'Heavy Work'], female: ['Sedentary Work', 'Moderate Work', 'Heavy Work', 'Pregnant Woman', 'Lactation 0-6 months', 'Lactation 6-12 months'] };
-  constructor(private navController: NavController, private storage:Storage) {
+  constructor(private navController: NavController, private storage: Storage) {
 
   }
 
@@ -139,11 +139,14 @@ export class BMICalcComponent {
   }
 
   convertUnits(str, value) {
-    debugger;
     if (str == 'cmeter') {
       let tempInch = this.heightincm * 0.393701;
-      this.heightFeet = Math.round(tempInch / 12);
-      this.heightInch = Math.round(tempInch % 12);
+      let realFeet = ((+this.heightincm * 0.393700) / 12).toFixed(1);
+      let n = (realFeet + "").split(".");
+      //this.heightFeet = Math.round(tempInch / 12);
+      this.heightFeet = Math.round(+n[0]);
+      this.heightInch = Math.round(+n[1]);
+      //this.heightInch = Math.round(tempInch % 12);
 
     } else {
       this.heightincm = (this.heightFeet * 30.48) + (this.heightInch * 2.54)
