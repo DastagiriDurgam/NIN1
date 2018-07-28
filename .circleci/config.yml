@@ -1,24 +1,15 @@
-steps:
-          - checkout
-          - run:
-              name: update-npm
-              command: 'sudo npm install -g npm@latest'
-          - restore_cache:
-              key: dependency-cache-{{ checksum "package.json" }}
-          - run:
-              name: install-npm-wee
-              command: npm install
-          - run:
-             name: install-cordova
-             command: sudo npm install -g cordova
-          - run:
-             name: add-cordova
-             command: cordova platform add android
-          - run:
-             name: build-android
-             command: cordova build android       
-          - run:
-             name: mkdir-android
-             command: mkdir mybuild
-          - store_artifacts:
-              path: '/home/circleci/mern-starter/mybuild/myapk.apk'    
+## Setup machine
+jobs:	machine:
+  build:	  java:
+    docker:	    version: 'oraclejdk8'
+      - image: beevelop/ionic	  node:
+    steps:	    version: v6.10.3
+      - checkout	  ruby:
+      - run:	    version: 2.1.2
+          name: Install node modules	  environment:
+          command: npm install	    ANDROID_HOME: /usr/local/android-sdk-linux
+      - run:	
+          name: Building android	
+          command: ionic cordova build android	## Setup dependencies
+      - store_artifacts:	dependencies:
+          path: platforms/android/build/outputs/apk/android-debug.apk
