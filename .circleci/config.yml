@@ -1,27 +1,15 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
-    environment:
-      JVM_OPTS: -Xmx3200m
+      - image: beevelop/ionic
     steps:
       - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          name: Install node modules
+          command: npm install
       - run:
-          name: Run Tests
-          command: ./gradlew lint test
+          name: Building android
+          command: ionic cordova build android
       - store_artifacts:
-          path: app/build/reports
-          destination: reports
-      - store_test_results:
-          path: app/build/test-results
+          path: platforms/android/build/outputs/apk/android-debug.apk
