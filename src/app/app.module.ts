@@ -37,7 +37,7 @@ import { Version } from '../app/OtherInfo/app.version.component'
 import { Terms } from '../app/OtherInfo/app.terms.component'
 import { SearchFoodByNutrient } from '../app/SearchFoodByNutrients/app.searchfoodbynutrient.component'
 
-import { SearchFoodByLanguage } from '../app/SearchFoodByLanguage/app.searchfoodbylanguage.component'
+import { SearchFoodByLanguage } from '../app/SearchFoodByLanguage/app.searchfoodbyLanguage.component'
 import { FoodsByLanguageDetails } from '../app/SearchFoodByLanguage/app.foodsByLanguageDetails.component'
 import { ConsuptionComponent } from '../app/MyDietNActivity/app.comsuption.component'
 import { LabelFood } from '../app/MyDietNActivity/app.labelfood.component'
