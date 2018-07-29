@@ -536,13 +536,6 @@ export class RegisterComponent {
 
   ngOnInit() {
     this.changeDivHeight();
-    console.log('spiner start');
-    this.spinnerDialog.show('HI','Testing');
-    setTimeout(() => {
-      console.log('spiner end');
-      this.spinnerDialog.hide()
-    }, 10000);
-
     this.storage.get('regDetails').then((data) => {
       if (data != null && data != undefined) {
         if (data.length > 0) {

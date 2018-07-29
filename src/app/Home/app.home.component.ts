@@ -7,9 +7,6 @@ import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component';
 import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component';
 import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbyLanguage.component';
 declare var window;
-
-
-
 @Component({
   selector: 'nin-home',
   templateUrl: './home.html'
@@ -17,12 +14,12 @@ declare var window;
 export class HomeComponent {
   pageTitle: any = 'Home';
   devHeight;
-  
+
   constructor(private navController: NavController) {
 
   }
   ngOnInit() {
-   
+
     this.onOrientationChange();
   }
 

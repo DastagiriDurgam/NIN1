@@ -15,22 +15,37 @@
   </ion-content>
 
 </ion-menu>-->
-<ion-menu [content]="content">
-  <ion-header>
+<ion-menu side="left" [content]="content">
+
+  <!-- <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
   <ion-content>
-    <ion-list>
+    <!-- <ion-list>
       <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-      <a href="#" (click)="onNavigate('req')">Nutrient Requirements</a>
-      <a href="#" (click)="onNavigate('nutrientinfood')">Nutrients In My Food</a>
-      <a href="#" (click)="onNavigate('mydietnactivity')">My Diet And Activity</a>
-      <a href="#" (click)="onNavigate('searchfoodbynutrient')">Search Food By Nutrient</a>
-      <a href="#" (click)="onNavigate('searchfoodbylanguage')">Search Food By Language</a>
-      <a href="#" (click)="onNavigate('otherinfo')">Info</a>
+    </ion-list> -->
+    <ion-list>
+      <span menuClose ion-item (click)="onNavigate('req')"><i class="fa fa-edit"></i> Nutrient Requirements</span>
+    </ion-list>
+    <ion-list>
+      <span menuClose ion-item (click)="onNavigate('nutrientinfood')"><i class="fa fa-edit"></i> Nutrients In My Food</span>
+    </ion-list>
+    <ion-list>
+      <span menuClose ion-item (click)="onNavigate('mydietnactivity')">
+          <i class="fa fa-edit"></i>  My Diet And Activity
+      </span>
+    </ion-list>
+    <ion-list>
+      <span menuClose ion-item (click)="onNavigate('searchfoodbynutrient')"><i class="fa fa-edit"></i> Search Food By Nutrient</span>
+    </ion-list>
+    <ion-list>
+      <span menuClose ion-item (click)="onNavigate('searchfoodbylanguage')"><i class="fa fa-edit"></i> Search Food By Language</span>
+    </ion-list>
+    <ion-list>
+      <span menuClose ion-item (click)="onNavigate('otherinfo')"><i class="fa fa-edit"></i> Info</span>
     </ion-list>
   </ion-content>
 </ion-menu>
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

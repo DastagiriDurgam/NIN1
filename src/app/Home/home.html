@@ -1,22 +1,57 @@
-
-
-<navbar  [pageTitle]="pageTitle" [color]="" [isDisplayFooter]="false" >
+<navbar [pageTitle]="pageTitle" [color]="" [isDisplayFooter]="false">
 
 </navbar>
 
-<div   style="height:100%; background-color:white;">
+
+
+<div style="height:100%; background-color:white;">
   <style>
     .w3-padding-16 {
       text-align: center;
       height: 90px;
     }
   </style>
-  <div>
-    <ul style="list-style: none; padding: 0; margin-top: 0; height: 100%;  background-color: #ff7403; color:black;">
+
+  <div class="w3-padding-16">
+    <ion-grid class="home-list" no-padding>
+      <ion-row>
+        <ion-col (click)="onNavigate('req')">
+          <i class="fa fa-edit"></i>
+          <span> My Nutrient Requirements</span>
+        </ion-col>
+        <ion-col (click)="onNavigate('nutrientinfood')">
+          <i class="fa fa-edit"></i>
+          <span> Nutrients in My food</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col (click)="onNavigate('mydietnactivity')">
+          <i class="fa fa-edit"></i>
+          <span> My Diet and Activity</span>
+        </ion-col>
+        <ion-col (click)="onNavigate('searchfoodbynutrient')">
+          <i class="fa fa-edit"></i>
+          <span> Search Foods by Nutrients</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col (click)="onNavigate('searchfoodbylanguage')">
+            <i class="fa fa-edit"></i>
+            <span> Search Foods by Language</span>
+          </ion-col>
+          <ion-col (click)="onNavigate('otherinfo')">
+            <i class="fa fa-edit"></i>
+            <span> Info</span>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- <ul style="list-style: none; padding: 0; margin-top: 0; height: 100%;  background-color: #ff7403; color:black;">
       <li class="w3-padding-16" style="background-color: 	#fbc579" (click)="onNavigate('req')">
         <div style="
             font-size: 35px;
-            "><img src="assets/icon/menu-1.png" width="48"></div>
+            ">
+          <img src="assets/icon/menu-1.png" width="48">
+        </div>
         <div style="
             font-size: 20px;
             ">
@@ -83,7 +118,6 @@
           Info
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>
-

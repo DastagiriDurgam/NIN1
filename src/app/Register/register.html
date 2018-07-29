@@ -15,38 +15,42 @@
 </style>
 
 
-<div class="icon-bar" *ngIf="isPrimary">
-  <a><i  ></i></a>
-  <a class="pageTitle"> Registration </a>
-  <a style="float: right"><img src="assets/icon/NIN_100_LOGO_FINAL.png" width="40"></a>
-</div>
+<!-- <div class="icon-bar" *ngIf="isPrimary">
+  <a>
+    <i></i>
+  </a>
+  <span class="pageTitle"> Registration</span>
+  <a style="float: right">
+    <img src="assets/icon/NIN_100_LOGO_FINAL.png" width="40">
+  </a>
+</div> -->
 
-<navbar [pageTitle]="pageTitle" [isDisplayFooter]="!isPrimary" *ngIf="!isPrimary">
+<navbar [pageTitle]="pageTitle" [isDisplayFooter]="!isPrimary">
 </navbar>
 
-<div > 
+<div>
   <div id="register" *ngIf="!isRestricted">
 
     <ion-list>
-  
-  
+
+
       <ion-item>
-        <ion-input type="text" [(ngModel)]="usename"  placeholder="Your Name"></ion-input>
+        <ion-input type="text" [(ngModel)]="usename" placeholder="Your Name"></ion-input>
       </ion-item>
 
 
       <ion-item *ngIf="isPrimary">
-        <ion-input type="text" placeholder="Email Address" [(ngModel)]="email_address" ></ion-input>
+        <ion-input type="text" placeholder="Email Address" [(ngModel)]="email_address"></ion-input>
       </ion-item>
 
 
-      <ion-item *ngIf="isPrimary">  
+      <ion-item *ngIf="isPrimary">
         <ion-input type="number" max="10" placeholder="Mobile Number" [(ngModel)]="mobile_number"></ion-input>
       </ion-item>
 
 
       <ion-item *ngIf="isPrimary">
-        <ion-input type="number" max ="4" placeholder="Enter 4 Digit Password" [(ngModel)]="pin"></ion-input>
+        <ion-input type="number" max="4" placeholder="Enter 4 Digit Password" [(ngModel)]="pin"></ion-input>
       </ion-item>
 
 
@@ -59,20 +63,20 @@
 
       <ion-item *ngIf="isPrimary">
         <ion-label>Select State</ion-label>
-        <ion-select [(ngModel)]="currentstate" placeholder="Select State"> 
-          <ion-option [value]="state[0]" *ngFor="let state of statesList" >{{state[0]}}</ion-option>
+        <ion-select [(ngModel)]="currentstate" placeholder="Select State">
+          <ion-option [value]="state[0]" *ngFor="let state of statesList">{{state[0]}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="!isPrimary" class="">
-      <ion-select style="margin-top:15px;" class="list col-md-12" [(ngModel)]="relation">
-        <ion-option value="relation" selected disabled>Choose Relation</ion-option>
-        <ion-option value="Wife">Wife</ion-option>
-        <ion-option value="Son">Son</ion-option>
-        <ion-option value="Daughter">Daughter</ion-option>
-        <ion-option value="Other">Other</ion-option>
-      </ion-select> 
+        <ion-select style="margin-top:15px;" class="list col-md-12" [(ngModel)]="relation">
+          <ion-option value="relation" selected disabled>Choose Relation</ion-option>
+          <ion-option value="Wife">Wife</ion-option>
+          <ion-option value="Son">Son</ion-option>
+          <ion-option value="Daughter">Daughter</ion-option>
+          <ion-option value="Other">Other</ion-option>
+        </ion-select>
 
-    </ion-item>
+      </ion-item>
     </ion-list>
 
 
@@ -99,22 +103,22 @@
   <ion-option value="Daughter">Daughter</ion-option>
   <ion-option value="Other">Other</ion-option>
 </ion-select> -->
-<div item-width="100%" class="text-center">
-  <input type="button" class="register_button"  color="secondary" (click)="register();" value="Register" /> 
-  <div>
-  <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
-  <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;"    (click)="gotoLogin();">Login</a>
-</div>
-</div>
+    <div item-width="100%" class="text-center">
+      <input type="button" class="register_button" color="secondary" (click)="register();" value="Register" />
+      <div>
+        <p *ngIf="isPrimary" style="display:inline; margin-top:5px;">Already Registered?</p>
+        <a *ngIf="isPrimary" style="margin-left:1px;display:inline; margin-top:5px;" (click)="gotoLogin();">Login</a>
+      </div>
+    </div>
 
 
     <!-- <input type="button" class="register_button" value="Register" (click)="register();"
     /> -->
-  
-   
+
+
   </div>
 
 
-  
+
 
 </div>
