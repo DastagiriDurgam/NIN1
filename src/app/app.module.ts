@@ -45,7 +45,7 @@ import { ConsuptionDetailsComponent } from '../app/MyDietNActivity/app.comsuptio
 import { ExpenditureComponent } from '../app/MyDietNActivity/app.expenditure.component'
 import { BalancesheetComponent } from '../app/MyDietNActivity/app.balancesheet.component'
 import { PrintNumbersPipe } from '../app/pipes'
-import {  IonicStorageModule } from '@ionic/storage'
+import { IonicStorageModule } from '@ionic/storage'
 import { SQLite } from '@ionic-native/sqlite'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { HttpRequest } from './Services/httpservice'
@@ -106,7 +106,14 @@ import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.fo
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      menuType: 'push',
+      platforms: {
+        ios: {
+          menuType: 'overlay',
+        }
+      }
+    }),
     JsonpModule,
     BrowserModule,
     HttpModule,
@@ -157,6 +164,6 @@ import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.fo
     Version,
     Terms
   ],
-  providers: [ SpinnerDialog,  SplashScreen, DatePicker, SQLite, HttpRequest, NINService, NinDBService, DBService, EventService, StatusBar, { provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [SpinnerDialog, SplashScreen, DatePicker, SQLite, HttpRequest, NINService, NinDBService, DBService, EventService, StatusBar, { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule { }
