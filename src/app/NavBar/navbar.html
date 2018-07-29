@@ -1,7 +1,7 @@
 <div style="z-index: 10000; height:100px">
   <ion-grid no-padding class="header-bar">
     <ion-row class="primary" justify-content-center>
-      <ion-col col-2 align-self-center style="text-align: center" *ngIf="isDisplayFooter">
+      <ion-col col-2 align-self-center style="text-align: center" *ngIf="isDisplayFooter && showMenu">
         <span class="menu-icon" menuToggle>
           <i class="fa fa-bars"></i>
         </span>
@@ -19,7 +19,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <a *ngIf="isDisplayFooter" style="position:fixed; left:5px; bottom:0; font-size: 35px; z-index:1000;" (click)="gotoHome()">
+  <a *ngIf="isDisplayFooter && showHome" style="position:fixed; left:5px; bottom:0; font-size: 35px; z-index:1000;" (click)="gotoHome()">
     <i class="fa fa-home" [ngStyle]="{'color':'#399445'}"></i>
   </a>
   <a *ngIf="isDisplayFooter" style="position:fixed; right:5px; bottom:0; font-size: 35px;z-index:1000;" (click)="popView()">

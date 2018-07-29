@@ -20,6 +20,8 @@ export class NavBarComponent {
   @Input() pageTitle: any = '';
   @Input() color: any = 'black';
   @Input() isDisplayFooter = true;
+  @Input() showMenu = true;
+  @Input() showHome = true;
   constructor(private navController: NavController, private platform: Platform) {
 
   }
