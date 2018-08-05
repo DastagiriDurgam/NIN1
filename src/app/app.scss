@@ -27,6 +27,10 @@
     margin-top: 0 !important;
 }
 
+.ion-page > ion-content {
+    position: relative;
+}
+
 html {
     height: 100%;
 
@@ -271,8 +275,8 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-.menu-inner {
-    .content {
+.menu-list {
+    &.content {
         background-color: #399445;
     }
 
@@ -283,15 +287,17 @@ body {
 
     .label-md {
         display: block !important;
+        text-align: left;
 
         i {
-            padding-right: 15px;
+            padding-right: 8px;
             font-size: 20px;
         }
     }
 
     .list-md .item-block .item-inner {
         border: 0px !important;
+        margin: 5px 0px 5px;
     }
 }
 
@@ -480,9 +486,9 @@ body {
 .submit_button {
     padding: 10px 5px !important;
     width: 140px !important;
-    background-color: #fabd75;
+    background-color: #039349; // #fabd75;
     -webkit-appearance: button !important;
-    color: black !important;
+    color: white !important;
     border-radius: 0px !important;
 }
 
@@ -522,7 +528,7 @@ ion-select {
     border: none !important;
 }
 
-.list-md .item-block .item-inner {
+.list-md .item-block .item-inner, .item-block .item-inner {
     border: 1px solid #333333 !important;
     margin: 5px !important;
     border-radius: 0px !important;
@@ -540,25 +546,110 @@ ion-select {
     padding: 0px 5px 5px 15px;
 }
 
+.row {
+    margin: 0px;
+}
+
 .home-list {
+    padding: 20px;
+
     .row {
         background-color: transparent;
-        padding: 10px;
+        padding: 0px;
 
         .col {
-            margin: 10px;
+            margin: 5px;
             background-color: #399445;
-            padding: 15px 10px 15px 10px !important;
+            padding: 25px 5px 25px 5px !important;
             color: white;
 
             i {
-                font-size: 20px;
+                font-size: 30px;
                 width: 100%;
+                padding-bottom: 3px;
             }
 
             span {
+                font-size: 15px;
                 text-transform: uppercase;
             }
         }
+    }
+}
+
+.bmr-result {
+    .bmr-item {
+        background-color: #ECEBE9;
+        border-radius: 10px;
+        margin: 10px;
+        height: 100px;
+        padding: 17px;
+        width: 100%;
+        text-align: center;
+
+        i {
+            font-size: 22px;
+            color: #039349;
+        }
+
+        span {
+            display: block;
+            font-size: 18px;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+
+        .label {
+            color: #039349;
+            font-size: 22px;
+        }
+
+        &.item-value {
+            height: 220px;
+
+            .label {
+                display: block;
+            }
+        }
+    }
+
+    .bmi-range {
+        padding: 20px;
+
+        .col {
+            text-align: center;
+        }
+
+        .value {
+            position: absolute;
+            padding-top: 10px;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .down-arrow {
+            width: 0;
+            height: 0px;
+            margin-top: 25px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #039349;
+            position: absolute;
+        }
+    }
+}
+
+.grid-data {
+    .header {
+        background-color: #039349;
+        color: white;
+    }
+
+    .item {
+        background-color: #ECEBE9;
+        color: #039349;
+        margin: 2px 0px;
+        font-size: 12px;
     }
 }

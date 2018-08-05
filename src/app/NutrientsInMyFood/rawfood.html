@@ -1,6 +1,6 @@
 <style>
   .rawfood {
-    margin: 85px 10px;
+    margin: 120px 10px;
     text-align: center;
     top: 0;
     position: absolute;
@@ -51,9 +51,9 @@
        
       </ul> 
        -->
-      <ion-item class="col-sm-12 col-xs-12"> 
-      <ion-input #searchInput type="text" style="margin:0;"  [ngModel]="searchStr"
-        (ngModelChange)="getFilteredRawfoods($event)" placeholder="Search  here"></ion-input>
+      <ion-item class="col-sm-12 col-xs-12">
+        <ion-input #searchInput type="text" style="margin:0;" [ngModel]="searchStr" (ngModelChange)="getFilteredRawfoods($event)"
+          placeholder="Search  here"></ion-input>
       </ion-item>
       <ul [hidden]="!isDisplayRawfoodList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 95px;     margin: 0;">
         <!--<li *ngFor="let item1 of filteredRawfood" (click)="setInput(searchInput, item1)">{{item1[2]}}, ({{item1[1]}}, {{item1[3]}})</li>   -->

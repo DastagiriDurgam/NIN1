@@ -1,19 +1,31 @@
 <div style="background: url(assets/images/bmi-bg-1.png) no-repeat;     background-size: 100% 100%; height: inherit;">
-   <navbar [pageTitle]="pageTitle" [color]="color"></navbar>
-   <div  style="height:100%; ">
-   <div class="row bgimg">
-      <ul class="req_item_container">
-         <li class="req_item">
-            <div class="circle" (click)="navigate('bmi')">
-               <p>BMI & BMR</p>
-            </div>
-         </li>
-         <li class="req_item">
-            <div class="circle" (click)="navigate('rda')">
-               <p>RDA</p>
-            </div>
-         </li>
-      </ul>
-   </div>
-</div>
+    <navbar [pageTitle]="pageTitle" [color]="color"></navbar>
+    <ion-grid style="height: 100%;margin-top: 100px;" class="home-list">
+        <ion-row>
+            <ion-col text-center (click)="navigate('bmi')">
+                <i class="fa fa-edit"></i>
+                <span> BMI & BMR</span>
+            </ion-col>
+            <ion-col text-center (click)="navigate('rda')">
+                <i class="fa fa-edit"></i>
+                <span> RDA</span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- <div style="height:100%; ">
+        <div class="row bgimg">
+            <ul class="req_item_container">
+                <li class="req_item">
+                    <div class="circle" (click)="navigate('bmi')">
+                        <p></p>
+                    </div>
+                </li>
+                <li class="req_item">
+                    <div class="circle" (click)="navigate('rda')">
+                        <p>RDA</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div> -->
 </div>
