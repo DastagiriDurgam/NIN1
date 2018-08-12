@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NutrientRequirementsComponent } from '../Requirements/app.mynutrientrequirements.components';
 import { NutrientsInMyFoodComponent } from '../NutrientsInMyFood/app.nutrientsinmyfood.component';
@@ -6,6 +6,7 @@ import { MyDietNActivity } from '../MyDietNActivity/app.mydietnactivity.componen
 import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component';
 import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component';
 import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbyLanguage.component';
+import { Content } from 'ionic-angular';
 declare var window;
 @Component({
   selector: 'nin-home',
@@ -14,12 +15,12 @@ declare var window;
 export class HomeComponent {
   pageTitle: any = 'Home';
   devHeight;
-
+  @ViewChild(Content) content: Content;
   constructor(private navController: NavController) {
 
   }
   ngOnInit() {
-
+    this.content.scrollTo(50, 0);
     this.onOrientationChange();
   }
 
@@ -49,5 +50,10 @@ export class HomeComponent {
     } else if (navStr === 'searchfoodbylanguage') {
       this.navController.push(SearchFoodByLanguage);
     }
+  }
+  ionViewDidEnter() {
+    let dimensions = this.content.getContentDimensions();
+    console.log('dimensions', dimensions);
+    // dimensions.contentBottom =100;
   }
 }

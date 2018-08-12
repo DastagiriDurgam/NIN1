@@ -22,12 +22,13 @@
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header> -->
-  <ion-content>
+  <ion-content class="menu-list">
     <!-- <ion-list>
       <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
     </ion-list> -->
     <ion-list>
-      <span menuClose ion-item (click)="onNavigate('req')"><i class="fa fa-edit"></i> Nutrient Requirements</span>
+      <span menuClose ion-item (click)="onNavigate('req')">
+        <i class="fa fa-edit"></i> Nutrient Requirements</span>
     </ion-list>
     <ion-list>
       <span menuClose ion-item (click)="onNavigate('nutrientinfood')"><i class="fa fa-edit"></i> Nutrients In My Food</span>
