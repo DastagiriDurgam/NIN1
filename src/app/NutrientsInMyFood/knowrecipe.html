@@ -31,7 +31,7 @@
 </style>
 <div  style="height:100%; background-color:white;">
 <div class="icon-bar knowvalues">  
-    <a *ngFor="let recipe of selectedRecipies" (click)="getNutrientValues(recipe)"><i class="fa fa-calendar-o" ></i><div>{{recipe.item[0]}}</div></a>
+    <a *ngFor="let recipe of selectedRecipies" (click)="getNutrientValues(recipe)"><i class="fa fa-calendar-o" ></i><div>{{recipe.item[1]}}</div></a>
     <!--<a  (click)="getTotal()" *ngIf="selectedRecipies.length>1"><i class="fa fa-plus-circle" ></i><div>Total</div></a>-->
    
 </div>
