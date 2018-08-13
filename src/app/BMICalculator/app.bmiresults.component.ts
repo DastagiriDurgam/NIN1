@@ -4,10 +4,7 @@ declare var window;
 
 @Component({
   selector: 'bmi-results',
-  templateUrl: './bmiresults.html',
-  styles: [`
- 
-  `]
+  templateUrl: './bmiresults.html'
 })
 export class BMIReultsComponent {
   devHeight;

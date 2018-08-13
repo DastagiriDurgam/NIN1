@@ -13,10 +13,7 @@ declare var window;
 
 @Component({
   selector: 'other-info',
-  templateUrl: './otherinfo.html',
-  styles: [` 
-
-  `]
+  templateUrl: './otherinfo.html'
 })
 export class OtherInfoComponent {
   devHeight;
