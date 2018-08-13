@@ -13,16 +13,38 @@
         <img src="assets/icon/NIN_100_LOGO_FINAL.png" width="40">
       </ion-col>
     </ion-row>
-    <ion-row class="secondary" justify-content-center>
+    <ion-row *ngIf="showSubMenu" class="secondary" justify-content-center>
       <ion-col align-self-center style="text-align: center">
         <span class="pageTitle">{{pageTitle}}</span>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <a *ngIf="isDisplayFooter && showHome" style="position:fixed; left:5px; bottom:0; font-size: 35px; z-index:1000;" (click)="gotoHome()">
+  <ion-row class="footer-bar">
+    <ion-col col-2 *ngIf="isDisplayFooter && showHome" (click)="gotoHome()">
+      <i class="fa fa-home" [ngStyle]="{'color':'#399445'}"></i>
+    </ion-col>
+    <ion-col>
+        <ion-row>
+          <ion-col col-2>
+              <img src="assets/icon/nin-logo-main.png" height="30">
+          </ion-col>
+          <ion-col class="footer-text" text-center>
+            ICMR - NIN
+          </ion-col>
+          <ion-col col-2 text-right>
+              <img src="assets/icon/NIN_100_LOGO_FINAL.png" height="30">
+          </ion-col>
+        </ion-row>
+    </ion-col>
+    <ion-col col-2 *ngIf="isDisplayFooter"  (click)="popView()">
+      <i class="fa fa-reply" [ngStyle]="{'color':'#399445'}"></i>
+    </ion-col>
+
+  </ion-row>
+  <!-- <a *ngIf="isDisplayFooter && showHome" (click)="gotoHome()">
     <i class="fa fa-home" [ngStyle]="{'color':'#399445'}"></i>
   </a>
   <a *ngIf="isDisplayFooter" style="position:fixed; right:5px; bottom:0; font-size: 35px;z-index:1000;" (click)="popView()">
     <i class="fa fa-reply" [ngStyle]="{'color':'#399445'}"></i>
-  </a>
+  </a> -->
 </div>

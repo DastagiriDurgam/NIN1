@@ -21,7 +21,9 @@ export class NavBarComponent {
   @Input() color: any = 'black';
   @Input() isDisplayFooter = true;
   @Input() showMenu = true;
+  @Input() showSubMenu = true;
   @Input() showHome = true;
+  @Input() homeBtn = true;
   constructor(private navController: NavController, private platform: Platform) {
 
   }

@@ -7,7 +7,7 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 export class HttpRequest {
     // http://218.248.6.41/api/Food/GetRawCategories
     //   baseUrl: string = 'http://218.248.6.41/api';
-      baseUrl: string = 'http://testsite.macronel.com/api';
+      baseUrl: string = 'http://ysrcpitwing.macronel.com/api';
     private headers = new Headers({
         'Content-Type': 'application/json',
         'Accept': 'application/json' 

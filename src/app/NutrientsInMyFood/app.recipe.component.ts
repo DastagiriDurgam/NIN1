@@ -77,13 +77,15 @@ export class RecipeComponent {
 
   getFilteredRecipies(ele) {
     var filterStr = ele;
+    console.log('this.totalRecipies', this.totalRecipies);
 
     if (filterStr.length > 0) {
       this.filteredRecipies = this.totalRecipies.filter((item) => {
         return (item[1].toLowerCase().includes(filterStr.toLowerCase())) 
       });
+
       this.isDisplayRecipeList = true;
-      // alert(JSON.stringify(this.filteredRecipies));
+       alert(JSON.stringify(this.totalRecipies));
     } else {
       this.isDisplayRecipeList = false;
     }

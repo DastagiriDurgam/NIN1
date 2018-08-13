@@ -32,7 +32,7 @@ export class RawFoodComponent {
   columnNames: any[] = [];
   pageTitle = 'Raw Food';
   currentitem: any = [];
-  constructor(private navController: NavController, private storage:Storage, private dbservice: DBService, private eventservice: EventService) {
+  constructor(private navController: NavController, private storage: Storage, private dbservice: DBService, private eventservice: EventService) {
 
   }
 
@@ -48,22 +48,23 @@ export class RawFoodComponent {
   getLanguagesList() {
     let getRecipiesQuery = "select languages, abbreviation from language_codes";
 
-   this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery, function (a, b) {
-    // alert(JSON.stringify(b));
-  });
+    this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery, function (a, b) {
+      // alert(JSON.stringify(b));
+    });
 
-   this.eventservice.getMessage().subscribe((data) => {
-     if (data.name == 'language_codes') {
-       this.languagesList = Array.from(data.value.values);
-    //  alert(JSON.stringify(this.languagesList
-    // ));
-     }
-
-
-   });
+    this.eventservice.getMessage().subscribe((data) => {
+      console.log('lang datat', data);
+      if (data.name == 'language_codes') {
+        this.languagesList = Array.from(data.value.values);
+        //  alert(JSON.stringify(this.languagesList
+        // ));
+      }
 
 
- }
+    });
+
+
+  }
 
   // getLanguagesList() {
   //   let getLanguagesQuery = "select  Distinct languages from raw_foods_ifct_nvif";
@@ -155,8 +156,9 @@ export class RawFoodComponent {
 
 
 
-  getRawfoodifctReviced() {
+  getRawfoodifctReviced(data?: string) {
     let getRecipiesQuery;
+    console.log('this.category', this.category);
     if (this.category.length != 0) {
       getRecipiesQuery = "select `foodcode`,`foodnames`,`names`, `languages` from rawfoodifctreviced where category='" + this.category + "'";
     } else {
@@ -172,6 +174,8 @@ export class RawFoodComponent {
       if (data.name == 'rawfoodifctreviced1') {
         this.totalRawfoods = data.value.values;
         this.columnNames = data.value.columns;
+
+        console.log('this.totalRawfoods', this.totalRawfoods);
         // alert(JSON.stringify(this.totalRawfoods));
       }
 
@@ -191,7 +195,7 @@ export class RawFoodComponent {
     }
 
     this.dbservice.getDataFromTable('raw_foods_ifct_nvif', 'recipes.sql', getRecipiesQuery, function (a, b) {
-       console.log(JSON.stringify(b));
+      console.log('categ', JSON.stringify(b));
     });
 
     this.eventservice.getMessage().subscribe((data) => {
@@ -204,24 +208,38 @@ export class RawFoodComponent {
   }
 
   getFilteredRawfoods(ele) {
-    
+
     // if (this.category.length != 0) {
-     
+
     var filterStr = ele;
+    console.log('this.selected_language', this.selected_language);
     if (filterStr.length > 0) {
-      this.filteredRawfood = this.totalRawfoods.filter((item) => {if(item[0]==null){ return false;} return ((item[0].toLowerCase().includes(filterStr.toLowerCase()))&&(this.selected_language==item[3]|| this.selected_language==""))});
+      console.log('ele', ele, this.totalRawfoods);
+      this.filteredRawfood = this.totalRawfoods.filter((item) => {
+        if (item[0] == null) {
+          return false;
+        } else {
+          if (item[2] == null) {
+            return ((item[1].toLowerCase().includes(filterStr.toLowerCase())) &&
+              (this.selected_language == item[3] || this.selected_language == ""))
+          } else {
+            return ((item[2].toLowerCase().includes(filterStr.toLowerCase())) &&
+              (this.selected_language == item[3] || this.selected_language == ""))
+          }
+
+        }
+      });
       this.isDisplayRawfoodList = true;
     } else {
       this.isDisplayRawfoodList = false;
     }
-
 
   }
 
   setInput(input, item) {
     // alert(JSON.stringify(item));
     this.isDisplayRawfoodList = false;
-    input.value = item[0];
+    input.value = item[1];
     this.currentitem = Array.from(item);
   }
 
