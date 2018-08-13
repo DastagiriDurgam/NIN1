@@ -36,7 +36,7 @@
 <ion-content class="bmr-result">
   <ion-grid>
     <ion-row>
-      <ion-col>
+      <ion-col col-6>
         <ion-row>
           <div class="bmr-item">
             <i class="fa fa-heartbeat"></i>
@@ -52,7 +52,7 @@
           </div>
         </ion-row>
       </ion-col>
-      <ion-col>
+      <ion-col col-6>
         <ion-row>
           <div class="bmr-item item-value">
             <ion-label>Value</ion-label>
@@ -64,19 +64,23 @@
     </ion-row>
   </ion-grid>
   <ion-row class="bmi-range">
-    <ion-col style="background-color: red">Under Weight
+    <ion-col style="background-color: red">
+      <span class="title">Under Weight</span>
       <span class="down-arrow"></span>
       <span class="value">&lt;18.5</span>
     </ion-col>
-    <ion-col style="background-color:green">Normal
+    <ion-col style="background-color:green">
+        <span class="title">Normal</span>
       <span class="down-arrow"></span>
       <span class="value">18.5 - 24.9</span>
     </ion-col>
-    <ion-col style="background-color:orange">Over-Weight
+    <ion-col style="background-color:orange">
+        <span class="title">Over-Weight</span>
       <span class="down-arrow"></span>
       <span class="value">25 - 29.9</span>
     </ion-col>
-    <ion-col style="background-color: red">Obesity
+    <ion-col style="background-color: red">
+        <span class="title">Obesity</span>
       <span class="down-arrow"></span>
       <span class="value">&gt; 30</span>
     </ion-col>

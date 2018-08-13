@@ -318,6 +318,7 @@ export class RegisterComponent {
 
     this.dbservice.getDataFromTable('getrecipies', 'recipes.sql', getRecipiesQuery, function (a, b) {
       // var c = Object.values(b);
+      
      
     });
 
@@ -326,7 +327,7 @@ export class RegisterComponent {
       if (data.name == 'getrecipies') {
 
         this.storage.set('totalRecipies', Array.from(data.value.values));
-        // alert(JSON.stringify(data.value.values))
+        alert(JSON.stringify(data.value.values))
         // this.totalRecipies = data.value.values;
 
       }
