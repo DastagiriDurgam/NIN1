@@ -31,7 +31,7 @@ export class KnowRecipeValuesComponent {
   getSelectedRecipies() {
     // alert(JSON.stringify(this.currentRecipe.item));
 
-    let getRecipiesQuery = "SELECT protein,  total_fat,  total_dietary_fibre,  carbohydrate ,  energy_joules ,  riboflavin_b2 ,  total_b6,  total_folate_b9 ,  total_ascorbic_acid  ,  retinol ,  total_carotenoids ,  ergocalciferol_d2  ,  cholecalciferol_d3  ,  vitamin_25_hydroxy_D3  ,  Iron_fe  ,  Zinc_zn  ,  Potassium_k ,  sodium_na  ,  calcium_ca ,  total_saturated_fatty_acids_TFSA ,  b12   FROM recipes_nut_value_for_100_grams where uid_recipes=" + this.currentRecipe.item[2];
+    let getRecipiesQuery = "SELECT protein,  total_fat,  total_dietary_fibre,  carbohydrate ,  energy_joules ,  riboflavin_b2 ,  total_b6,  total_folate_b9 ,  total_ascorbic_acid  ,  retinol ,  total_carotenoids ,  ergocalciferol_d2  ,  cholecalciferol_d3  ,  vitamin_25_hydroxy_D3  ,  Iron_fe  ,  Zinc_zn  ,  Potassium_k ,  sodium_na  ,  calcium_ca ,  total_saturated_fatty_acids_TFSA ,  b12   FROM recipes_nut_value_for_100_grams where uid_recipes=" + this.currentRecipe.item[0];
     var self = this;
     this.dbservice.getDataFromTable('recipes_nut_value_for_100_grams', 'recipes.sql', getRecipiesQuery, function (a, b) {
       self.displayValues.values = b;

@@ -85,7 +85,7 @@ export class RecipeComponent {
       });
 
       this.isDisplayRecipeList = true;
-       alert(JSON.stringify(this.totalRecipies));
+      // alert(JSON.stringify(this.totalRecipies));
     } else {
       this.isDisplayRecipeList = false;
     }
@@ -103,7 +103,6 @@ export class RecipeComponent {
       this.isDisplayRecipeList = false;
       if (filterVlues.length < 1) {
         this.selectedRecipies.push({ item: this.currentitem, value: 100 });
-
       }
       event.value = "";
     } else {
@@ -117,7 +116,7 @@ export class RecipeComponent {
 
   setInput(input, item) {
     this.isDisplayRecipeList = false;
-    input.value = item[0];
+    input.value = item[1];
     this.currentitem = Array.from(item);
   }
 
