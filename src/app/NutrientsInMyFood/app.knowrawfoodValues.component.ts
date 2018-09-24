@@ -95,6 +95,21 @@ export class KnowRawFoodValuesComponent {
     var self = this;
     let getNutrientsQuery = "select * from raw_foods_ifct_nvif where food_code='" + rafood.item[0] + "'";
     // alert(JSON.stringify(getNutrientsQuery));
+   this.dbservice.getDataFromTable2(getNutrientsQuery,false,true).then(data=>{
+    self.valuestodisplay = data.rows;
+
+    displayValues = data.values[0];
+    displaycolumns = data.columns;
+    // alert(JSON.stringify(displayValues));
+    this.columnstodisplay = displaycolumns.filter(
+      (item, index) => {
+        return (index > 4) && (this.itemNames[item] != null) && ((displaycolumns.length - 1) != index);
+      }
+    );
+
+   })
+   
+    /*
     this.dbservice.getDataFromTable('rawfoodifct1', 'recipes.sql', getNutrientsQuery, function (a, b) {
       // alert(JSON.stringify(b));
       self.valuestodisplay = b;
@@ -121,6 +136,7 @@ export class KnowRawFoodValuesComponent {
       }
 
     });
+    */
 
 
 

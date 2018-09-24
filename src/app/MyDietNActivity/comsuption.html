@@ -39,7 +39,7 @@
         style="margin:0px; padding:0px"></ion-input>
     </ion-item>
     <ul [hidden]="!isDisplayRecipeList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; height:60%; max-height: 200%; background-color: white; width: 91%; overflow-y: auto;  z-index: 10;     top: 0px;     margin: 5%;">
-      <li *ngFor="let item of filteredRecipies" (click)="setInput(searchInput, item)">{{item[0]}}</li>
+      <li *ngFor="let item of filteredRecipies" (click)="setInput(searchInput, item)">{{item[1]}}</li>
     </ul>
 
 
@@ -60,7 +60,7 @@
             <i class="fa fa-times-circle-o"></i>
           </span>
         </td>
-        <td>{{recipe.item[0]}}</td>
+        <td>{{recipe.item[1]}}</td>
         <td>
           <input type="number" (keydown)="restricttonumbers($event)" [(ngModel)]="selectedRecipies[i].value" style="background-color: transparent; color:white;   margin: 5px;    width: 100px;    padding: 2px;"
             (focus)="onFocus($event)" />

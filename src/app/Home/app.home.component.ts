@@ -7,6 +7,7 @@ import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component';
 import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component';
 import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbyLanguage.component';
 import { Content } from 'ionic-angular';
+import { DBService } from '../Services/dbservice';
 declare var window;
 @Component({
   selector: 'nin-home',
@@ -16,12 +17,17 @@ export class HomeComponent {
   pageTitle: any = 'Home';
   devHeight;
   @ViewChild(Content) content: Content;
-  constructor(private navController: NavController) {
+  constructor(private navController: NavController, private dbservice: DBService) {
 
   }
   ngOnInit() {
     this.content.scrollTo(50, 0);
-    this.onOrientationChange();
+    // this.onOrientationChange();
+    this.dbservice.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        // alert('rdy' + rdy);
+      }
+    });
   }
 
   onOrientationChange() {
