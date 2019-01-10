@@ -7,6 +7,7 @@ import { KnowRecipeValuesComponent } from './app.knowrecipeValues.component';
 import { Storage } from '@ionic/storage';
 import { DBService } from '../Services/dbservice';
 import { EventService } from '../Services/eventservice';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 declare var window;
 
 
@@ -24,9 +25,10 @@ export class RecipeComponent {
   pageTitle = "Recipe";
   currentitem: any = [];
   // storage = new Storage();
-  constructor(private navController: NavController, 
+  constructor(private navController: NavController,
     private eventservice: EventService,
-    private storage:Storage,private dbservice:DBService) {
+    private SpinnerDialog: SpinnerDialog,
+    private storage: Storage, private dbservice: DBService) {
 
   }
 
@@ -34,7 +36,17 @@ export class RecipeComponent {
 
   ngOnInit() {
     let getRecipiesQuery = "SELECT uid_recipes, Itemname, one_serving_wt_g FROM recipes";
+    this.SpinnerDialog.show();
+    this.dbservice.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        this.dbservice.getDataFromTable2(getRecipiesQuery).then(data => {
+          this.totalRecipies = Array.from(data.values);
+          this.SpinnerDialog.hide();
+        });
+      }
+    });
 
+    /*
     this.dbservice.getDataFromTable('getrecipies', 'recipes.sql', getRecipiesQuery, function (a, b) {
       // var c = Object.values(b);
       // const data = b;
@@ -52,11 +64,7 @@ export class RecipeComponent {
       }
 
     });
-    this.storage.get('totalRecipies').then((data1) => {
-      // alert(data1);
-     // this.totalRecipies = data1;
-
-    });
+    */
 
     this.onOrientationChange();
   }
@@ -81,7 +89,7 @@ export class RecipeComponent {
 
     if (filterStr.length > 0) {
       this.filteredRecipies = this.totalRecipies.filter((item) => {
-        return (item[1].toLowerCase().includes(filterStr.toLowerCase())) 
+        return (item[1].toLowerCase().includes(filterStr.toLowerCase()))
       });
 
       this.isDisplayRecipeList = true;

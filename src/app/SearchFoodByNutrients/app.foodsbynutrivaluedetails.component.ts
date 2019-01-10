@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { DBService } from '../Services/dbservice'
 import { EventService } from '../Services/eventservice'
-import {  NavParams } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 declare var window;
 
 
@@ -36,8 +36,11 @@ export class SearchFoodByNutrientDetails {
 
 
     // alert(JSON.stringify(this.details));
+    this.dbservice.tableDump('foods_by_language').then(res => {
+      this.getFoodCodesByLanguage();
+    });
 
-    this.getFoodCodesByLanguage();
+
     // if (this.details.isascending == "true" || this.details.isascending == true) {
     //          this.getRawfoodItemsReviced("ASC");
     //         } else {
@@ -134,7 +137,7 @@ export class SearchFoodByNutrientDetails {
 
 
   adjustFractions(value): any {
-       return eval(value.toFixed(2))?value.toFixed(2):0;
+    return eval(value.toFixed(2)) ? value.toFixed(2) : 0;
   }
 
   getFoodCodesByLanguage() {
@@ -149,15 +152,15 @@ export class SearchFoodByNutrientDetails {
       if (data.name == 'foods_by_lang1') {
         this.totalRawfoods = [];
         this.columnNames = []
-       
+
         // alert(JSON.stringify(data.value));
-        if (this.details.language == "EN") {      
+        if (this.details.language == "EN") {
           this.totalRawfoods = data.value.values;
           this.columnNames = data.value.columns;
         } else {
           this.totalRawfoods = data.value.values;
           this.columnNames = data.value.columns;
-          data.value.values.forEach(element => {            
+          data.value.values.forEach(element => {
             getFoodCodesByLanguageQuery = "SELECT  short_name, food_codes FROM `foods_by_language` where lang_nm like '" + this.details.language.replace('.', '') + "%' AND food_codes=" + element[0] + " LIMIT 1";
             this.dbservice.getDataFromTable('foods_by_lang2', 'recipes.sql', (getFoodCodesByLanguageQuery), function (a, b) {
               console.log(JSON.stringify(b));
@@ -170,9 +173,9 @@ export class SearchFoodByNutrientDetails {
 
     this.eventservice.getMessage().subscribe((data2) => {
       if (data2.name == 'foods_by_lang2') {
-        
+
         this.totalRawfoods.forEach((element1, index) => {
-          if(element1[0]==data2.value.values[0][1]){
+          if (element1[0] == data2.value.values[0][1]) {
             // alert(JSON.stringify(this.totalRawfoods[index][1]));
             // alert(JSON.stringify(data2.value.values[0][0]));
             this.totalRawfoods[index][1] = data2.value.values[0][0];

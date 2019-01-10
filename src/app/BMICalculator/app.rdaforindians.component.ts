@@ -101,37 +101,52 @@ onGetRda(dObj, response){
   getRda() {    
     var that = this;
     let getRecipiesQuery = "SELECT * FROM rda_2010 where gender='" + this.gender + "' AND particulars='" + this.selectedParticular + "'";  
-
-    this.dbservice.getDataFromTable('rda', 'recipes.sql', getRecipiesQuery, function(dObj, response){
-      // that.perticularsObj =response ;
-      // this.perticularsObj.isLoaded = false;
-      //  alert(JSON.stringify(that.perticularsObj));
-      that.perticularsToDisplay = [];
-      that.perticularKeys.forEach((element, index) => {
-        // alert(element);
-          that.perticularsToDisplay.push(response[element]);
-        
-      });
-    // alert(JSON.stringify(response)); 
-    }
-  );
-
-    this.eventservice.getMessage().subscribe((data) => {
-      if (data.name == 'rda') {
-
-        // let columns = data.value.columns.length ? data.value.columns : [];
-        let values = data.value.values.length ? data.value.values : [];
-      //  alert(JSON.stringify(values));
-        // this.perticularsToDisplay = values[0].filter((item, index) => {
-        //   if (index > 3) {
-        //     return true;
-        //   }
-        // });
-
-      } 
-
-
+    this.dbservice.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        this.dbservice.getDataFromTable2(getRecipiesQuery,true).then(data=>{
+          console.log('response',data);
+          that.perticularsToDisplay = [];
+          that.perticularKeys.forEach((element, index) => {
+            // alert(element);
+              that.perticularsToDisplay.push(data[element]);
+            
+          });
+          // let values = data.value.values.length ? data.value.values : [];
+    
+        })
+      }
     });
+   
+  //   this.dbservice.getDataFromTable('rda', 'recipes.sql', getRecipiesQuery, function(dObj, response){
+  //     // that.perticularsObj =response ;
+  //     // this.perticularsObj.isLoaded = false;
+  //     //  alert(JSON.stringify(that.perticularsObj));
+  //     that.perticularsToDisplay = [];
+  //     that.perticularKeys.forEach((element, index) => {
+  //       // alert(element);
+  //         that.perticularsToDisplay.push(response[element]);
+        
+  //     });
+  //   // alert(JSON.stringify(response)); 
+  //   }
+  // );
+
+  //   this.eventservice.getMessage().subscribe((data) => {
+  //     if (data.name == 'rda') {
+
+  //       // let columns = data.value.columns.length ? data.value.columns : [];
+  //       let values = data.value.values.length ? data.value.values : [];
+  //     //  alert(JSON.stringify(values));
+  //       // this.perticularsToDisplay = values[0].filter((item, index) => {
+  //       //   if (index > 3) {
+  //       //     return true;
+  //       //   }
+  //       // });
+
+  //     } 
+
+
+  //   });
   }
 
   submitRda() {

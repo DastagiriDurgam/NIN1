@@ -56,6 +56,7 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { RegisterOthersComponent } from '../app/Register/app.registerothers.component';
 import { DatePicker } from '@ionic-native/date-picker';
 import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.foodsbynutrivaluedetails.component'
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
 
 
 
@@ -164,6 +165,6 @@ import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.fo
     Version,
     Terms
   ],
-  providers: [SpinnerDialog, SplashScreen, DatePicker, SQLite, HttpRequest, NINService, NinDBService, DBService, EventService, StatusBar, { provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [SpinnerDialog, SplashScreen, DatePicker, SQLite, SQLitePorter, HttpRequest, NINService, NinDBService, DBService, EventService, StatusBar, { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule { }

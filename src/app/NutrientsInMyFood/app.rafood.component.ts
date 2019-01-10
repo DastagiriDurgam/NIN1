@@ -5,6 +5,7 @@ import { KnowRawFoodValuesComponent } from './app.knowrawfoodValues.component'
 import { DBService } from '../Services/dbservice'
 import { EventService } from '../Services/eventservice';
 import { Storage } from '@ionic/storage';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 declare var window;
 
 
@@ -32,7 +33,7 @@ export class RawFoodComponent {
   columnNames: any[] = [];
   pageTitle = 'Raw Food';
   currentitem: any = [];
-  constructor(private navController: NavController, private storage: Storage, private dbservice: DBService, private eventservice: EventService) {
+  constructor(private navController: NavController, private storage: Storage, private dbservice: DBService, private eventservice: EventService, private spinnerDialog: SpinnerDialog) {
 
   }
 
@@ -48,6 +49,12 @@ export class RawFoodComponent {
   getLanguagesList() {
     let getRecipiesQuery = "select languages, abbreviation from language_codes";
 
+    this.dbservice.getDataFromTable2(getRecipiesQuery).then(data => {
+      this.languagesList = Array.from(data.values);
+    })
+
+
+    /*
     this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery, function (a, b) {
       // alert(JSON.stringify(b));
     });
@@ -62,6 +69,7 @@ export class RawFoodComponent {
 
 
     });
+    */
 
 
   }
@@ -125,20 +133,33 @@ export class RawFoodComponent {
   }
 
   ngOnInit() {
-
+    /*
     this.storage.get('categoryList').then((data1) => {
       this.categoryList = data1;
       console.log(JSON.stringify(data1));
     });
+    */
     // this.getLanguagesFromDB();
     // this.storage.get('languagesList').then((data1) => {
     //   this.languagesList = data1;
 
     // });
-    this.insertRawFoodsifct();
-    this.getRawfoodifctReviced();
+    this.dbservice.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        let getRecipiesQuery = "select * from raw_categories";
+
+        this.dbservice.getDataFromTable2(getRecipiesQuery).then(data => {
+          console.log('data', data);
+          this.categoryList = Array.from(data.values);
+          this.getLanguagesList();
+          this.getRawfoodifctReviced();
+        });
+
+      }
+    });
+
     this.onOrientationChange();
-    this.getLanguagesList();
+
   }
 
   onOrientationChange() {
@@ -154,17 +175,23 @@ export class RawFoodComponent {
   }
 
 
-
-
   getRawfoodifctReviced(data?: string) {
     let getRecipiesQuery;
     console.log('this.category', this.category);
-    if (this.category.length != 0) {
-      getRecipiesQuery = "select `foodcode`,`foodnames`,`names`, `languages` from rawfoodifctreviced where category='" + this.category + "'";
-    } else {
-      getRecipiesQuery = "select  `foodcode`,`foodnames`,`names`, `languages` from rawfoodifctreviced";
-    }
+    this.dbservice.tableDump('rawfoodifctreviced').then(res => {
+      if (this.category.length != 0) {
+        getRecipiesQuery = "select `foodcode`,`foodnames`,`names`, `languages` from rawfoodifctreviced where category='" + this.category + "'";
+      } else {
+        getRecipiesQuery = "select  `foodcode`,`foodnames`,`names`, `languages` from rawfoodifctreviced";
+      }
+      this.dbservice.getDataFromTable2(getRecipiesQuery).then(data => {
+        this.totalRawfoods = data.values;
+        this.columnNames = data.columns;
+      })
+    });
 
+
+    /*
     this.dbservice.getDataFromTable('rawfoodifctreviced1', 'recipes.sql', getRecipiesQuery, function (a, b) {
       // alert(JSON.stringify(b));
     });
@@ -180,6 +207,7 @@ export class RawFoodComponent {
       }
 
     });
+    */
 
 
   }

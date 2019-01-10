@@ -1,4 +1,4 @@
-<navbar [pageTitle]="pageTitle"></navbar>
+<navbar [pageTitle]="pageTitle" [showSubMenu]='false'></navbar>
 <style>
     body {
         margin: 0;
@@ -38,7 +38,7 @@
         <!--<a  (click)="getTotal()" *ngIf="selectedRecipies.length>1"><i class="fa fa-plus-circle" ></i><div>Total</div></a>-->
 
     </div>
-    <ion-content style="height: calc(100% - 200px);">
+    <ion-content style="height: calc(100% - 150px);">
         <ion-grid class="grid-data">
             <ion-row class="header">
                 <ion-col>Nutrient</ion-col>

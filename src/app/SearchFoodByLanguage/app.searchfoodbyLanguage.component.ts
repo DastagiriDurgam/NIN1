@@ -32,7 +32,7 @@ export class SearchFoodByLanguage {
   currentitem: any = [];
   searchStr = '';
 
-  constructor(private dbservice: DBService, private storage:Storage, private eventservice: EventService, private navController: NavController) {
+  constructor(private dbservice: DBService, private storage: Storage, private eventservice: EventService, private navController: NavController) {
 
   }
 
@@ -41,7 +41,7 @@ export class SearchFoodByLanguage {
     let getLanguagesQuery = "select abbreviation, languages from language_codes where abbreviation!='C.' AND abbreviation!='Sci.'";
     // alert(JSON.stringify(getLanguagesQuery));
     this.dbservice.getDataFromTable('rawfoodifctreviced2', 'recipes.sql', getLanguagesQuery, function (a, b) {
-    console.log(JSON.stringify(b));
+      console.log(JSON.stringify(b));
     });
 
     this.eventservice.getMessage().subscribe((data) => {
@@ -54,8 +54,8 @@ export class SearchFoodByLanguage {
     });
 
   }
-  ngOnInit()  {
-// alert("ddd")
+  ngOnInit() {
+    // alert("ddd")
     // // this.getLanguagesFromDB();
     // this.storage.get('languagesList').then((data1) => {
     //   this.languagesList = data1;
@@ -75,7 +75,9 @@ export class SearchFoodByLanguage {
     // this.getRawfoodItems();
     this.getLanguagesList();
     this.onOrientationChange();
-    this.getFoodsByLanguage(this.selected_language);
+    this.dbservice.tableDump('foods_by_language').then(res => {
+      this.getFoodsByLanguage(this.selected_language);
+    });
   }
 
   onOrientationChange() {
@@ -96,15 +98,14 @@ export class SearchFoodByLanguage {
 
   setInput(input, item) {
     this.isDisplayRawfoodList = false;
-    if (this.selected_language == 'EN') { 
-      input.value = item[1];
+    if (this.selected_language == 'EN') {
+      input.value = item[3];
     } else {
-      input.value = item[1];
+      input.value = item[3];
     }
 
     this.currentitem = Array.from(item);
   }
-
   getFilteredRawfoods(ele) {
     this.filteredRawfood = [];
     //  alert(JSON.stringify(this.totalRawfoods[0]))
@@ -114,7 +115,7 @@ export class SearchFoodByLanguage {
         this.filteredRawfood = this.totalRawfoods.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase()))
         );
       } else {
-        this.filteredRawfood = this.totalRawfoods.filter((item) =>(item[1].toLowerCase().includes(filterStr.toLowerCase())));
+        this.filteredRawfood = this.totalRawfoods.filter((item) => (item[1].toLowerCase().includes(filterStr.toLowerCase())));
       }
       this.isDisplayRawfoodList = true;
     } else {
@@ -142,7 +143,7 @@ export class SearchFoodByLanguage {
       let getRecipiesQuery = "select * from raw_foods_ifct_nvif";
 
       this.dbservice.getDataFromTable('raw_foods_ifct_nvif', 'recipes.sql', getRecipiesQuery, function (a, b) {
-      console.log(JSON.stringify(b));
+        console.log(JSON.stringify(b));
       });
 
       this.eventservice.getMessage().subscribe((data) => {
@@ -155,13 +156,13 @@ export class SearchFoodByLanguage {
         }
       });
     } else {
-      var lang_nm =language;
-    lang_nm =  lang_nm.replace('.', '');
+      var lang_nm = language;
+      lang_nm = lang_nm.replace('.', '');
       let getRecipiesQuery = "select * from foods_by_language where lang_nm LIKE'" + lang_nm + "%'";
-        // alert(JSON.stringify(getRecipiesQuery))
-
-      this.dbservice.getDataFromTable('foods_by_language', 'recipes.sql', getRecipiesQuery, function (a, b) {
-      console.log(JSON.stringify(b));
+      this.dbservice.tableDump('foods_by_language').then(res => {
+        this.dbservice.getDataFromTable('foods_by_language', 'recipes.sql', getRecipiesQuery, function (a, b) {
+          console.log(JSON.stringify(b));
+        });
       });
 
       this.eventservice.getMessage().subscribe((data) => {
@@ -170,7 +171,7 @@ export class SearchFoodByLanguage {
           //  alert(JSON.stringify(data.value));
           this.totalRawfoods = [];
           this.totalRawfoods = data.value.values;
-            // alert(JSON.stringify(this.totalRawfoods))
+          // alert(JSON.stringify(this.totalRawfoods))
         }
       });
 
@@ -206,7 +207,7 @@ export class SearchFoodByLanguage {
   getRawfoodItems() {
     let getRecipiesQuery = "select * from raw_foods_ifct_nvif";
     this.dbservice.getDataFromTable('raw_foods_ifct_nvif', 'recipes.sql', getRecipiesQuery, function (a, b) {
-    console.log(JSON.stringify(b));
+      console.log(JSON.stringify(b));
     });
     this.eventservice.getMessage().subscribe((data) => {
       // alert(JSON.stringify(data.value));

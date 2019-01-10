@@ -15,7 +15,7 @@ declare var window;
   `]
 })
 export class ConsuptionDetailsComponent {
-  totalValues:any = {};
+  totalValues: any = {};
   isTotaled = false;
   isTotalTab = false;
   devHeight;
@@ -28,7 +28,7 @@ export class ConsuptionDetailsComponent {
   pageTitle = "Recipe Values";
   totalvaluestodisplay: any = {};
   commons: any = {};
-  itemNames: any = { "protein": "Protein(g)", "total_fat": "Fat(g)", "total_dietary_fibre": "Fibre(g)", "carbohydrate": "Carbohydrate(g)", "energy_joules": "Energy (Kcal)", "riboflavin_b2": "Vitamin B2(mg)", "total_b6": "Vitamin B6(mg)", "total_folate_b9": "Vitamin B9(µg)", "total_ascorbic_acid": "Vitamin C(mg)", "retinol": "Vitamin A(µg)", "total_carotenoids": "Carotenoids(µg)", "ergocalciferol_d2": "Vitamin D2(µg)", "cholecalciferol_d3": "Vitamin D3(µg)", "vitamin_25_hydroxy_D3": "Active Vitamin D3(µg)", "Iron_fe": "Iron(mg)", "Zinc_zn": "Zinc(mg)", "Potassium_k": "Potassium k(mg)", "sodium_na": "Sodium (mg)", "calcium_ca": "Calcium (mg)", "total_saturated_fatty_acids_TFSA": "Saturated Fat(g)"};
+  itemNames: any = { "protein": "Protein(g)", "total_fat": "Fat(g)", "total_dietary_fibre": "Fibre(g)", "carbohydrate": "Carbohydrate(g)", "energy_joules": "Energy (Kcal)", "riboflavin_b2": "Vitamin B2(mg)", "total_b6": "Vitamin B6(mg)", "total_folate_b9": "Vitamin B9(µg)", "total_ascorbic_acid": "Vitamin C(mg)", "retinol": "Vitamin A(µg)", "total_carotenoids": "Carotenoids(µg)", "ergocalciferol_d2": "Vitamin D2(µg)", "cholecalciferol_d3": "Vitamin D3(µg)", "vitamin_25_hydroxy_D3": "Active Vitamin D3(µg)", "Iron_fe": "Iron(mg)", "Zinc_zn": "Zinc(mg)", "Potassium_k": "Potassium k(mg)", "sodium_na": "Sodium (mg)", "calcium_ca": "Calcium (mg)", "total_saturated_fatty_acids_TFSA": "Saturated Fat(g)" };
 
 
   constructor(private ninservice: NINService, private navController: NavController, private navParams: NavParams, private dbservice: DBService, private eventservice: EventService) {
@@ -37,31 +37,45 @@ export class ConsuptionDetailsComponent {
 
   getSelectedRecipies(item, timetype) {
 
-var self = this;
+    var self = this;
     let getRecipiesQuery = "SELECT  protein,  total_fat,  total_dietary_fibre,  carbohydrate ,  energy_joules ,  riboflavin_b2 ,  total_b6,  total_folate_b9 ,  total_ascorbic_acid  ,  retinol ,  total_carotenoids ,  ergocalciferol_d2  ,  cholecalciferol_d3  ,  vitamin_25_hydroxy_D3  ,  Iron_fe  ,  Zinc_zn  ,  Potassium_k ,  sodium_na  ,  calcium_ca ,  total_saturated_fatty_acids_TFSA ,  b12   FROM recipes_nut_value_for_100_grams where uid_recipes=" + item;
-    self.displayValues.values ={};
-    this.dbservice.getDataFromTable('recipes_nut_value_for_100_grams_'+item, 'recipes.sql', getRecipiesQuery, function (a, b) {
-      self.displayValues.values  = b;
+    self.displayValues.values = {};
+    var gotValues;
+    this.dbservice.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        this.dbservice.getDataFromTable2(getRecipiesQuery, false, true).then(data => {
+          self.displayValues.values = data.rows;
+          this.displayValues.columns = data.columns;
+          gotValues = data;
+          this.selectedValues[item + timetype] = data;
+        });
+      }
+    });
+    /*
+
+    this.dbservice.getDataFromTable('recipes_nut_value_for_100_grams_' + item, 'recipes.sql', getRecipiesQuery, function (a, b) {
+      self.displayValues.values = b;
       console.log(JSON.stringify(b))
     });
 
-    var gotValues;
+    
     this.eventservice.getMessage().subscribe((data) => {
-      if (data.name == 'recipes_nut_value_for_100_grams_'+item) {
+      if (data.name == 'recipes_nut_value_for_100_grams_' + item) {
         // this.displayValues.values = data.value.values;
         this.displayValues.columns = data.value.columns;
         gotValues = data.value;
-        this.selectedValues[item+timetype] = data.value;
+        this.selectedValues[item + timetype] = data.value;
 
       }
 
     });
+    */
 
     gotValues;
   }
 
   adjustFractions(value): any {
-    
+
     return eval(value.toFixed(2));
   }
 
@@ -80,7 +94,7 @@ var self = this;
     });
     this.currentRecipe = this.selectedRecipies[0];
     // alert(JSON.stringify(this.currentRecipe.item));
-     this.getSelectedRecipies(this.currentRecipe.item[2], this.currentRecipe.timetype);
+    this.getSelectedRecipies(this.currentRecipe.item[2], this.currentRecipe.timetype);
     this.onOrientationChange();
   }
 
@@ -100,36 +114,36 @@ var self = this;
   getTotal() {
     this.isTotalTab = true;
     this.getTotalFrmSer();
-//     this.currentRecipe.value = 1;
-//     let totalValues = [];
+    //     this.currentRecipe.value = 1;
+    //     let totalValues = [];
 
-// //  alert(JSON.stringify(this.selectedValues));
-//     for (let i = 0; i < 20; i++) {
-//       let tempValue = 0;
-//       for (let a = 0; a < Object.keys(this.selectedValues).length; a++) {
-       
-//         if (this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i] != null && this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i] != NaN) {
-//         if(eval(this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i])){
-//           tempValue += eval(this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i]);
-//           // alert(JSON.stringify(eval(this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i])));
-//         }else{
-//           tempValue += 0;
-//         }
-        
-                 
-         
-//         } else {
-//           tempValue += 0;
-//         }
+    // //  alert(JSON.stringify(this.selectedValues));
+    //     for (let i = 0; i < 20; i++) {
+    //       let tempValue = 0;
+    //       for (let a = 0; a < Object.keys(this.selectedValues).length; a++) {
 
-//       }
-    
-//       totalValues[i] = tempValue;
-     
+    //         if (this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i] != null && this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i] != NaN) {
+    //         if(eval(this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i])){
+    //           tempValue += eval(this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i]);
+    //           // alert(JSON.stringify(eval(this.selectedValues[Object.keys(this.selectedValues)[a]].values[0][i])));
+    //         }else{
+    //           tempValue += 0;
+    //         }
 
-//     }
-     
-//     this.displayValues.values[0] = totalValues;
+
+
+    //         } else {
+    //           tempValue += 0;
+    //         }
+
+    //       }
+
+    //       totalValues[i] = tempValue;
+
+
+    //     }
+
+    //     this.displayValues.values[0] = totalValues;
   }
 
 
@@ -162,7 +176,7 @@ var self = this;
         (response) => {
           // alert(JSON.stringify(response))
           if (response.Status == 'Success') {
-             alert("Successfully Saved")
+            alert("Successfully Saved")
             this.navController.pop();
 
           } else {
@@ -170,40 +184,40 @@ var self = this;
 
             // this.navController.push(ConsuptionDetailsComponent, { recipe: this.selected_recipe });
           }
-         
+
         }
       );
     }
   }
 
   getTotalFrmSer() {
-  
-        let details = [];
-    
-        for (var item in this.selectedRecipies) {
-          if (this.selectedRecipies.hasOwnProperty(item)) {
-            var element = this.selectedRecipies[item];
-            let el = {};
-            el['Uid'] = element.item[0];
-            el['ItemName'] = element.item[1];
-            el['Quantity'] = element.value;
-            el['timetype'] = element.timetype;
-            details.push(el);
-          }
-    
-        }
-          // alert(JSON.stringify({ Userid: this.commons.Userid, Date: this.commons.Date, Userconsumptionlist: [details] }) );
-        if (this.selectedRecipies.length > 0) {
-          this.ninservice.getConsumptionTotal({ Userid: this.commons.Userid, Date: this.commons.Date, Userconsumptionlist: details }).subscribe(
-            (response) => {
-             this.totalValues = response;
-              // alert(JSON.stringify(response))
-              // alert(JSON.stringify(response));
-             
-            }
-          );
-        }
+
+    let details = [];
+
+    for (var item in this.selectedRecipies) {
+      if (this.selectedRecipies.hasOwnProperty(item)) {
+        var element = this.selectedRecipies[item];
+        let el = {};
+        el['Uid'] = element.item[0];
+        el['ItemName'] = element.item[1];
+        el['Quantity'] = element.value;
+        el['timetype'] = element.timetype;
+        details.push(el);
       }
+
+    }
+    // alert(JSON.stringify({ Userid: this.commons.Userid, Date: this.commons.Date, Userconsumptionlist: [details] }) );
+    if (this.selectedRecipies.length > 0) {
+      this.ninservice.getConsumptionTotal({ Userid: this.commons.Userid, Date: this.commons.Date, Userconsumptionlist: details }).subscribe(
+        (response) => {
+          this.totalValues = response;
+          // alert(JSON.stringify(response))
+          // alert(JSON.stringify(response));
+
+        }
+      );
+    }
+  }
 
 
   getRecipeValues() {
