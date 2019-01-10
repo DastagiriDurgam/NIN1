@@ -18,15 +18,17 @@ export class SplashComponent {
        
         this.storage.get('uid').then((data) => {
             
-            if (data != null) {
-                setTimeout(() => {
-                    this.navController.push(HomeComponent);
-                }, 8000);
+            if (data) {
+                this.navController.push(HomeComponent);
+                // setTimeout(() => {
+                //     this.navController.push(HomeComponent);
+                // }, 8000);
 
             } else {
-                setTimeout(() => {
-                    this.navController.push(RegisterComponent);
-                }, 8000);
+                this.navController.push(RegisterComponent);
+                // setTimeout(() => {
+                //     this.navController.push(RegisterComponent);
+                // }, 0);
 
             }
         });

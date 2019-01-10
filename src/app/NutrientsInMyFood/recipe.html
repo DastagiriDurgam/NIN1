@@ -5,13 +5,13 @@
     top: 0;
     position: absolute;
   }
-  
+
   .recipiesTables {
     background-color: darkslategray;
     color: white;
     margin: 5%;
   }
-  
+
   .recipe_submit_button {
     padding: 5px !important;
     background-color: #fabd75;
@@ -59,37 +59,42 @@
 
 
 
-<div  style="height:100%; background-color:white;">
-<div class="rawfood msform" id="msform">
+<div style="height:100%; background-color:white;">
+  <div class="rawfood msform" id="msform">
 
 
-  <input #searchInput type="text" class="col-sm-11 col-xs-11 searchInput" [ngModel]="searchStr" (ngModelChange)="getFilteredRecipies($event)"
-    placeholder="Search  here" />
-  <ul [hidden]="!isDisplayRecipeList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 45px;     margin: 0;">
-    <li *ngFor="let item of filteredRecipies" (click)="setInput(searchInput, item)">{{item[0]}}</li>
+    <input #searchInput type="text" class="col-sm-11 col-xs-11 searchInput" [ngModel]="searchStr" (ngModelChange)="getFilteredRecipies($event)"
+      placeholder="Search  here" />
+    <ul [hidden]="!isDisplayRecipeList" style="list-style: none; text-align: left;text-indent: 10px; border: 1px solid lightgray;position: absolute; max-height: 200%; background-color: white; width: 100%; overflow-y: auto;  z-index: 10;     top: 45px;     margin: 0;">
+      <li *ngFor="let item of filteredRecipies" (click)="setInput(searchInput, item)">{{item[1]}}</li>
+    </ul>
 
-  </ul>
+    <input class="submit_button" name="next" style="margin:auto;" type="button" value="Add" (click)="addRecipe(item, searchInput)">
 
-  <input class="submit_button" name="next" style="margin:auto;" type="button" value="Add" (click)="addRecipe(item, searchInput)">
+    <table class="col-sm-12 col-xs-12" style="background-color: darkslategray;  color: white; margin-top:10px; margin-bottom:10px; ">
+      <tr style="background-color:#f9a938;color: black">
+        <th></th>
+        <th style="text-align: center;">Item Name</th>
+        <th style="text-align: center;">Quantity(g)</th>
+      </tr>
+      <tr style="color:#f9a938; " *ngFor="let recipe of selectedRecipies; let i = index">
+        <td>
+          <span style="margin-left:10px;" (click)="selectedRecipies.splice(i, 1)">
+            <i class="fa fa-times-circle-o"></i>
+          </span>
+        </td>
 
-  <table class="col-sm-12 col-xs-12" style="background-color: darkslategray;  color: white; margin-top:10px; margin-bottom:10px; ">
-    <tr style="background-color:#f9a938;color: black">
-      <th></th>
-      <th style="text-align: center;">Item Name</th>
-      <th style="text-align: center;">Quantity(g)</th>
-    </tr>
-    <tr style="color:#f9a938; " *ngFor="let recipe of selectedRecipies; let i = index">
-       <td><span style="margin-left:10px;" (click)="selectedRecipies.splice(i, 1)"><i class="fa fa-times-circle-o"></i></span></td>
-   
-      <td >{{recipe.item[0]}}</td>
-      <td><input type="text" style="background-color:transparent; margin:auto;" (keydown)="restricttonumbers($event)" [(ngModel)]="selectedRecipies[i].value" style="background-color: white;    margin: 5px;    width: 100px;    padding: 2px;"
-        /></td>
+        <td>{{recipe.item[1]}}</td>
+        <td>
+          <input type="text" style="background-color:transparent; margin:auto;" (keydown)="restricttonumbers($event)" [(ngModel)]="selectedRecipies[i].value"
+            style="background-color: white;    margin: 5px;    width: 100px;    padding: 2px;" />
+        </td>
 
-    </tr>
-  </table>
-  <div class="col-xs-12 col-sm-12">
-    <input type="button" name="next" class="submit_button" value="Know Value" (click)="getRecipeValues()" />
-    <input type="button" name="next" class="submit_button" value="Clear" (click)="clearRecipeValues()" />
+      </tr>
+    </table>
+    <div class="col-xs-12 col-sm-12">
+      <input type="button" name="next" class="submit_button" value="Know Value" (click)="getRecipeValues()" />
+      <input type="button" name="next" class="submit_button" value="Clear" (click)="clearRecipeValues()" />
+    </div>
   </div>
-</div>
 </div>

@@ -37,7 +37,7 @@ import { Version } from '../app/OtherInfo/app.version.component'
 import { Terms } from '../app/OtherInfo/app.terms.component'
 import { SearchFoodByNutrient } from '../app/SearchFoodByNutrients/app.searchfoodbynutrient.component'
 
-import { SearchFoodByLanguage } from '../app/SearchFoodByLanguage/app.searchfoodbylanguage.component'
+import { SearchFoodByLanguage } from '../app/SearchFoodByLanguage/app.searchfoodbyLanguage.component'
 import { FoodsByLanguageDetails } from '../app/SearchFoodByLanguage/app.foodsByLanguageDetails.component'
 import { ConsuptionComponent } from '../app/MyDietNActivity/app.comsuption.component'
 import { LabelFood } from '../app/MyDietNActivity/app.labelfood.component'
@@ -45,7 +45,7 @@ import { ConsuptionDetailsComponent } from '../app/MyDietNActivity/app.comsuptio
 import { ExpenditureComponent } from '../app/MyDietNActivity/app.expenditure.component'
 import { BalancesheetComponent } from '../app/MyDietNActivity/app.balancesheet.component'
 import { PrintNumbersPipe } from '../app/pipes'
-import {  IonicStorageModule } from '@ionic/storage'
+import { IonicStorageModule } from '@ionic/storage'
 import { SQLite } from '@ionic-native/sqlite'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { HttpRequest } from './Services/httpservice'
@@ -56,6 +56,7 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { RegisterOthersComponent } from '../app/Register/app.registerothers.component';
 import { DatePicker } from '@ionic-native/date-picker';
 import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.foodsbynutrivaluedetails.component'
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
 
 
 
@@ -106,7 +107,14 @@ import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.fo
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      menuType: 'push',
+      platforms: {
+        ios: {
+          menuType: 'overlay',
+        }
+      }
+    }),
     JsonpModule,
     BrowserModule,
     HttpModule,
@@ -157,6 +165,6 @@ import { SearchFoodByNutrientDetails } from '../app/SearchFoodByNutrients/app.fo
     Version,
     Terms
   ],
-  providers: [ SpinnerDialog,  SplashScreen, DatePicker, SQLite, HttpRequest, NINService, NinDBService, DBService, EventService, StatusBar, { provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [SpinnerDialog, SplashScreen, DatePicker, SQLite, SQLitePorter, HttpRequest, NINService, NinDBService, DBService, EventService, StatusBar, { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule { }

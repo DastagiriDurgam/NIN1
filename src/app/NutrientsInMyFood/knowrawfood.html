@@ -1,4 +1,4 @@
-<navbar [pageTitle]="pageTitle"></navbar>
+<navbar [pageTitle]="pageTitle" [showSubMenu]="false"></navbar>
 <style>
     body {
         margin: 0;
@@ -30,27 +30,24 @@
         background-color: #000;
     }
 </style>
-<div  style="height:100%; background-color:white;">
 <div class="icon-bar knowvalues">
-    <a *ngFor="let rawfood of selectedRawfoods" (click)="getNutrientValues(rawfood)"><i class="fa fa-calendar-o" ></i><div>{{rawfood.item[0]}}</div></a>
+    <a *ngFor="let rawfood of selectedRawfoods" (click)="getNutrientValues(rawfood)"><i class="fa fa-calendar-o" ></i><div>{{rawfood.item[2]}}</div></a>
     <!--<a  (click)="getTotal()" *ngIf="selectedRawfoods.length>1"><i class="fa fa-plus-circle" ></i><div>Total</div></a>-->
-   
 </div>
-
-<table class="col-sm-12 col-xs-12" style=" margin: 0px 10px 10px 10px; ">
-<tr style="color: #f9a938">
-    <th>Nutrient</th>
-      <th>Value</th>
-    </tr>
- 
-<tr *ngFor="let column of columnstodisplay; let i = index" [ngStyle]="{'color':(itemNames[column]=='Energy (Kcal)'?'red':'black')}">
-      <td *ngIf="itemNames[column]!='Vitamin B12'">{{itemNames[column]}}</td>
-      <td *ngIf="itemNames[column]!='Energy (Kcal)' && itemNames[column]!='Vitamin B12' && column!='total_saturated_fatty_acids_TFSA'">{{adjustFractions(valuestodisplay[column] *(currentRawfood.value/100))}}</td>
-     <td *ngIf="itemNames[column]=='Energy (Kcal)'">{{adjustFractions((valuestodisplay[column]/(4.184)) *(currentRawfood.value/100))}}</td>
-    <td *ngIf="column=='total_saturated_fatty_acids_TFSA'">{{adjustFractions((valuestodisplay[column]/1000) *(currentRawfood.value/100))}}</td>
-     
-    </tr>
-   
-</table>
-
-</div>
+<ion-content  style="height: calc(100% - 170px);">
+    <ion-grid class="grid-data">
+        <ion-row class="header">
+            <ion-col>
+                Nutrient
+            </ion-col>
+            <ion-col>Value
+            </ion-col>
+        </ion-row>
+        <ion-row class="item" *ngFor="let column of columnstodisplay; let i = index" [ngStyle]="{'color':(itemNames[column]=='Energy (Kcal)'?'red':'black')}">
+                <ion-col *ngIf="itemNames[column]!='Vitamin B12'">{{itemNames[column]}}</ion-col>
+      <ion-col *ngIf="itemNames[column]!='Energy (Kcal)' && itemNames[column]!='Vitamin B12' && column!='total_saturated_fatty_acids_TFSA'">{{adjustFractions(valuestodisplay[column] *(currentRawfood.value/100))}}</ion-col>
+     <ion-col *ngIf="itemNames[column]=='Energy (Kcal)'">{{adjustFractions((valuestodisplay[column]/(4.184)) *(currentRawfood.value/100))}}</ion-col>
+    <ion-col *ngIf="column=='total_saturated_fatty_acids_TFSA'">{{adjustFractions((valuestodisplay[column]/1000) *(currentRawfood.value/100))}}</ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -5,44 +5,46 @@ import { NavController, Platform } from 'ionic-angular';
 import { HomeComponent } from '../../app/Home/app.home.component';
 import { NutrientRequirementsComponent } from '../Requirements/app.mynutrientrequirements.components';
 import { NutrientsInMyFoodComponent } from '../NutrientsInMyFood/app.nutrientsinmyfood.component';
-import { MyDietNActivity } from '../MyDietNActivity/app.mydietnactivity.component'
-import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component'
-import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component'
-import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbylanguage.component'
+import { MyDietNActivity } from '../MyDietNActivity/app.mydietnactivity.component';
+import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component';
+import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component';
+import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbyLanguage.component';
 declare var window;
-
-
 
 @Component({
   selector: 'navbar',
   templateUrl: 'navbar.html'
 })
 export class NavBarComponent {
-  devHeight = window.innerHeight-75;
+  devHeight = window.innerHeight - 75;
   @Input() pageTitle: any = '';
   @Input() color: any = 'black';
   @Input() isDisplayFooter = true;
-  constructor(private navController: NavController, private platform:Platform) {
+  @Input() showMenu = true;
+  @Input() showSubMenu = true;
+  @Input() showHome = true;
+  @Input() homeBtn = true;
+  constructor(private navController: NavController, private platform: Platform) {
 
   }
 
   openNav() {
     console.log(this.pageTitle);
-    document.getElementById("mySidenav").style.width = "250px";
+   // document.getElementById("mySidenav").style.width = "250px";
   }
 
   closeNav() {
     console.log(this.pageTitle);
-    document.getElementById("mySidenav").style.width = "0";
+   // document.getElementById("mySidenav").style.width = "0";
   }
 
-gotoHome(){
-  this.navController.setRoot(HomeComponent);
-}
+  gotoHome() {
+    this.navController.setRoot(HomeComponent);
+  }
 
   popView() {
-    if(this.pageTitle != 'Home')
-    this.navController.pop();
+    if (this.pageTitle != 'Home')
+      this.navController.pop();
   }
   onNavigate(navStr) {
     if (navStr === 'req') {
@@ -57,8 +59,8 @@ gotoHome(){
       this.navController.push(SearchFoodByNutrient);
     } else if (navStr === 'searchfoodbylanguage') {
       this.navController.push(SearchFoodByLanguage);
-    }else if (navStr === 'exit'){
-    this.platform.exitApp();
+    } else if (navStr === 'exit') {
+      this.platform.exitApp();
     }
   }
 

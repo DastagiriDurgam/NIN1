@@ -1,59 +1,111 @@
-<navbar [pageTitle]="pageTitle"></navbar>
 <style>
+  .green {
+    color: green !important;
+  }
 
-.green
-{
-background-color: green;
-}
-.orange
-{
-background-color: orange;
-}
-.red
-{
-background-color:red;
-}
-.blue
-{
-background-color:blue;
-}
+  .orange {
+    color: orange !important;
+  }
+
+  .red {
+    color: red !important;
+  }
+
+  .blue {
+    color: blue !important;
+  }
 
   table {
     border-collapse: collapse;
     border: 1px solid gray;
     width: 100%;
   }
-  
+
   th,
   td {
     text-align: left;
     padding: 8px;
     border: 0.5px solid gray;
   }
-  
+
   tr:nth-child(even) {
     background-color: #f2f2f2
   }
-</style> 
-<div class="container"   style="height:100%; background-color:white;">
-<div class="row">
+</style>
+<navbar [pageTitle]="pageTitle"></navbar>
+<ion-content class="bmr-result">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-row>
+          <div class="bmr-item">
+            <i class="fa fa-heartbeat"></i>
+            <ion-label>BMI</ion-label>
+            <span>{{bmiresult.toFixed(2)}}</span>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="bmr-item">
+            <i class="fa fa-heartbeat"></i>
+            <ion-label>BMR (Kcal)</ion-label>
+            <span>{{bmrresult.toFixed(2)}}</span>
+          </div>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6>
+        <ion-row>
+          <div class="bmr-item item-value">
+            <ion-label>Value</ion-label>
+            <i class="fa fa-heartbeat" [ngClass]="bmiresultstyle.class"></i>
+            <ion-label [ngClass]="bmiresultstyle.class">{{bmiresultstyle.title}}</ion-label>
+          </div>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row class="bmi-range">
+    <ion-col style="background-color: red">
+      <span class="title">Under Weight</span>
+      <span class="down-arrow"></span>
+      <span class="value">&lt;18.5</span>
+    </ion-col>
+    <ion-col style="background-color:green">
+        <span class="title">Normal</span>
+      <span class="down-arrow"></span>
+      <span class="value">18.5 - 24.9</span>
+    </ion-col>
+    <ion-col style="background-color:orange">
+        <span class="title">Over-Weight</span>
+      <span class="down-arrow"></span>
+      <span class="value">25 - 29.9</span>
+    </ion-col>
+    <ion-col style="background-color: red">
+        <span class="title">Obesity</span>
+      <span class="down-arrow"></span>
+      <span class="value">&gt; 30</span>
+    </ion-col>
+  </ion-row>
 
-  <div  class="col-sm-12 col-xs-12 text-center" style="background-color: #565663;height: 40px;color: #ffe996;font-size: 15px;padding: 10px;margin-top: 41px;">Physical Status</div>
-  <div style="overflow-x:auto;" class="col-sm-12 col-xs-12">
-    <table>
-      <tr>
-        <td>BMI</td>
-        <td>{{bmiresult.toFixed(2)}}</td>
-      </tr>
-      <tr>
-        <td>BMR (Kcal) </td>
-        <td>{{bmrresult.toFixed(2)}}</td>
-      </tr> 
-    </table>
-  </div>
-  <div  style="margin: 10px;width: 100%;" class="">
+</ion-content>
+<div class="container" style="height:100%; background-color:white;">
+  <div class="row">
 
-    <div  class="col-sm-12 col-xs-12 text-left" style="
+    <div class="col-sm-12 col-xs-12 text-center" style="background-color: #565663;height: 40px;color: #ffe996;font-size: 15px;padding: 10px;margin-top: 41px;">Physical Status</div>
+    <div style="overflow-x:auto;" class="col-sm-12 col-xs-12">
+      <table>
+        <tr>
+          <td>BMI</td>
+          <td>{{bmiresult.toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>BMR (Kcal) </td>
+          <td>{{bmrresult.toFixed(2)}}</td>
+        </tr>
+      </table>
+    </div>
+    <div style="margin: 10px;width: 100%;" class="">
+
+      <div class="col-sm-12 col-xs-12 text-left" style="
 
     background-color: #f9a938;
 
@@ -69,70 +121,70 @@ background-color:blue;
 
     ">BMI Categories</div>
 
-    <div    class="col-sm-12 col-xs-12" style="background-color: #565663;height: auto;color: #ffe996;text-align: center;font-size: 15px;text-align: left;">
+      <div class="col-sm-12 col-xs-12" style="background-color: #565663;height: auto;color: #ffe996;text-align: center;font-size: 15px;text-align: left;">
 
-      <ul   class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="list-style:none; ">
-
-
-
-        <li   class="row" style="padding:10px 0px">
-          <div   class="col-md-1 col-sm-1 col-xs-1" style="width:15px; height:20px; background-color:red;"></div>
-          <div   class="col-md-6 col-sm-6 col-xs-5">Under Weight</div>
-          <div  class="col-md-4 col-sm-4 col-xs-5" style="text-align:left"> &lt; 18.5</div>
-        </li>
+        <ul class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="list-style:none; ">
 
 
 
-        <li   class="row" style="padding:10px 0px">
-          <div   class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;background-color: green;"></div>
-          <div   class="col-md-5 col-sm-5 col-xs-5">Normal</div>
-          <div  class="col-md-5 col-sm-5 col-xs-5" style="text-align:left">18.5 - 24.9</div>
-        </li>
+          <li class="row" style="padding:10px 0px">
+            <div class="col-md-1 col-sm-1 col-xs-1" style="width:15px; height:20px; background-color:red;"></div>
+            <div class="col-md-6 col-sm-6 col-xs-5">Under Weight</div>
+            <div class="col-md-4 col-sm-4 col-xs-5" style="text-align:left"> &lt; 18.5</div>
+          </li>
 
 
 
-        <li   class="row" style="padding:10px 0px">
-          <div   class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;background-color: orange;"></div>
-          <div   class="col-md-6 col-sm-6 col-xs-5">Over-Weight</div>
-          <div  class="col-md-4 col-sm-4 col-xs-5" style="text-align:left">25 - 29.9</div>
-        </li>
+          <li class="row" style="padding:10px 0px">
+            <div class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;background-color: green;"></div>
+            <div class="col-md-5 col-sm-5 col-xs-5">Normal</div>
+            <div class="col-md-5 col-sm-5 col-xs-5" style="text-align:left">18.5 - 24.9</div>
+          </li>
 
 
 
-        <li   class="row" style="padding:10px 0px">
-          <div   class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;background-color: red;"></div>
-          <div   class="col-md-6 col-sm-6 col-xs-5">Obesity</div>
-          <div  class="col-md-4 col-sm-4 col-xs-5" style="text-align:left">&gt; 30</div>
-        </li>
+          <li class="row" style="padding:10px 0px">
+            <div class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;background-color: orange;"></div>
+            <div class="col-md-6 col-sm-6 col-xs-5">Over-Weight</div>
+            <div class="col-md-4 col-sm-4 col-xs-5" style="text-align:left">25 - 29.9</div>
+          </li>
 
 
 
-      </ul>
+          <li class="row" style="padding:10px 0px">
+            <div class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;background-color: red;"></div>
+            <div class="col-md-6 col-sm-6 col-xs-5">Obesity</div>
+            <div class="col-md-4 col-sm-4 col-xs-5" style="text-align:left">&gt; 30</div>
+          </li>
 
 
+
+        </ul>
+
+
+
+
+
+      </div>
+
+
+
+      <div style="width: 100%;text-align: left;" class="col-sm-12 col-xs-12">
+        <h6>Your BMI Range :</h6>
+
+
+
+        <div class="row" style="padding: 0;margin-left: 10px;">
+          <div class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;" [ngClass]="bmiresultstyle.class"></div>
+          <div class="col-md-6 col-sm-6 col-xs-6">{{bmiresultstyle.title}}</div>
+        </div>
+
+
+
+      </div>
 
 
 
     </div>
-
-
-
-    <div style="width: 100%;text-align: left;" class="col-sm-12 col-xs-12">
-      <h6 >Your BMI Range :</h6>
-
-
-
-      <div    class="row" style="padding: 0;margin-left: 10px;">
-        <div    class="col-md-1 col-sm-1 col-xs-1" style="width:15px;height:20px;" [ngClass]="bmiresultstyle.class"></div>
-        <div    class="col-md-6 col-sm-6 col-xs-6">{{bmiresultstyle.title}}</div>
-      </div> 
-
-
-
-    </div>
-
-
 
   </div>
-
-</div>

@@ -6,8 +6,8 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 @Injectable()
 export class HttpRequest {
     // http://218.248.6.41/api/Food/GetRawCategories
-    //   baseUrl: string = 'http://218.248.6.41/api';
-      baseUrl: string = 'http://testsite.macronel.com/api';
+       baseUrl: string = 'http://testsite.macronel.com/api/';
+    //  baseUrl: string = 'http://ysrcpitwing.macronel.com/api';
     private headers = new Headers({
         'Content-Type': 'application/json',
         'Accept': 'application/json' 
@@ -31,7 +31,7 @@ export class HttpRequest {
               return this.http.post(this.baseUrl + data.url,  this.headers)
             .map((res: Response) =>{ this.spinnerDialog.hide() ;return res.json()} )
             .catch((error: any) =>{
-                // alert(JSON.stringify(error)); 
+                 alert(JSON.stringify(error)); 
                   return Observable.throw(error.json().error )});
         }  
            
