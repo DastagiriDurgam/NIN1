@@ -7,22 +7,26 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
 @Injectable()
 export class DBService {
 
     private sqliteObject: SQLiteObject = null;
     database: SQLiteObject;
+    databaseName = "developers.db";
     private databaseReady: BehaviorSubject<boolean>;
     constructor(private sqlite: SQLite, private eventservice: EventService,
+        private spinnerDialog: SpinnerDialog,
         public sqlitePorter: SQLitePorter, private storage: Storage,
         private platform: Platform,
         private http: Http) {
         this.databaseReady = new BehaviorSubject(false);
         this.platform.ready().then(() => {
             this.sqlite.create({
-                name: 'developers.db',
-                location: 'default'
+                name: this.databaseName,
+                location: 'default',
+                createFromLocation: 1
             }).then((db: SQLiteObject) => {
                 this.database = db;
                 this.storage.get('database_filled').then(val => {
@@ -34,7 +38,6 @@ export class DBService {
                 });
             });
         });
-
     }
     fillDatabase() {
         this.http.get('assets/db/dump.sql')
@@ -44,10 +47,38 @@ export class DBService {
                     .then(data => {
                         this.databaseReady.next(true);
                         this.storage.set('database_filled', true);
-                        console.log('dbdump');
+                        console.log('dbdump completed');
                     })
                     .catch(e => alert(e));
             });
+    }
+    tableDump(tableName) {
+        return new Promise((resolve) => {
+            this.createDb(this.databaseName).then((db: SQLiteObject) => {
+                console.log('tableName', tableName);
+                this.storage.get(tableName).then(res => {
+                    if (res) {
+                        resolve(true);
+                    } else {
+                        this.spinnerDialog.show('loading ' + tableName);
+                        this.http.get('assets/db/' + tableName + '.sql')
+                            .map(res => res.text())
+                            .subscribe(sql => {
+                                this.sqlitePorter.importSqlToDb(this.database, sql)
+                                    .then(data => {
+                                        this.storage.set(tableName, true);
+                                        this.spinnerDialog.hide();
+                                        resolve(true);
+                                    })
+                                    .catch(e => console.log('table dump error', e));
+                            });
+
+                    }
+                });
+
+            });
+        });
+
     }
     getDatabaseState() {
         return this.databaseReady.asObservable();
@@ -58,7 +89,8 @@ export class DBService {
 
         return this.sqlite.create({
             name: databaseName,
-            location: 'default'
+            location: 'default',
+            createFromLocation: 1
         });
     }
 
@@ -66,7 +98,7 @@ export class DBService {
         // alert(JSON.stringify(query));
         console.log('db-conent-createTable');
         return this.sqlite.create({
-            name: 'developers.db',
+            name: this.databaseName,
             location: 'default'
         })
             .then((db: SQLiteObject) => {
@@ -78,7 +110,7 @@ export class DBService {
                         // alert(JSON.stringify("create")) 
                         // alert(JSON.stringify(output))  
                         //  console.log(JSON.stringify(output))  
-                        this.insertValuesToTable('developers.db', insertQuery, tableName, db);
+                        this.insertValuesToTable(this.databaseName, insertQuery, tableName, db);
 
                     }).catch((e) => {
                         // alert(JSON.stringify(e))
@@ -114,7 +146,7 @@ export class DBService {
             });
         } else {
 
-            this.createDb('developers.db').then((db: SQLiteObject) => {
+            this.createDb(this.databaseName).then((db: SQLiteObject) => {
 
                 this.sqliteObject = db;
                 var clearQuery = 'DELETE FROM ' + tableName;
@@ -133,8 +165,8 @@ export class DBService {
     }
 
     getDataFromTable2(query, responseRows = false, rowsObject = false) {
-        return this.createDb('developers.db').then((db: SQLiteObject) => {
-          return  this.database.executeSql(query, []).then((data) => {
+        return this.createDb(this.databaseName).then((db: SQLiteObject) => {
+            return this.database.executeSql(query, []).then((data) => {
 
                 if (responseRows) {
                     return data.rows.item(0);
@@ -163,7 +195,7 @@ export class DBService {
 
 
     getDataFromTable(name: any, databaseName: string, query: string, callback?: any): any {
-        this.createDb('developers.db').then((db: SQLiteObject) => {
+        this.createDb(this.databaseName).then((db: SQLiteObject) => {
             this.sqliteObject = db;
             db.executeSql(query, [])
                 .then((output) => {
@@ -178,9 +210,7 @@ export class DBService {
 
                             return output.rows.item(i)[key];
                         });
-                        console.log('responseArray', responseArray);
                         responseArray.values.push(Array.from(vals));
-
                     }
                     callback(new Object(responseArray), output.rows.item(0));
                     this.eventservice.sendMessage(name, new Object(responseArray));
@@ -196,55 +226,5 @@ export class DBService {
         });
 
     }
-
-    // createTable(databaseName: string, query: string) {
-    //     this.createDb(databaseName)
-    //         .then(
-    //         (db: SQLiteObject) => {
-    //             this.sqliteObject = db;
-    //             db.executeSql(query, {}).then((output) => {
-    //                return   output;
-    //             })
-    //                 .catch((e) => { console.log('SQL Exception');console.log(JSON.stringify(e)) });
-    //         }
-    //         )
-    //         .catch((e) => { console.log('SQL Exception');console.log(JSON.stringify(e)) });
-    // }
-
-    // insertValues(databaseName: string,query){
-    //     this.createDb(databaseName)
-    //         .then(
-    //         (db: SQLiteObject) => {
-    //             this.sqliteObject = db;
-    //             db.executeSql(query, []).then((output) => {
-    //                  console.log('output is');
-    //              console.log(JSON.stringify(output) );
-    //               for(let i = 0; i < output.rows.length; i++) {
-    //                   if(i<10){                          
-    //                       console.log(
-
-    //                          JSON.stringify(output.rows.item(i))  
-    //                            );
-    //                   }
-    //                     }
-
-    //             })
-    //                 .catch((e) => { console.log('SQL Exception');console.log(JSON.stringify(e)) });
-    //         }
-    //         )
-    //         .catch((e) => { console.log('SQL Exception');console.log(JSON.stringify(e)) });
-    // }
-
-
-    // getDataFromTable(query) {
-    //     this.sqliteObject.executeSql(query, {})
-    //         .then((output) => {
-
-    //         })
-    //         .catch((e) => { console.log('SQL Exception');console.log(JSON.stringify(e)) });
-    // }
-
-
-
 
 }
