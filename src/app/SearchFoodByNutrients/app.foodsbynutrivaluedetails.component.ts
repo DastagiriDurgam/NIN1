@@ -33,22 +33,12 @@ export class SearchFoodByNutrientDetails {
     this.details = this.navParams.get('fbyndetails');
     //{nutrient:this.selected_nutrient, category:this.perticulars, isascending:this.ascrdesc}
 
+    alert(JSON.stringify( this.details ));
 
-
-    // alert(JSON.stringify(this.details));
     this.dbservice.tableDump('foods_by_language').then(res => {
       this.getFoodCodesByLanguage();
     });
 
-
-    // if (this.details.isascending == "true" || this.details.isascending == true) {
-    //          this.getRawfoodItemsReviced("ASC");
-    //         } else {
-    //          this.getRawfoodItemsReviced("DESC");
-    //         }
-
-
-    //     ;
     this.onOrientationChange();
   }
 
@@ -66,75 +56,6 @@ export class SearchFoodByNutrientDetails {
 
 
 
-  getRawfoodItemsReviced(ascrdesc) {
-
-    let col2 = this.details.nutrient[2].replace('\t', '');
-    let getRecipiesQuery;
-    if (this.details.language != "EN") {
-      getRecipiesQuery = "SELECT [names], [" + col2 + "],  [food_code] from [rawfoodifctreviced] where languages='" + this.details.language + "' AND category='" + this.details.category + "' ORDER BY languages " + ascrdesc + "  LIMIT 10";
-    } else {
-      getRecipiesQuery = "SELECT [foodnames], [" + col2 + "],  [food_code] from [rawfoodifctreviced] where category='" + this.details.category + "' ORDER BY " + col2 + " " + ascrdesc + "  LIMIT 10";
-
-    }
-    //  alert(JSON.stringify(getRecipiesQuery));
-    this.dbservice.getDataFromTable('rawfoodifctreviced2', 'recipes.sql', getRecipiesQuery, function (a, b) {
-      console.log(b);
-    });
-    this.eventservice.getMessage().subscribe((data) => {
-
-      if (data.value.columns.length > 0) {
-        this.isNoDataAvailable = false;
-      } else {
-        this.isNoDataAvailable = true;
-      }
-      if (data.name == 'rawfoodifctreviced2') {
-
-        this.totalRawfoods = data.value.values;
-        this.columnNames = data.value.columns;
-        // alert(JSON.stringify(data.value));
-
-        // alert(JSON.stringify(this.queryVariable1 + this.queryVariable));
-        // this.getFoodsByLanguage();
-      }
-
-    });
-
-  }
-
-
-  getRawfoodItems(ascrdesc) {
-
-    let col2 = this.details.nutrient[2].replace('\t', '');
-    let getRecipiesQuery;
-
-    getRecipiesQuery = "SELECT [Food Name], [" + col2 + "],  [food_code] from [raw_foods_ifct_nvif] where category='" + this.details.category + "' ORDER BY " + col2 + " LIMIT 10";
-
-
-    // console.log(JSON.stringify(getRecipiesQuery));
-    this.dbservice.getDataFromTable('raw_foods_ifct_nvif', 'recipes.sql', getRecipiesQuery, function (a, b) {
-      console.log(JSON.stringify(b));
-    });
-    this.eventservice.getMessage().subscribe((data) => {
-
-      if (data.value.columns.length > 0) {
-        this.isNoDataAvailable = false;
-      } else {
-        this.isNoDataAvailable = true;
-      }
-      if (data.name == 'raw_foods_ifct_nvif') {
-
-        this.totalRawfoods = data.value.values;
-        this.columnNames = data.value.columns;
-        //  alert(JSON.stringify(this.totalRawfoods));
-
-        // alert(JSON.stringify(this.queryVariable1 + this.queryVariable));
-        // this.getFoodsByLanguage();
-      }
-
-    });
-
-  }
-
 
   adjustFractions(value): any {
     return eval(value.toFixed(2)) ? value.toFixed(2) : 0;
@@ -143,12 +64,16 @@ export class SearchFoodByNutrientDetails {
   getFoodCodesByLanguage() {
     let getFoodCodesByLanguageQuery;
     let col2 = this.details.nutrient[2].replace('\t', '');
-    getFoodCodesByLanguageQuery = "SELECT [food_code], [Food_Name], [" + col2 + "] from [raw_foods_ifct_nvif] where category='" + this.details.category + "' ORDER BY " + col2 + (this.details.isascending ? " ASC" : " DESC") + " LIMIT 10";
-
-    this.dbservice.getDataFromTable('foods_by_lang1', 'recipes.sql', (getFoodCodesByLanguageQuery), function (a, b) {
+    getFoodCodesByLanguageQuery = "SELECT food_code, Food_Name, " + col2 + " from raw_foods_ifct_nvif where category='" + this.details.category + "' ORDER BY " + col2 + (this.details.isascending ? " ASC" : " DESC") + " LIMIT 10";
+    this.dbservice.getDataFromTable('foods_by_lang1', 'recipes.sql', getFoodCodesByLanguageQuery, function (a, b) {
       console.log(JSON.stringify(b));
     });
+    this.dbservice.getDataFromTable2(getFoodCodesByLanguageQuery, false, true).then(res => {
+      console.log('res', res);
+    })
+
     this.eventservice.getMessage().subscribe((data) => {
+      console.log('foods_by_lang1', data);
       if (data.name == 'foods_by_lang1') {
         this.totalRawfoods = [];
         this.columnNames = []
