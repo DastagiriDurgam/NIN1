@@ -60,7 +60,7 @@ export class DBService {
                     if (res) {
                         resolve(true);
                     } else {
-                        this.spinnerDialog.show('loading ' + tableName);
+                        this.spinnerDialog.show('loading ',null,true);
                         this.http.get('assets/db/' + tableName + '.sql')
                             .map(res => res.text())
                             .subscribe(sql => {
