@@ -20,7 +20,7 @@ export class SearchFoodByNutrient {
   nutrientList: any = [];
   languagesList: any = [];
   foodList: any = [];
-  selected_nutrient: any = "0";
+  selected_nutrient: any;
   ascrdesc = false;
   perticulars = "";
   isDisplayfoodList: boolean = false;
@@ -36,7 +36,7 @@ export class SearchFoodByNutrient {
   perticularsArray: any = {};
 
   constructor(private dbservice: DBService, private eventservice: EventService, private navController: NavController) {
-   
+
   }
 
   ngOnInit() {
@@ -51,26 +51,28 @@ export class SearchFoodByNutrient {
     this.onOrientationChange();
   }
 
-onChangeOfLanguge(){
-  
-}
+  onChangeOfLanguge() {
 
+  }
 
   getLanguagesList() {
     let getLanguagesQuery = "select abbreviation, languages from language_codes where abbreviation!='C.' AND abbreviation!='Sci.'";
     // alert(JSON.stringify(getLanguagesQuery));
-    this.dbservice.getDataFromTable('rawfoodifctreviced2', 'recipes.sql', getLanguagesQuery);
-
-    this.eventservice.getMessage().subscribe((data) => {
-
-      if (data.name == 'rawfoodifctreviced2') {
-        this.languagesList = data.value.values;
-        // alert(JSON.stringify(data.value));
-      }
-
+    this.dbservice.getDataFromTable2(getLanguagesQuery, false, true).then(res => {
+      this.languagesList = res.values;
+      alert(JSON.stringify(getLanguagesQuery));
     });
 
-  } 
+    // this.eventservice.getMessage().subscribe((data) => {
+
+    //   if (data.name == 'rawfoodifctreviced2') {
+    //     this.languagesList = data.value.values;
+
+    //   }
+
+    // });
+
+  }
 
   onOrientationChange() {
     this.devHeight = (window.innerHeight - 75).toString() + "px";
@@ -85,88 +87,20 @@ onChangeOfLanguge(){
   }
 
 
+getNutrientFromDB() {
 
-
-  getRawCategoriesFromDB() {
-    let createQuery = "CREATE TABLE IF NOT EXISTS `raw_categories` (   `category` varchar(26) DEFAULT NULL,   `category id` int(2) NOT NULL,   `displayname` varchar(250) DEFAULT NULL )";
-
-    let insertQuery = "INSERT INTO `raw_categories` (`category`, `category id`, `displayname`) VALUES ('Cereal_grains_and_products', 1, 'Cereals,Grains & Products'), ('Pulses_and_legumes', 2, 'Pulses & Legumes'), ('Leafy_vegetables', 3, 'Leafy Vegetables'), ('Other_vegetables', 4, 'Other Vegetables'), ('Fruits', 5, 'Fruits'), ('Roots_and_tubers', 6, 'Roots & Tubers'), ('Condiments_and_spices', 7, 'Condiments & Spices'), ('nuts_and_oil_seeds', 8, 'Nuts & Oil Seeds'), ('Sugars', 9, 'Sugars'), ('Mushrooms', 10, 'Mushrooms'), ('Beverages_alcoholic', 11, 'Beverages Alcoholic'), ('Beverages_non_alcoholic', 12, 'Beverages Non-Alcoholic'), ('Milk_and_milk_products', 13, 'Milk & Milk Products'), ('Meat_and_poultry', 14, 'Meat & Poultry'), ('Fishes_and_other_sea_foods', 15, 'Fishes & Other Sea Foods'), ('Fats_and_edible_oils', 16, 'Fats & Edible Oils')";
-
-    let getRecipiesQuery = "select * from raw_categories";
-
-    this.dbservice.createTable('recipes.sql', createQuery, insertQuery, `raw_categories`);
-
-    this.dbservice.insertValuesToTable('recipes.sql', insertQuery, `raw_categories`);
-
-    this.dbservice.getDataFromTable('raw_categories', 'recipes.sql', getRecipiesQuery);
-
-    this.eventservice.getMessage().subscribe((data) => {
-      // alert(JSON.stringify(data.value));
-      if (data.name == 'raw_categories') {
-        // alert(JSON.stringify(data.value.values))
-        this.plantanimalDetails = data.value.values;
-      }
-
-    });
-
-  }
-
-
-
-
-
-  getNutrientFromDB() {
-    let createQuery = "CREATE TABLE IF NOT EXISTS `nutrients` (   `id` int(11) NOT NULL,   `name` varchar(30) NOT NULL,   `other name` varchar(250) DEFAULT NULL )";
-
-    let insertQuery = "INSERT INTO `nutrients` (`id`, `name`, `other name`) VALUES (1, 'Calcium(mg)', 'calcium_ca'), (2, 'Carbohydrate(g)', '	carbohydrate'), (3, 'Protein(g)', '	protein'), (4, 'Fat(g)', 'total_fat'), (5, 'Vitamin B6(mg)', 'total_b6'), (6, 'Vitamin B9(µg)', 'total_folate_b9'), (7, 'Vitamin C(mg)', 'total_ascorbic_acid'), (8, 'Vitamin A(µg)', 'retinol'), (9, 'Carotenoids(µg)', 'total_carotenoids'), (10, 'Vitamin D2(µg)', 'ergocalciferol_d2'), (11, 'Vitamin D3(µg)', 'cholecalciferol_d3'), (12, 'Active Vitamin D3(µg)', 'vitamin_25_hydroxy_D3'), (13, 'Iron(mg)', 'Iron_fe'), (14, 'Zinc(mg)', 'Zinc_zn'), (15, 'Potassium(mg)', 'Potassium_k'), (16, 'Sodium(mg)', 'sodium_na'), (17, 'Saturated Fat(mg)', 'total_saturated_fatty_acids_TFSA'), (18, 'Fibre(g)', 'total_dietary_fibre'), (19, 'Energy(cal)', 'energy_joules'), (20, 'Vitamin B2(mg)', 'riboflavin_b2 ')";
 
     let getRecipiesQuery = "select * from nutrients";
 
-    this.dbservice.createTable('recipes.sql', createQuery, insertQuery, `nutrients`);
-
-
-    this.dbservice.insertValuesToTable('recipes.sql', insertQuery, `nutrients`);
-
-
-
-    this.dbservice.getDataFromTable('nutrients', 'recipes.sql', getRecipiesQuery, function (a, b) {
-      console.log(JSON.stringify(b));
-    });
-
-    this.eventservice.getMessage().subscribe((data) => {
-      
-      if (data.name == 'nutrients') {
-        this.nutrientList = data.value.values;
-        // alert(JSON.stringify(data.value.values));
-      }
-
-    });
+    this.dbservice.getDataFromTable2(getRecipiesQuery, false, true).then(res => {
+      this.nutrientList = res.values;
+    })
 
   }
-
-
-  getRawfoodifctReviced(language) {
-    let getRecipiesQuery = "select * from raw_foods_ifct_nvif";
-
-    this.dbservice.getDataFromTable('rawfoodifctreviced1', 'recipes.sql', getRecipiesQuery);
-
-    this.eventservice.getMessage().subscribe((data) => {
-      // alert(JSON.stringify(data.value));
-      if (data.name == 'rawfoodifctreviced1') {
-        this.nutrientList = data.value.values;
-        // alert(JSON.stringify(data.value.values));
-      }
-
-    });
-
-
-  }
-
-
 
 
   submitAction() {
-    
+
     this.errorMessage = this.validateForms([{ modelName: this.selected_nutrient, defaultvalue: '0', modelTitle: 'Nutrient', errorTitle: 'Nutrient' }, { modelName: this.perticulars, defaultvalue: '', modelTitle: 'Particulars', errorTitle: 'Particulars' }]);
     // alert(JSON.stringify(this.selected_nutrient ));
     if (this.errorMessage.isValid) {
