@@ -40,7 +40,7 @@ export class RegisterComponent {
     private ninService: NINService,
     private spinnerDialog: SpinnerDialog,
     private dbservice: DBService, private storage: Storage) {
-      this.spinnerDialog.show('Loading....');
+    this.spinnerDialog.show('Loading....', null, true);
     this.dbservice.getDatabaseState().subscribe(rdy => {
       if (rdy) {
         this.spinnerDialog.hide();
@@ -68,7 +68,7 @@ export class RegisterComponent {
         }
       }
     });
-   // this.onOrientationChange();
+    // this.onOrientationChange();
     // this.getStatesData();
     // this.getRda();
     // 

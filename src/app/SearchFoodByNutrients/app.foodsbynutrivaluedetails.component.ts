@@ -33,7 +33,7 @@ export class SearchFoodByNutrientDetails {
     this.details = this.navParams.get('fbyndetails');
     //{nutrient:this.selected_nutrient, category:this.perticulars, isascending:this.ascrdesc}
 
-    alert(JSON.stringify( this.details ));
+    // alert(JSON.stringify( this.details ));
 
     this.dbservice.tableDump('foods_by_language').then(res => {
       this.getFoodCodesByLanguage();

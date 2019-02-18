@@ -60,7 +60,7 @@ export class SearchFoodByNutrient {
     // alert(JSON.stringify(getLanguagesQuery));
     this.dbservice.getDataFromTable2(getLanguagesQuery, false, true).then(res => {
       this.languagesList = res.values;
-      alert(JSON.stringify(getLanguagesQuery));
+      // alert(JSON.stringify(getLanguagesQuery));
     });
 
     // this.eventservice.getMessage().subscribe((data) => {
