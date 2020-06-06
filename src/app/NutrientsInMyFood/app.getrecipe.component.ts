@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import{NavController} from 'ionic-angular';
-import {RecipeComponent} from './app.recipe.component'
+import { NavController } from 'ionic-angular';
+import { RecipeComponent } from './app.recipe.component'
 declare var window;
 
 
@@ -14,18 +14,18 @@ declare var window;
 })
 export class GetRecipeComponent {
   devHeight;
-    gender: string="";
-  perticulars:any="";
-  perticularsArray:any = {Man:['Sedentary work', 'Moderate work', 'Heavy work'], Woman:['Sedentary work', 'Moderate work', 'Heavy work', 'Pregnant woman', 'Lactation 0-6 months', 'Lactation 6-12 months']};
-  pageTitle:any = 'RDA For Indians';
- constructor(private navController:NavController){
+  gender: string = "";
+  perticulars: any = "";
+  perticularsArray: any = { Man: ['Sedentary work', 'Moderate work', 'Heavy work'], Woman: ['Sedentary work', 'Moderate work', 'Heavy work', 'Pregnant woman', 'Lactation 0-6 months', 'Lactation 6-12 months'] };
+  pageTitle: any = 'RDA For Indians';
+  constructor(private navController: NavController) {
 
- }
-    getRecipeValues(){
-      this.navController.push(RecipeComponent);
-    }
-    ngOnInit(){
-        this.onOrientationChange();
+  }
+  getRecipeValues() {
+    this.navController.push(RecipeComponent);
+  }
+  ngOnInit() {
+    this.onOrientationChange();
   }
 
   onOrientationChange() {
@@ -39,7 +39,7 @@ export class GetRecipeComponent {
   changeDivHeight() {
     this.devHeight = (window.innerHeight - 75).toString() + "px";
   }
-restricttonumbers(event) {
+  restricttonumbers(event) {
 
     if ((event.which >= 48) && (event.which < 57) || (event.which == 8)) {
 
@@ -48,5 +48,5 @@ restricttonumbers(event) {
     }
 
   }
- 
+
 }

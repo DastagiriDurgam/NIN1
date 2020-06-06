@@ -14,23 +14,28 @@
     }
 
     .infoinput {
-        background-color: #F8B864;
+        background-color: #ECEBE9;
         margin: 10px;
         height: 35px;
         font-size: 12px;
         font-weight: bold;
         padding: 0 10px;
         width: 100%;
+        border: 0;
     }
 
     .poweredby {
         position: absolute;
-        bottom: 20px;
+        bottom: 50px;
         color: #0a007d;
         margin: auto;
         text-align: center;
-        right: 40px;
+        right: 2px;
+    }
 
+    .poweredby p {
+        margin: 0px;
+        color: black;
     }
 
     .cname {
@@ -53,32 +58,54 @@
     
 
 </form>-->
-<div class="container" style="height:100%; background-color:white;">
-    <div class="row" style="margin:auto; padding:20px;">
+<ion-grid>
+    <ion-row justify-content-center>
+        <input type="button" class="infoinput" (click)="otherInfo('details')" value="Registration Details of User">
+    </ion-row>
+    <ion-row justify-content-center>
+        <input type="button" class="infoinput" (click)="otherInfo('subuser')" value="Register Sub User">
+    </ion-row>
+    <ion-row justify-content-center>
+        <input type="button" class="infoinput" (click)="otherInfo('userguide')" value="User guide">
+    </ion-row>
+    <ion-row justify-content-center>
+        <input type="button" class="infoinput" (click)="otherInfo('contactus')" value="Contact Us">
+    </ion-row>
+    <ion-row justify-content-center>
+        <input type="button" class="infoinput" (click)="otherInfo('source')" value="Source">
+    </ion-row>
+    <ion-row justify-content-center>
+        <input type="button" class="infoinput" (click)="otherInfo('about')" value="About App">
+    </ion-row>
+    <ion-row>
+        <input type="button" class="infoinput" (click)="otherInfo('version')" value="Version">
+    </ion-row>
+    <ion-row>
+        <input type="button" class="infoinput" (click)="otherInfo('terms')" value="Terms & Conditions">
+    </ion-row>
+</ion-grid>
+<div class="poweredby">
+    <p>Powered by</p>
+    <a href="http://www.macronel.com">
+        <img src="assets/images/mac-logo.png" alt="Macronel" width="100">
+    </a>
+</div>
+<!-- v class="row" style="margin:auto; padding:20px;">
         <div class="col-md-12" style="margin:auto;">
+
             <div class="col-md-12">
-                <input type="button" class=" infoinput" (click)="otherInfo('details')" value="Registration Details of User">
             </div>
             <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('subuser')" value="Register Sub User">
             </div>
             <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('userguide')" value="User guide">
             </div>
             <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('contactus')" value="Contact Us">
             </div>
             <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('source')" value="Source">
             </div>
             <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('about')" value="About App">
             </div>
             <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('version')" value="Version">
-            </div>
-            <div class="col-md-12">
-                <input type="button" class="infoinput" (click)="otherInfo('terms')" value="Terms & Conditions">
             </div>
         </div>
     </div>
@@ -90,4 +117,4 @@
         </a>
     </div>
 
-</div>
+</div> -->

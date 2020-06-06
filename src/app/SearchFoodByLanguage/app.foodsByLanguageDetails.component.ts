@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { DBService } from '../Services/dbservice'
 import { EventService } from '../Services/eventservice';
 import { NavParams } from 'ionic-angular';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 // import { Storage } from '@ionic/storage'
 declare var window;
 
@@ -23,7 +24,9 @@ export class FoodsByLanguageDetails {
   foodListByLang: any = [];
   languagesList: any = [];
 
-  constructor(private dbservice: DBService, private eventservice: EventService, private navParams: NavParams) {
+  constructor(private dbservice: DBService,
+    private spinnerDialog: SpinnerDialog,
+    private eventservice: EventService, private navParams: NavParams) {
 
   }
 
@@ -46,7 +49,10 @@ export class FoodsByLanguageDetails {
     this.foodsList = this.navParams.get('foods');
     this.selectedFood = this.foodsList[0];
     //  alert(JSON.stringify(this.selectedFood));
-    this.getfoodbylang();
+    this.dbservice.tableDump('foods_by_language').then(res => {
+      this.getfoodbylang();
+    });
+
 
 
     //  this.getLanguagesFromDB();
@@ -75,7 +81,7 @@ export class FoodsByLanguageDetails {
 
     this.dbservice.getDataFromTable('language_codes', 'recipes.sql', getRecipiesQuery, function (a, b) {
       console.log(JSON.stringify(b));
-      });
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
       if (data.name == 'language_codes') {
@@ -98,7 +104,7 @@ export class FoodsByLanguageDetails {
 
     this.dbservice.getDataFromTable('foods_in_language', 'recipes.sql', getRecipiesQuery, function (a, b) {
       console.log(JSON.stringify(b));
-      });
+    });
 
     this.eventservice.getMessage().subscribe((data) => {
 

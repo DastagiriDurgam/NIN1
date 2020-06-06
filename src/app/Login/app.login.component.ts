@@ -62,6 +62,8 @@ export class LoginComponent {
         });
 
 
+      } else {
+        alert(response);
       }
 
     });

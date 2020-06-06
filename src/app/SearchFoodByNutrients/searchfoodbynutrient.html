@@ -1,61 +1,66 @@
 <navbar [pageTitle]="pageTitle"></navbar>
 
 <style>
+  .register_button {
+    padding: 5px !important;
+    width: 100px !important;
+    background-color: orangered;
+    -webkit-appearance: button;
+    color: white !important;
+  }
 
- .register_button {
-      padding: 5px !important;
-      width: 100px !important;
-      background-color: orangered;
-      -webkit-appearance: button;
-      color: white !important;
-    }
-     #msform {
-         margin: 280px 10px !important;
-    }
-
+  #msform {
+    margin: 280px 10px !important;
+  }
 </style>
-<div  style="height:100%; ">
-<!-- multistep form -->
-<div style="padding: 20px;" class="row">
-<ion-item class="col-sm-12 col-xs-12">
-   <ion-select  type="text" name="pass"  style="padding: 10px;      color:black;" [(ngModel)]="selected_nutrient" >
-      <ion-option [value]="0" selected >Nutrient</ion-option>
-      <ion-option [value]="category[2]" *ngFor="let category of nutrientList">{{category[1]}}</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item class="col-sm-12 col-xs-12">
-  <ion-select #lang type="text" name="pass"  style="padding: 10px;  " [(ngModel)]="selected_language" (change)="onChangeOfLanguge(selected_language)">
-      <!--<ion-option [value]="0" selected>English</ion-option>-->
-       <ion-option value="EN"  selected>English</ion-option>
-      <ion-option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</ion-option>
-    </ion-select>
+<div style="height:100%; ">
+  <!-- multistep form -->
+  <div style="padding: 20px;" class="row">
+    <ion-item class="col-sm-12 col-xs-12">
+      <ion-select type="text" name="nutrient" style="padding: 10px;color:black;" 
+      (ngModelChange)="selectNutrientById(nutrientList, $event, 'someProperty')"
+      [(ngModel)]="selected_nutrient">
+        <ion-option [value]="0" selected>Nutrient</ion-option>
+        <ion-option [value]="category[0]"   *ngFor="let category of nutrientList">{{category[1]}}</ion-option>
+      </ion-select>
     </ion-item>
-  <!--<ion-select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
+
+    <ion-item class="col-sm-12 col-xs-12">
+      <ion-select #lang type="text" name="lang" style="padding: 10px;  " [(ngModel)]="selected_language"
+        (change)="onChangeOfLanguge(selected_language)">
+        <!--<ion-option [value]="0" selected>English</ion-option>-->
+        <ion-option value="EN" selected>English</ion-option>
+        <ion-option [value]="language[0]" *ngFor="let language of languagesList">{{language[1]}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <!--<ion-select class=" col-sm-12 col-xs-12 activities" style="padding:10px; ">
     <ion-option selected>Sort By</ion-option>    
-    <!--<ion-option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</ion-option> -->
-  <!--</ion-select>-->
-  <ion-item class="col-sm-12 col-xs-12">
- <ion-select type="text" name="pass"  style="padding: 10px;     " [(ngModel)]="ascrdesc" >
-      <ion-option value="false" selected >Descending</ion-option>
-      <ion-option value="true" >Ascending</ion-option> 
-    </ion-select>
-</ion-item>
-<ion-item class="col-sm-12 col-xs-12">
-    <ion-select   [(ngModel)]="plantRanimal" style="padding: 10px;     ">
-        
-        <ion-option value="plant" selected> Plant Source</ion-option>
-        <ion-option value="animal"> Animal Source</ion-option>       
-    </ion-select>
+   <ion-option *ngFor="let activity of totalActivities.values" [value]="activity[0]">{{activity[1]}}</ion-option> -->
+    <!--</ion-select>-->
+    <ion-item class="col-sm-12 col-xs-12">
+      <ion-select type="text" name="ascrdescs" style="padding: 10px;     " [(ngModel)]="ascrdesc">
+        <ion-option value="false" selected>Descending</ion-option>
+        <ion-option value="true">Ascending</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item class="col-sm-12 col-xs-12">
-     <ion-select   [(ngModel)]="perticulars" style="padding: 10px;     ">
+      <ion-select [(ngModel)]="plantRanimal" style="padding: 10px;     ">
+
+        <ion-option value="plant" selected> Plant Source</ion-option>
+        <ion-option value="animal"> Animal Source</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="col-sm-12 col-xs-12">
+      <ion-select [(ngModel)]="perticulars" style="padding: 10px;     ">
         <ion-option value="" disabled selected>Particulars</ion-option>
-        <ion-option [value]="item.name" *ngFor="let item of plantanimalDetails[plantRanimal]">{{item.title}}</ion-option>       
-    </ion-select>    
+        <ion-option [value]="item.name" *ngFor="let item of plantanimalDetails[plantRanimal]">{{item.title}}
+        </ion-option>
+      </ion-select>
     </ion-item>
 
-    <input type="button" name="next" class="submit_button" value="Know & Submit" (click)="submitAction()" style="margin:auto;"/>                
-     <!--<input type="button" name="next" class="submit_button" value="Submit" (click)="submitRda()"/> -->
+    <input type="button" name="next" class="submit_button" value="Know & Submit" (click)="submitAction()"
+      style="margin:auto;" />
+    <!--<input type="button" name="next" class="submit_button" value="Submit" (click)="submitRda()"/> -->
 
-</div> </div>
+  </div>
+</div>

@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NutrientRequirementsComponent } from '../Requirements/app.mynutrientrequirements.components';
 import { NutrientsInMyFoodComponent } from '../NutrientsInMyFood/app.nutrientsinmyfood.component';
-import { MyDietNActivity } from '../MyDietNActivity/app.mydietnactivity.component'
-import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component'
-import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component'
-import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbylanguage.component'
+import { MyDietNActivity } from '../MyDietNActivity/app.mydietnactivity.component';
+import { OtherInfoComponent } from '../OtherInfo/app.otherinfo.component';
+import { SearchFoodByNutrient } from '../SearchFoodByNutrients/app.searchfoodbynutrient.component';
+import { SearchFoodByLanguage } from '../SearchFoodByLanguage/app.searchfoodbyLanguage.component';
+import { Content } from 'ionic-angular';
+import { DBService } from '../Services/dbservice';
 declare var window;
-
-
-
 @Component({
   selector: 'nin-home',
   templateUrl: './home.html'
@@ -17,13 +16,18 @@ declare var window;
 export class HomeComponent {
   pageTitle: any = 'Home';
   devHeight;
-  
-  constructor(private navController: NavController) {
+  @ViewChild(Content) content: Content;
+  constructor(private navController: NavController, private dbservice: DBService) {
 
   }
   ngOnInit() {
-   
-    this.onOrientationChange();
+    this.content.scrollTo(50, 0);
+    // this.onOrientationChange();
+    this.dbservice.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        // alert('rdy' + rdy);
+      }
+    });
   }
 
   onOrientationChange() {
@@ -52,5 +56,10 @@ export class HomeComponent {
     } else if (navStr === 'searchfoodbylanguage') {
       this.navController.push(SearchFoodByLanguage);
     }
+  }
+  ionViewDidEnter() {
+    let dimensions = this.content.getContentDimensions();
+    console.log('dimensions', dimensions);
+    // dimensions.contentBottom =100;
   }
 }

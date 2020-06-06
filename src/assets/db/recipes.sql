@@ -1,10 +1,3 @@
--- get uid and item name --
--- --------------------------------------------------------
-
---
--- Table structure for table `recipes`
---
-
 CREATE TABLE IF NOT EXISTS `recipes` (
   `uid_recipes` int(3) NOT NULL,
   `source` varchar(4) DEFAULT NULL,
@@ -15,11 +8,7 @@ CREATE TABLE IF NOT EXISTS `recipes` (
   `one_serving_wt_g` int(3) DEFAULT NULL,
   `serving_measure` decimal(3,2) DEFAULT NULL,
   `serving_unit` varchar(9) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `recipes`
---
+);
 
 INSERT INTO `recipes` (`uid_recipes`, `source`, `Itemcode`, `Itemname`, `type_of_preperation`, `total_cooked_wt_g`, `one_serving_wt_g`, `serving_measure`, `serving_unit`) VALUES
 (1, 'cwue', '1.1.1', 'Rice (Cooked)', 'cr', 620, 200, '2.00', 'katori'),
